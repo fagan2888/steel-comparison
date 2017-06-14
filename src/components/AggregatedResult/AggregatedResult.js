@@ -21,53 +21,15 @@ ResultCountLabel.propTypes = {
   query: PropTypes.object,
 };
 
-const TimeFrameLabel = ({ query }) => {
-  let time_frame = '';
-  if (has(query, 'date')) {
-    time_frame = query['date'].split(" TO ");
-    time_frame = moment(time_frame[0]).format('MMM YYYY') + " to " + moment(time_frame[1]).format('MMM YYYY');
-  }
-  else {
-    time_frame = "no time frame specified";
-  }
-  let text = '';
-  if (!isEmpty(omit(query, ['offset', 'percent_change']))) {
-    text = `I-94 Arrivals for:  ${time_frame}.`;
-  }
-  return <p className="explorer__result__label">{text}</p>;
-};
-TimeFrameLabel.propTypes = {
-  query: PropTypes.object,
-};
-
-function downloadReports(reports){
-  const blob = new Blob([JSON.stringify(reports, null, 4)], {type: "text/plain;charset=utf-8"});
-  FileSaver.saveAs(blob, "reports.json");
-}
-
-const DownloadButton = ({count, results}) => {
-  if (count === 0) return null;
-  else {
-    return (
-      <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
-        <i className="fa fa-paper-plane" /> Download JSON Reports
-      </button>
-    );
-  }
-}
-DownloadButton.propTypes = {
-  count: PropTypes.number.isRequired,
-  results: PropTypes.array,
-};
-
 const AggregatedResult = ({ onPaging, query = {}, results }) => {
+
   if (results.isFetchingAggs) return null;
   if (results.error != "") 
     return (<div className="explorer__result">{results.error}</div>);
 
   const items = map(results.pageItems, result => {
-    const key = result.i94_country_or_region;
-    return <Item key={key} result={result} />
+    const key = Object.keys(result)[0];
+    return <Item key={key} result={result[key]} link_text={key}/>
   });
 
   const pagesProps = {
@@ -79,7 +41,6 @@ const AggregatedResult = ({ onPaging, query = {}, results }) => {
 
   return (
     <div className="explorer__result">
-      <TimeFrameLabel query={query} />
       <ResultCountLabel count={results.aggregatedItems.length} query={query} />
       {items}
       <Pages {...pagesProps} />

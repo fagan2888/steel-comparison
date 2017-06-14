@@ -4,6 +4,7 @@ import Detail from './Detail';
 class Item extends Component {
   static propTypes = {
     result: PropTypes.object.isRequired,
+    link_text: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -19,11 +20,10 @@ class Item extends Component {
   }
 
   render() {
-    const { i94_country_or_region } = this.props.result;
     const { expand } = this.state;
     return (
       <div className="explorer__result-item">
-        <a href="#" className="explorer__result-item__label" onClick={this.onClick}>{i94_country_or_region}</a>
+        <a href="#" className="explorer__result-item__label" onClick={this.onClick}>{this.props.link_text}</a>
         {expand ? <Detail result={this.props.result} /> : null}
       </div>
     );

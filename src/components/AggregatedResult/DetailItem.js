@@ -40,77 +40,9 @@ const Row = ({ label, children }) => {
 };
 Row.propTypes = { label: PropTypes.string.isRequired, children: PropTypes.any };
 
-const MonthlyAmountsList = ({ value }) => {
-  if (typeof value != 'object') return null;
-
-  const items = compact(map(value, (v, k) => {
-    return(
-    <li key={k}>
-      {moment(k).format('MMM YYYY')}:  {v.toLocaleString()}
-    </li>
-    );
-  }));
-  if (isEmpty(items)) {
-    return null;
-  }
-
-  return <ul className="explorer__result-monthly_amounts">{items}</ul>;
-};
-MonthlyAmountsList.propTypes = { value: PropTypes.object };
-
-const PortsList = ({value}) => {
-  const items = compact(map(value, (v, k) => {
-    return(
-    <tr key={k}>
-      <td className="ports-cell">{moment(k).format('MMM YYYY')}</td>
-      <td className="ports-cell"> <PortsAmounts value={v} /> </td>
-    </tr>
-    );
-  }));
-  if (isEmpty(items)) return null;
-
-  return <table className="explorer__result-ports_list"><tbody>{items}</tbody></table>;
-};
-PortsList.propTypes = { value: PropTypes.object };
-
-const PortsAmounts = ({value}) => {
-  const items = compact(map(value, (item, i) => {
-    return(
-    <li key={i}>
-      {item['port']}:  {item['amount'].toLocaleString()}
-    </li>
-    );
-  }));
-  if (isEmpty(items)) return null;
-
-  return <ul className="explorer__result-ports_amounts">{items}</ul>;
-};
-PortsAmounts.propTypes = { value: PropTypes.array };
-
-
-const PortsPercentChange = ({value}) => {
-  
-  const items = compact(map(value, (item, i) => {
-    return(
-    <tr key={item.port}>
-      <td className="ports-cell">{item.port}</td>
-      <td className="ports-cell"> <UnorderedList value={item.amount} /> </td>
-    </tr>
-    );
-  }));
-  if (isEmpty(items)) return null;
-
-  return <table className="explorer__result-ports_list"><tbody>{items}</tbody></table>;
-};
-PortsPercentChange.propTypes = { value: PropTypes.array };
-
 export {
   Link,
   ListItem,
   Row,
-  UnorderedList,
-  MonthlyAmountsList,
-  PortsList,
-  PortsAmounts,
-  PortsPercentChange
+  UnorderedList
 };

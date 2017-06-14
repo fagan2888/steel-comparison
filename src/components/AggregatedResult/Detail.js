@@ -1,93 +1,71 @@
 import React, { PropTypes } from 'react';
-import { Row, UnorderedList, MonthlyAmountsList, PortsList, PortsAmounts, PortsPercentChange } from './DetailItem';
-import { TotalsChartPair, VisaTypesChartPair, PortsChartPair } from './Graphs';
+import { Row, UnorderedList, } from './DetailItem';
+import { LineGraph } from './Graphs';
 import Collapse from 'rc-collapse';
 import 'rc-collapse/assets/index.css';
+import { compact, get, isEmpty, map, startCase } from '../../utils/lodash';
 
 const Detail = ({ result }) => {
+  const ReportHeading = ({ result_key }) => {
+    if (result_key === 'partner_countries')
+      return <h3>Partner Countries:</h3>;
+    else if (result_key === 'product_groups')
+      return <h3>Product Groups:</h3>;
+    else
+      return null;
+  }
+
+  const ReportCollapse = ({result, report_type}) => {
+    const items = map(result, (v, k) => {
+      return (
+        <Collapse.Panel key={k} header={k}>
+          <LineGraph data={result} report_type={report_type}/>
+          <br />
+          <br />
+          <ReportTable data={v} />
+        </Collapse.Panel>
+      );
+    });
+    return (
+      <Collapse accordion={false}>
+        {items}
+      </Collapse>
+    );
+  }
+
+  const TableColumns = ({entry}) => {
+    const items = map(entry, (v, k) => {
+      if (!isNaN(parseFloat(v))){
+        v = parseFloat(v).toFixed(2);
+      }
+      return <td key={k}>{v}</td>;
+    });
+
+    return <tr>{items}</tr>;
+  }
+
+  const ReportTable = ({data}) => {
+    
+    const headers = map(data[0], (v, k) => {
+      return <th key={k}>{startCase(k)}</th>;
+    });
+
+    const rows = map(data, (v, i) => {
+      return <TableColumns key={i} entry={v} />;
+    });
+
+    return (
+      <table className="explorer__result-item__detail"><tbody><tr>{headers}</tr>{rows}</tbody></table>
+    );
+  }
+
+  const report_type_key = result.report_type;
   return (
-    <Collapse accordion={false}>
-       <Collapse.Panel header="Total Arrivals Graphs">
-        <TotalsChartPair data={result} />
-      </Collapse.Panel>
+    <div id="report">
+    <ReportHeading result_key={report_type_key} />
 
-      <Collapse.Panel header="Visa Type Graphs">
-        <VisaTypesChartPair data={result} />
-      </Collapse.Panel>
-
-      <Collapse.Panel header="Top 10 Ports Graphs">
-        <PortsChartPair data={result} />
-      </Collapse.Panel>
-
-      <Collapse.Panel header="Total Arrivals">
-        <table className="explorer__result-item__detail">
-          <tbody>
-            <Row label="Percent Change for Total Arrivals">
-              <UnorderedList value={result.total_arrivals_percent_change} />
-            </Row>
-            <Row label="Total Arrivals by Month">
-              <MonthlyAmountsList value={result.total_arrivals} />
-            </Row>
-          </tbody>
-        </table>
-      </Collapse.Panel>
-
-      <Collapse.Panel header="Visa Type Arrivals">
-        <table className="explorer__result-item__detail">
-          <tbody>
-            <Row label="Percent Change for Business Visa Arrivals">
-              <UnorderedList value={result.business_visa_arrivals_percent_change} />
-            </Row>
-            <Row label="Business Visa Arrivals by Month">
-              <MonthlyAmountsList value={result.business_visa_arrivals} />
-            </Row>
-
-            <Row label="Percent Change for Pleasure Visa Arrivals">
-              <UnorderedList value={result.pleasure_visa_arrivals_percent_change} />
-            </Row>
-            <Row label="Pleasure Visa Arrivals by Month">
-              <MonthlyAmountsList value={result.pleasure_visa_arrivals} />
-            </Row>
-
-            <Row label="Percent Change for Student Visa Arrivals">
-              <UnorderedList value={result.student_visa_arrivals_percent_change} />
-            </Row>
-            <Row label="Student Visa Arrivals by Month">
-              <MonthlyAmountsList value={result.student_visa_arrivals} />
-            </Row>
-          </tbody>
-        </table>
-      </Collapse.Panel>
-
-      <Collapse.Panel header="Ports of Entry Arrivals">
-        <table className="explorer__result-item__detail">
-          <tbody>
-            <Row label="Percent Change for Ports of Entry Arrivals">
-              <PortsPercentChange value={result.ports_arrivals_percent_changes} />
-            </Row>
-
-            <Row label="Ports of Entry Arrivals by Month">
-              <PortsList value={result.ports_arrivals} />
-            </Row>
-          </tbody>
-        </table>
-      </Collapse.Panel>
-
-      <Collapse.Panel header="Metadata">
-        <table className="explorer__result-item__detail">
-          <tbody>
-            <Row label="I94 Country or Region">{result.i94_country_or_region}</Row>
-            <Row label="NTTO Groups">
-              <UnorderedList value={result.ntto_group} />
-            </Row>
-            <Row label="Country">{result.country}</Row>
-            <Row label="World Regions">
-              <UnorderedList value={result.world_region} />
-            </Row>
-          </tbody>
-        </table>
-      </Collapse.Panel>
-    </Collapse>
+    <ReportCollapse result={result.entries} report_type={report_type_key}/>
+    </div>
   )
 };
 Detail.propTypes = {

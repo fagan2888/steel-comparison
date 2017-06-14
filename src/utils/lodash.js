@@ -12,3 +12,5 @@ export capitalize from 'lodash/capitalize';
 export has from 'lodash/has';
 export zipObject from 'lodash/zipObject';
 export pickBy from 'lodash/pickBy';
+export startCase from 'lodash/startCase';
+export remove from 'lodash/remove';

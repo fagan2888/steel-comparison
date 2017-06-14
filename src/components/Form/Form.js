@@ -10,6 +10,12 @@ import './Form.scss';
      reporterCountries: {
        required: true
      },
+     partnerCountries: {
+       required: false
+     },
+     productGroups: {
+       required: false
+     },
    };
 
 const SelectField = ({ description, field, label = 'Untitled', options, multi = false }) => (
@@ -59,9 +65,9 @@ class Form extends Component {
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
 
-          <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" />
-          <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" />
-          <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
+          <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" multi/>
+          <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" multi/>
+          <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" multi/>
     
           <FormMessages field={reporterCountries} >
                <p className="validation-error" when="required">
