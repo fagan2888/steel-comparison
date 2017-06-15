@@ -19,7 +19,7 @@ const Detail = ({ result }) => {
     const items = map(result, (v, k) => {
       return (
         <Collapse.Panel key={k} header={k}>
-          <LineGraph data={result} report_type={report_type}/>
+          <LineGraph data={v} report_type={report_type}/>
           <br />
           <br />
           <ReportTable data={v} />
@@ -47,7 +47,7 @@ const Detail = ({ result }) => {
   const ReportTable = ({data}) => {
     
     const headers = map(data[0], (v, k) => {
-      return <th key={k}>{startCase(k)}</th>;
+      return <th key={k}>{startCase(k).replace("Sum ", "")}</th>;
     });
 
     const rows = map(data, (v, i) => {

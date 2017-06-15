@@ -11,7 +11,6 @@ const LineGraph = ({ data, report_type }) => {
   else if (report_type === 'product_groups')
     data_row_field = 'partner_country';
 
-  data = values(data)[0]
   let color_index = 0;
   
   const datasets = map(data.slice(0, 10), (entry) => {
@@ -33,7 +32,7 @@ const LineGraph = ({ data, report_type }) => {
   });
   
   const labels = map(Object.keys(omit(data[0], data_row_field)), (label)=> {
-    return startCase(label);
+    return label.replace('sum_', '');
   });
 
   const chartData = {
@@ -44,7 +43,7 @@ const LineGraph = ({ data, report_type }) => {
   const chartOptions = {
         title: {
             display: true,
-            text: 'Annual Steel Exports (unit)'
+            text: 'Annual Steel Exports (metric tons)'
         },
         legend: {
             display: true
