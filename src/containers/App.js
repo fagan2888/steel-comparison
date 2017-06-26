@@ -49,13 +49,16 @@ class App extends Component {
 
     return (
       <div className="explorer">
-        <h1 className="Header-1"><b>Steel Exports Data</b></h1>
-        <p className="DefaultParagraph-1">Search for steel exports data by reporter country and partner country or product group. </p>
 
-        <div className="explorer__content">
-
+        <div className="form__content">
+          <h1 className="Header-1"><b>Steel Exports Data</b></h1>
+          <p className="DefaultParagraph-1">Search for steel exports data by reporter country and partner country or product group. </p>
+      
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options}/>
           <Spinner active={results.isFetchingAggs} />
+        </div>
+
+        <div className="explorer__content">
           <AggregatedResult results={results} onPaging={this.handleAggPaging} query={query} />
         </div>
       </div>

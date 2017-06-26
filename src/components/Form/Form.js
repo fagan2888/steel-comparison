@@ -10,6 +10,9 @@ import './Form.scss';
      reporterCountries: {
        required: true
      },
+     flowType: {
+      required: true
+     },
      partnerCountries: {
        required: false
      },
@@ -56,7 +59,7 @@ class Form extends Component {
 
   render() {
     const { 
-      fields: {  reporterCountries, partnerCountries, productGroups }, 
+      fields: {  reporterCountries, partnerCountries, productGroups, flowType }, 
       handleSubmit,
       formOptions 
     } = this.props;
@@ -66,20 +69,29 @@ class Form extends Component {
         <fieldset>
 
           <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" multi/>
-          <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" multi/>
-          <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" multi/>
-    
           <FormMessages field={reporterCountries} >
                <p className="validation-error" when="required">
                  Must enter at least one reporter country.
                </p>
           </FormMessages>
 
+          <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" multi/>
+          <FormMessages field={flowType} >
+             <p className="validation-error" when="required">
+               Must choose to report by quantity or dollar value.  
+             </p>
+          </FormMessages>
+
+          <div className="explorer__form__row">
+            <p>Choose one or more partner countries OR one or more product groups to aggregate by: </p>
+            <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" multi/>
+            <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" multi/>
+          </div>
+
           <div className="explorer__form__group">
             <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
               <i className="fa fa-paper-plane" /> Generate Reports
             </button>
-
           </div>
         </fieldset>
       </form>
@@ -89,6 +101,6 @@ class Form extends Component {
 
 export default reduxForm({
   form: 'form',
-  fields: ['reporterCountries', 'partnerCountries', 'productGroups'],
+  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType'],
   ...generateValidation(validations)
 })(Form);

@@ -18,12 +18,15 @@ export function setFormOptions(options){
   let product_groups = map(options.aggregations.product_groups, obj => { 
     return optionObject(obj['key']); 
   }).sort(propComparator('value', 'asc'));
-
-  return {
+  let flow_types = map(options.aggregations.flow_types, obj => { 
+    return optionObject(obj['key']); 
+  }).sort(propComparator('value', 'asc'));
+  return {  
     type: SET_FORM_OPTIONS,
     reporter_countries: reporter_countries,
     partner_countries: partner_countries,
-    product_groups: product_groups
+    product_groups: product_groups,
+    flow_types: flow_types
   };
 }
 

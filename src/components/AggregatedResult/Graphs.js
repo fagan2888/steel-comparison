@@ -26,12 +26,12 @@ const LineGraph = ({ data, report_type }) => {
         pointBorderWidth: 1,
         pointHoverRadius: 5,
         pointHitRadius: 10,
-        data: values(omit(entry, data_row_field)),
+        data: values(omit(entry, [data_row_field, 'flow_type', 'ytd_2016', 'ytd_2017', 'percent_change_ytd'])),
       }
     );
   });
   
-  const labels = map(Object.keys(omit(data[0], data_row_field)), (label)=> {
+  const labels = map(Object.keys(omit(data[0], [data_row_field, 'flow_type', 'ytd_2016', 'ytd_2017', 'percent_change_ytd'])), (label)=> {
     return label.replace('sum_', '');
   });
 
@@ -39,11 +39,19 @@ const LineGraph = ({ data, report_type }) => {
     labels: labels,
     datasets: datasets
   };
+
+  let chartTitle = "";
+  if (data[0]['flow_type'] == 'QTY'){
+    chartTitle = 'Annual Steel Exports (Metric Tons)';
+  }
+  else {
+    chartTitle = 'Annual Steel Exports (US Dollars)';
+  }
   
   const chartOptions = {
         title: {
             display: true,
-            text: 'Annual Steel Exports (metric tons)'
+            text: chartTitle
         },
         legend: {
             display: true

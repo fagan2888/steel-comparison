@@ -4,12 +4,10 @@
   margin: 0 auto;
   position: relative;
   text-align: left;
-  max-width: 971px;
 
   &__content {
     font-family: Verdana;
     margin: 0 58.5px;
-    max-width: 800px;
     padding: 0 22px;
   }
 
@@ -33,4 +31,11 @@
       }
     }
   }
+}
+
+.form__content{
+  max-width: 800px;
+  font-family: Verdana;
+  margin: 0 58.5px;
+  padding: 0 22px;
 }
