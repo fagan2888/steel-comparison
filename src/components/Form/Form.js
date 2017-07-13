@@ -68,14 +68,14 @@ class Form extends Component {
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
 
-          <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" multi/>
+          <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" />
           <FormMessages field={reporterCountries} >
                <p className="validation-error" when="required">
                  Must enter at least one reporter country.
                </p>
           </FormMessages>
 
-          <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" multi/>
+          <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" />
           <FormMessages field={flowType} >
              <p className="validation-error" when="required">
                Must choose to report by quantity or dollar value.  
@@ -84,8 +84,8 @@ class Form extends Component {
 
           <div className="explorer__form__row">
             <p>Choose one or more partner countries OR one or more product groups to aggregate by: </p>
-            <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" multi/>
-            <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" multi/>
+            <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" />
+            <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
           </div>
 
           <div className="explorer__form__group">

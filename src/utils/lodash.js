@@ -14,3 +14,4 @@ export zipObject from 'lodash/zipObject';
 export pickBy from 'lodash/pickBy';
 export startCase from 'lodash/startCase';
 export remove from 'lodash/remove';
+export pick from 'lodash/pick';

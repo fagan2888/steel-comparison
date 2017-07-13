@@ -34,32 +34,34 @@ export function receiveAggResults(payload) {
   };
 }
 
-function aggregateResults(json, querystring, params, offset, agg_results) {
-  // 10k is the max offset that can be reached in Elasticsearch for now:
-  //if(json.total >= 10000) return receiveAggResults({results: []});
-  if(json.total >= 10000) return receiveFailure('Too many results; enter fewer countries, world regions, or groups to limit the number of reports.');
+function aggregateResults(json, params, offset, agg_results) {
   
-  agg_results.results = buildAggResults(json.results, agg_results.results, params);
-  agg_results.total += json.results.length;
-  // Fetch next batch of results if needed:
-  if(agg_results.total < json.total)
-    return fetchAggResults(querystring, params, offset+100, agg_results);
+  const results = {};
+  results.product_group_entry = json[0].results;
+  results.partner_country_entry = json[1].results;
+  results.reporter_country = params.reporter_countries;
+  //agg_results = buildAggResults(results, agg_results, params);
   
-  agg_results.results = buildReports(agg_results.results, params);
+  //agg_results.results = buildReports(agg_results.results, params);
 
-  return receiveAggResults(agg_results);
+  return receiveAggResults(results);
 }
 
 const { host, apiKey } = config.api.steel;
-function fetchAggResults(querystring, params, offset = 0, aggregated_results = {}) {
+function fetchAggResults(params, offset = 0, aggregated_results = {}) {
   return (dispatch) => {
-    dispatch(requestAggResults(querystring));
-    return fetch(`${host}?api_key=${apiKey}&size=100&offset=${offset}&${querystring}`)
-      .then(response => response.json())
-      .then(json => dispatch(aggregateResults(json, querystring, params, offset, aggregated_results)))
-      //.catch((error) => {
-      //  dispatch(receiveFailure('There was an error retrieving results from the data source.'));
-      //});
+    dispatch(requestAggResults());
+    const product_group_querystring = stringify(omit(params, 'partner_countries'));
+    const partner_country_querystring = stringify(omit(params, 'product_groups'));
+    const requests = [
+      fetch(`${host}?api_key=${apiKey}&size=100&offset=${offset}&${product_group_querystring}`).then(response => response.json()),
+      fetch(`${host}?api_key=${apiKey}&size=100&offset=${offset}&${partner_country_querystring}`).then(response => response.json()) ];
+
+    return Promise.all(requests)
+      .then(json => dispatch(aggregateResults(json, params, offset, aggregated_results)))
+      .catch((error) => {
+        dispatch(receiveFailure('There was an error retrieving results from the data source:  ' + error ));
+      });
   };
 }
 
@@ -76,10 +78,10 @@ function shouldFetchResults(state) {
 export function fetchAggResultsIfNeeded(params) {
   return (dispatch, getState) => {
     if (isEmpty(omit(params, ['offset', 'size'])))
-      return dispatch(receiveAggResults({results: []})); // Don't return anything if no query is entered
+      return dispatch(receiveAggResults({})); // Don't return anything if no query is entered
     if(shouldFetchResults(getState())){
       const agg_results = {results: [], total: 0}
-      return dispatch(fetchAggResults(stringify(params), params, 0, agg_results));
+      return dispatch(fetchAggResults(params, 0, agg_results));
     }
 
     return Promise.resolve([]);

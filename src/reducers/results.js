@@ -7,7 +7,8 @@ export function results(state = {
   pageItems: [],
   offset: 0,
   invalidated: false,
-  error: ""
+  error: "",
+  dashboardData: {}
 }, action) {
   switch (action.type) {
   case REQUEST_AGG_RESULTS:
@@ -31,9 +32,8 @@ export function results(state = {
     return Object.assign({}, state, {
       isFetchingAggs: false,
       invalidated: false,
-      aggregatedItems: action.payload.results,
       offset: 0,
-      pageItems: action.payload.results.slice(state.offset, state.offset+10),
+      dashboardData: action.payload,
     });
   default:
     return state;

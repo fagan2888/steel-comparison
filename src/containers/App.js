@@ -17,15 +17,6 @@ class App extends Component {
     dispatch(fetchAggResultsIfNeeded(query));
   }
 
-  handleAggPaging = (e) => {
-    e.preventDefault();
-    if (!e.target.dataset.page) return;
-
-    const { dispatch } = this.props;
-    const offset = (parseInt(e.target.dataset.page, 10) - 1) * 10;
-    dispatch(pageResults(offset));
-  }
-
   handleSubmit = (form) => {
     const params = reduce(omitBy(form, isEmpty), (result, value, _key) => {
       const key = snakeCase(_key);
@@ -51,15 +42,15 @@ class App extends Component {
       <div className="explorer">
 
         <div className="form__content">
-          <h1 className="Header-1"><b>Steel Exports Data</b></h1>
-          <p className="DefaultParagraph-1">Search for steel exports data by reporter country and partner country or product group. </p>
+          <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
+          <p className="DefaultParagraph-1">Search for steel trade data by first selecting a reporter country. </p>
       
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options}/>
           <Spinner active={results.isFetchingAggs} />
         </div>
 
         <div className="explorer__content">
-          <AggregatedResult results={results} onPaging={this.handleAggPaging} query={query} />
+          <AggregatedResult results={results} query={query} />
         </div>
       </div>
     );

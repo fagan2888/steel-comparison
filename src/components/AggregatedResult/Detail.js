@@ -1,35 +1,30 @@
 import React, { PropTypes } from 'react';
 import { Row, UnorderedList, } from './DetailItem';
 import { LineGraph } from './Graphs';
-import Collapse from 'rc-collapse';
-import 'rc-collapse/assets/index.css';
+import YearlyBarGraph from './YearlyBarGraph';
+import ProductGroupBarGraph from './ProductGroupBarGraph';
+import ProductGroupPie from './ProductGroupPie';
+import PartnerCountryPie from './PartnerCountryPie';
+import PartnerCountryBarGraph from './PartnerCountryBarGraph';
 import { compact, get, isEmpty, map, startCase } from '../../utils/lodash';
 
-const Detail = ({ result }) => {
-  const ReportHeading = ({ result_key }) => {
-    if (result_key === 'partner_countries')
-      return <h3>Partner Countries:</h3>;
-    else if (result_key === 'product_groups')
-      return <h3>Product Groups:</h3>;
-    else
-      return null;
+const Detail = ({ result, query }) => {
+  const ReportHeading = ({ reporter }) => {
+    return <h1>Steel Exports for {reporter}</h1>;
   }
-
-  const ReportCollapse = ({result, report_type}) => {
-    const items = map(result, (v, k) => {
-      return (
-        <Collapse.Panel key={k} header={k}>
-          <LineGraph data={v} report_type={report_type}/>
-          <br />
-          <br />
-          <ReportTable data={v} />
-        </Collapse.Panel>
-      );
-    });
+  console.log(result)
+  const ReportDashboard = ({result}) => {
     return (
-      <Collapse accordion={false}>
-        {items}
-      </Collapse>
+      <div key={result.reporter_country}>
+        <YearlyBarGraph data={result.product_group_entry} params={query} />
+        <ProductGroupBarGraph data={result.product_group_entry} params={query} />
+        <PartnerCountryBarGraph data={result.partner_country_entry} params={query} />
+        <ProductGroupPie data={result.product_group_entry} params={query} />
+        <PartnerCountryPie data={result.partner_country_entry} params={query} />
+        <br />
+        <br />
+
+      </div>
     );
   }
 
@@ -59,17 +54,17 @@ const Detail = ({ result }) => {
     );
   }
 
-  const report_type_key = result.report_type;
   return (
     <div id="report">
-    <ReportHeading result_key={report_type_key} />
+      <ReportHeading reporter={result.reporter_country} />
 
-    <ReportCollapse result={result.entries} report_type={report_type_key}/>
+      <ReportDashboard result={result} />
     </div>
   )
 };
 Detail.propTypes = {
-  result: PropTypes.object.isRequired
+  result: PropTypes.object.isRequired,
+  query: PropTypes.object.isRequired
 };
 
 export default Detail;
