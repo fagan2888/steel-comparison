@@ -14,8 +14,10 @@ function compare(a, b) {
 const PartnerCountryPie = ({ data, params }) => {
   const data_fields = ['ytd_2017'];
 
-  const data_entries = data.sort(compare).slice(1, 6);
-  console.log(data)
+  const sorted_data = data.sort(compare);
+  const data_entries = sorted_data.slice(1, 6);
+  const total = sorted_data[0].ytd_2017;
+
   const labels = map(data_entries, (entry) => {
     return entry.product_group;
   })
@@ -26,7 +28,7 @@ const PartnerCountryPie = ({ data, params }) => {
         fill: false,
         backgroundColor:  ['red', 'green', 'yellow', 'blue', 'orange'],
         hoverBackgroundColor: ['red', 'green', 'yellow', 'blue', 'orange'],
-        data: map(data_entries, (entry) => { return entry.ytd_2017; }),
+        data: map(data_entries, (entry) => { return (entry.ytd_2017/total)*100; }),
       },
     ];
 

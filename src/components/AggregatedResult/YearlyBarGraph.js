@@ -30,7 +30,7 @@ const YearlyBarGraph = ({ data, params }) => {
     datasets: datasets
   };
 
-  let chartTitle = params.reporter_countries + ' Exports of ' + params.product_groups + ' from World in ' + params.flow_type;
+  let chartTitle = params.reporter_countries + ' Exports of ' + params.product_groups + ' for World in ' + params.flow_type;
   
   const chartOptions = {
         title: {

@@ -14,7 +14,7 @@ function compare(a, b) {
 const ProductGroupBarGraph = ({ data, params }) => {
   const data_fields = ['ytd_2016', 'ytd_2017'];
 
-  const data_entries = data.sort(compare).slice(0, 5);
+  const data_entries = data.sort(compare).slice(1, 6);
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;

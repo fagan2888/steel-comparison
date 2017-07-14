@@ -12,7 +12,7 @@ const Detail = ({ result, query }) => {
   const ReportHeading = ({ reporter }) => {
     return <h1>Steel Exports for {reporter}</h1>;
   }
-  console.log(result)
+
   const ReportDashboard = ({result}) => {
     return (
       <div key={result.reporter_country}>
