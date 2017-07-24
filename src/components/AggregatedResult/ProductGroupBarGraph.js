@@ -11,10 +11,25 @@ function compare(a, b) {
   return 0;
 }
 
-const ProductGroupBarGraph = ({ data, params }) => {
-  const data_fields = ['ytd_2016', 'ytd_2017'];
+function buildTitle(params) {
+  let units = "";
+  if (params.flow_type === "QTY")
+    units = "Thousands of Metric Tons";
+  else if (params.flow_type === "VALUE")
+    units = "Thousands of U.S. Dollars";
 
-  const data_entries = data.sort(compare).slice(1, 6);
+  const chartTitle = params.reporter_countries + ' Exports for Top 5 Partner Countries of ' + params.product_groups + ' in ' + units;
+  return chartTitle;
+}
+
+const ProductGroupBarGraph = ({ data, params }) => {
+  const chartTitle = buildTitle(params);
+
+  data = data.filter(function(entry) {
+    return (entry.partner_country !== "World" && entry.partner_country !== "Other Countries");
+  });
+
+  const data_entries = data.sort(compare).slice(0, 5);
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;
@@ -29,7 +44,7 @@ const ProductGroupBarGraph = ({ data, params }) => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: map(data_entries, (entry) => { return entry.ytd_2016; }),
+        data: map(data_entries, (entry) => { return entry.ytd_2016/1000; }),
       },
       {
         label: 'YTD 2017',
@@ -39,7 +54,7 @@ const ProductGroupBarGraph = ({ data, params }) => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0,99,132,0.4)',
         hoverBorderColor: 'rgba(0,99,132,1)',
-        data: map(data_entries, (entry) => { return entry.ytd_2017; }),
+        data: map(data_entries, (entry) => { return entry.ytd_2017/1000; }),
       },
     ];
 
@@ -47,8 +62,6 @@ const ProductGroupBarGraph = ({ data, params }) => {
     labels: labels,
     datasets: datasets
   };
-
-  let chartTitle = params.reporter_countries + ' Exports for Top 5 Partner Countries of ' + params.product_groups + ' in ' + params.flow_type;
   
   const chartOptions = {
         title: {
@@ -59,9 +72,15 @@ const ProductGroupBarGraph = ({ data, params }) => {
             display: true
         },
         scales: { 
-          yAxes: [{
+          xAxes: [{
               ticks: {
-                    maxTicksLimit: 15
+                    maxTicksLimit: 15,
+                    userCallback: function(value, index, values) {
+                      value = value.toString();
+                      value = value.split(/(?=(?:...)*$)/);
+                      value = value.join(',');
+                      return value;
+                    }
                   }
             }]
         },
