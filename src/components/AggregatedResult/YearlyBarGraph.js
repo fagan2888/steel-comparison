@@ -9,7 +9,7 @@ function buildTitle(params) {
     units = "Thousands of Metric Tons";
   else if (params.flow_type === "VALUE")
     units = "Thousands of U.S. Dollars";
-  const chart_title = params.reporter_countries + ' Exports of ' + params.product_groups + ' for World in ' + units;
+  const chart_title = params.reporter_countries + ' Exports of ' + params.product_groups + ' for ' + params.partner_countries + ' in ' + units;
   return chart_title;
 }
 
@@ -19,7 +19,7 @@ const YearlyBarGraph = ({ data, params }) => {
   const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd'];
 
   const data_entry = data.find((element) => {
-    return element.partner_country === 'World'
+    return element.partner_country === params.partner_countries
   });
 
   const data_values = map(values(omit(data_entry, excluded_fields)), value => {

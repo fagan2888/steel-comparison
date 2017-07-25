@@ -18,24 +18,23 @@ function buildTitle(params) {
   else if (params.flow_type === "VALUE")
     units = "Thousands of U.S. Dollars";
 
-  const chart_title = 'Share of ' + params.reporter_countries + ' Exports for Top 5 Partner Countries of ' + params.product_groups + ' in ' + units + ' - YTD 2017';
+  const chart_title = 'Share of ' + params.reporter_countries + ' Exports for Top 5 Partner Countries of ' + params.product_groups + ' in ' + units + ' - ' + startCase(params.pie_period);
   return chart_title;
 }
 
 const ProductGroupPie = ({ data, params }) => {
   const chartTitle = buildTitle(params);
-  const data_fields = ['ytd_2017'];
 
   const sorted_data = data.sort(compare);
   const data_entries = sorted_data.slice(1, 6);
-  const total = sorted_data[0].ytd_2017;
+  const total = sorted_data[0][params.pie_period];
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;
   });
 
   const data_values = map(data_entries, (entry) => { 
-    return ((entry.ytd_2017/total)*100).toFixed(2); 
+    return ((entry[params.pie_period]/total)*100).toFixed(2); 
   });
 
   const datasets = [

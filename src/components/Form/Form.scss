@@ -5,6 +5,10 @@
   color: red;
 }
 
+.Select {
+  width: 80%;
+}
+
 .explorer__form {
   font-size: 11px;
   margin: 28px 0;
@@ -18,22 +22,23 @@
 
   &__submit {
     float: right;
+    margin-top: 20px;
   }
 
   &__row {
-    display: inline;
+    display: block;
   }
 
   &__row_group {
     vertical-align:middle;
     display: inline-block;
-    width: 50%;
+    width: 45%;
   }
 
   &__group {
     display: inline-block;
     margin-top: 10px;
-    width: 100%;
+    width: 50%;
 
     label {
       color: #000;

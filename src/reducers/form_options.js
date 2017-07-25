@@ -5,7 +5,8 @@ export function form_options(state = {
   reporterCountries: [],
   partnerCountries: [],
   productGroups: [],
-  flowTypes: []
+  flowTypes: [],
+  timePeriods: [],
 }, action) {
   switch (action.type) {
   case SET_FORM_OPTIONS:
@@ -13,7 +14,8 @@ export function form_options(state = {
       reporterCountries: action.reporter_countries,
       partnerCountries: action.partner_countries,
       productGroups: action.product_groups,
-      flowTypes: action.flow_types
+      flowTypes: action.flow_types,
+      timePeriods: action.time_periods,
     });
   default:
     return state;

@@ -37,24 +37,24 @@ const ProductGroupBarGraph = ({ data, params }) => {
 
   const datasets = [
       {
-        label: 'YTD 2016',
+        label: startCase(params.comparison_interval_start),
         fill: false,
         backgroundColor:  'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: map(data_entries, (entry) => { return entry.ytd_2016/1000; }),
+        data: map(data_entries, (entry) => { return entry[params.comparison_interval_start]/1000; }),
       },
       {
-        label: 'YTD 2017',
+        label: startCase(params.comparison_interval_end),
         fill: false,
         backgroundColor:  'rgba(0,99,132,0.2)',
         borderColor: 'rgba(0,99,132,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0,99,132,0.4)',
         hoverBorderColor: 'rgba(0,99,132,1)',
-        data: map(data_entries, (entry) => { return entry.ytd_2017/1000; }),
+        data: map(data_entries, (entry) => { return entry[params.comparison_interval_end]/1000; }),
       },
     ];
 

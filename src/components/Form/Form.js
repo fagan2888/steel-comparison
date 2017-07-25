@@ -7,22 +7,34 @@ import { generateValidation } from 'redux-form-validation';
 import './Form.scss';
 
  const validations = {
-     reporterCountries: {
-       required: true
-     },
-     flowType: {
+    reporterCountries: {
       required: true
-     },
-     partnerCountries: {
-       required: false
-     },
-     productGroups: {
-       required: false
-     },
+    },
+    flowType: {
+      required: true
+    },
+    partnerCountries: {
+      required: true
+    },
+    productGroups: {
+      required: true
+    },
+    flowDirection: {
+      required: false
+    },
+    comparisonIntervalStart: {
+      required: false
+    },
+    comparisonIntervalEnd: {
+      required: false
+    },
+    piePeriod: {
+      required: true
+    }
    };
 
 const SelectField = ({ description, field, label = 'Untitled', options, multi = false }) => (
-  <div className="explorer__form__group">
+  <div>
     <label htmlFor={field.name}>{label}</label>
     {description ? <p>{description}</p> : null}
     <div>
@@ -59,7 +71,7 @@ class Form extends Component {
 
   render() {
     const { 
-      fields: {  reporterCountries, partnerCountries, productGroups, flowType }, 
+      fields: {  reporterCountries, partnerCountries, productGroups, flowType, flowDirection, comparisonIntervalStart, comparisonIntervalEnd, piePeriod }, 
       handleSubmit,
       formOptions 
     } = this.props;
@@ -68,24 +80,85 @@ class Form extends Component {
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
 
-          <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Countries" description="" />
-          <FormMessages field={reporterCountries} >
-               <p className="validation-error" when="required">
-                 Must enter at least one reporter country.
-               </p>
-          </FormMessages>
+          <div className="explorer__form__row">
+            <div className="explorer__form__group">
+              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" />
+              <FormMessages field={reporterCountries} >
+                   <p className="validation-error" when="required">
+                     Must enter at least one reporter country.
+                   </p>
+              </FormMessages>
+            </div>
 
-          <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" />
-          <FormMessages field={flowType} >
-             <p className="validation-error" when="required">
-               Must choose to report by quantity or dollar value.  
-             </p>
-          </FormMessages>
+            <div className="explorer__form__group">
+              <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" />
+              <FormMessages field={flowType} >
+                 <p className="validation-error" when="required">
+                   Must choose to report by quantity or dollar value.  
+                 </p>
+              </FormMessages>
+            </div>
+          </div>
 
           <div className="explorer__form__row">
-            <p>Choose one or more partner countries OR one or more product groups to aggregate by: </p>
-            <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Countries" description="" />
-            <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
+            <div className="explorer__form__group">
+              <SelectField field={partnerCountries} options={formOptions.partnerCountries} label="Partner Country" description="" />
+              <FormMessages field={partnerCountries} >
+                 <p className="validation-error" when="required">
+                   Must choose a partner country.  
+                 </p>
+              </FormMessages>
+            </div>
+
+
+            <div className="explorer__form__group">
+              <SelectField field={flowDirection} options={[]} label="Trade Flow (Imports or Exports)" description="" />
+              <FormMessages field={flowDirection} >
+                 <p className="validation-error" when="required">
+                   Must choose Imports or Exports.
+                 </p>
+              </FormMessages>
+            </div>
+          </div>
+
+          <div className="explorer__form__row">
+            <div className="explorer__form__group">
+              <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
+              <FormMessages field={productGroups} >
+                 <p className="validation-error" when="required">
+                   Must choose a product group.  
+                 </p>
+              </FormMessages>
+            </div>
+
+            <div className="explorer__form__group">
+              <SelectField field={comparisonIntervalStart} options={formOptions.timePeriods} label="Comparison Bar Graph Interval Start" description="" />
+              <FormMessages field={comparisonIntervalStart} >
+                 <p className="validation-error" when="required">
+                   Must choose first comparison interval.
+                 </p>
+              </FormMessages>
+            </div>
+          </div>
+
+          <div className="explorer__form__row">
+            <div className="explorer__form__group">
+              <SelectField field={piePeriod} options={formOptions.timePeriods} label="Time Period for Pie Graphs" description="" />
+              <FormMessages field={piePeriod} >
+                 <p className="validation-error" when="required">
+                   Must choose time period for pie graphs.
+                 </p>
+              </FormMessages>
+            </div>
+
+            <div className="explorer__form__group">
+              <SelectField field={comparisonIntervalEnd} options={formOptions.timePeriods} label="Comparison Bar Graph Interval End" description="" />
+              <FormMessages field={comparisonIntervalEnd} >
+                 <p className="validation-error" when="required">
+                   Must choose second comparison interval.
+                 </p>
+              </FormMessages>
+            </div>
           </div>
 
           <div className="explorer__form__group">
@@ -101,6 +174,6 @@ class Form extends Component {
 
 export default reduxForm({
   form: 'form',
-  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType'],
+  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType', 'flowDirection', 'comparisonIntervalStart', 'comparisonIntervalEnd', 'piePeriod'],
   ...generateValidation(validations)
 })(Form);

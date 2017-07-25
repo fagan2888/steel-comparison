@@ -95,7 +95,7 @@ function buildQueryString(params) {
     const date_range = calculateDateRange(moment(params.start_date), params.percent_change);
     Object.assign(params, { date: date_range });
   }
-  return stringify(omit(params, ['start_date', 'percent_change', 'select_options']));
+  return stringify(omit(params, ['start_date', 'percent_change', 'select_options', 'flow_direction', 'comparison_interval_start', 'comparison_interval_start', 'pie_period']));
 }
 
 function filterSelectValues(params) {
