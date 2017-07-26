@@ -13,10 +13,20 @@ function buildTitle(params) {
   return chart_title;
 }
 
-const YearlyBarGraph = ({ data, params }) => {
+const Footnote = ({data, params, last_updated}) => {
+  const ytd_end_month = data[0].ytd_end_month;
+  const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
+  return (
+    <p> 
+      Source: Department of Commerce, annual data from UN Statistics, YTD data (Jan-{ytd_end_month}) from Global Trade Atlas, updated on {last_updated_date}.
+    </p> 
+  );
+}
+
+const YearlyBarGraph = ({ data, params, last_updated }) => {
   const chartTitle = buildTitle(params);
 
-  const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd'];
+  const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month'];
 
   const data_entry = data.find((element) => {
     return element.partner_country === params.partner_countries
@@ -75,8 +85,11 @@ const YearlyBarGraph = ({ data, params }) => {
 
 
   return  (
-    <div className="bar_graph">
-      <Bar data={chartData} options={chartOptions} />
+    <div>
+      <div className="bar_graph">
+        <Bar data={chartData} options={chartOptions} />
+      </div>
+      <Footnote data={data} params={params} last_updated={last_updated}/>
     </div>
   );
 }

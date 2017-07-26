@@ -40,6 +40,8 @@ function aggregateResults(json, params, offset, agg_results) {
   results.product_group_entry = json[0].results;
   results.partner_country_entry = json[1].results;
   results.reporter_country = params.reporter_countries;
+
+  results.source_last_updated = json[1].sources_used[0].source_last_updated;
   //agg_results = buildAggResults(results, agg_results, params);
   
   //agg_results.results = buildReports(agg_results.results, params);

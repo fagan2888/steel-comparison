@@ -16,7 +16,7 @@ const Detail = ({ result, query }) => {
   const ReportDashboard = ({result}) => {
     return (
       <div key={result.reporter_country}>
-        <YearlyBarGraph data={result.product_group_entry} params={query} />
+        <YearlyBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
         <ProductGroupBarGraph data={result.product_group_entry} params={query} />
         <PartnerCountryBarGraph data={result.partner_country_entry} params={query} />
         <ProductGroupPie data={result.product_group_entry} params={query} />
