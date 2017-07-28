@@ -45,7 +45,7 @@ class App extends Component {
           <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
           <p className="DefaultParagraph-1">Search for steel trade data by first selecting a reporter country. </p>
       
-          <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options}/>
+          <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
           <Spinner active={results.isFetchingAggs} />
         </div>
 

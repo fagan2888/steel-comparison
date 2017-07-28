@@ -17,7 +17,7 @@ const Footnote = ({data, params, last_updated}) => {
   const ytd_end_month = data[0].ytd_end_month;
   const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
-    <p> 
+    <p className="graph_footnote"> 
       Source: Department of Commerce, annual data from UN Statistics, YTD data (Jan-{ytd_end_month}) from Global Trade Atlas, updated on {last_updated_date}.
     </p> 
   );

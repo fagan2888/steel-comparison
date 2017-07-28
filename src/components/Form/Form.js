@@ -4,6 +4,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import FormMessages from 'redux-form-validation';
 import { generateValidation } from 'redux-form-validation';
+import { requestSubGroups } from '../../actions/form_options';
 import './Form.scss';
 
  const validations = {
@@ -33,7 +34,7 @@ import './Form.scss';
     }
    };
 
-const SelectField = ({ description, field, label = 'Untitled', options, multi = false }) => (
+const SelectField = ({ description, field, label = 'Untitled', options, multi = false, dispatch = null }) => (
   <div>
     <label htmlFor={field.name}>{label}</label>
     {description ? <p>{description}</p> : null}
@@ -46,6 +47,11 @@ const SelectField = ({ description, field, label = 'Untitled', options, multi = 
         joinValues = {true}
         delimiter = {','}
         simpleValue = {true}
+        onChange={event => {
+          field.onChange(event)
+          if (dispatch)
+            dispatch(requestSubGroups(event))
+        }}
       />
     </div>
   </div>
@@ -82,8 +88,8 @@ class Form extends Component {
 
           <div className="explorer__form__row">
             <div className="explorer__form__group">
-              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" />
-              <FormMessages field={reporterCountries} >
+              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" dispatch={this.props.dispatch}/>
+              <FormMessages field={reporterCountries} > 
                    <p className="validation-error" when="required">
                      Must enter at least one reporter country.
                    </p>

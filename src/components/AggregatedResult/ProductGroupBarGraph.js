@@ -22,7 +22,17 @@ function buildTitle(params) {
   return chartTitle;
 }
 
-const ProductGroupBarGraph = ({ data, params }) => {
+const Footnote = ({data, params, last_updated}) => {
+  //const ytd_end_month = data[0].ytd_end_month;
+  //const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
+  return (
+    <p className="graph_footnote"> 
+      Footnote placeholder.  
+    </p> 
+  );
+}
+
+const ProductGroupBarGraph = ({ data, params, last_updated }) => {
   const chartTitle = buildTitle(params);
 
   data = data.filter(function(entry) {
@@ -89,8 +99,11 @@ const ProductGroupBarGraph = ({ data, params }) => {
 
 
   return  (
-    <div className="bar_graph">
-      <HorizontalBar data={chartData} options={chartOptions} />
+    <div>
+      <div className="bar_graph">
+        <HorizontalBar data={chartData} options={chartOptions} />
+      </div>
+      <Footnote data={data} params={params} last_updated={last_updated}/>
     </div>
   );
 }

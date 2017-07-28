@@ -22,7 +22,17 @@ function buildTitle(params) {
   return chart_title;
 }
 
-const ProductGroupPie = ({ data, params }) => {
+const Footnote = ({data, params, last_updated}) => {
+  //const ytd_end_month = data[0].ytd_end_month;
+  //const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
+  return (
+    <p className="graph_footnote"> 
+      Footnote placeholder.  
+    </p> 
+  );
+}
+
+const ProductGroupPie = ({ data, params, last_updated }) => {
   const chartTitle = buildTitle(params);
 
   const sorted_data = data.sort(compare);
@@ -66,8 +76,11 @@ const ProductGroupPie = ({ data, params }) => {
 
 
   return  (
-    <div className="pie_graph">
-      <Pie data={chartData} options={chartOptions} />
+    <div>
+      <div className="pie_graph">
+        <Pie data={chartData} options={chartOptions} />
+      </div>
+      <Footnote data={data} params={params} last_updated={last_updated}/>
     </div>
   );
 }

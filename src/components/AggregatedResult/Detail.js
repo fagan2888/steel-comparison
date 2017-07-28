@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Row, UnorderedList, } from './DetailItem';
-import { LineGraph } from './Graphs';
 import YearlyBarGraph from './YearlyBarGraph';
 import ProductGroupBarGraph from './ProductGroupBarGraph';
 import ProductGroupPie from './ProductGroupPie';
@@ -17,13 +16,10 @@ const Detail = ({ result, query }) => {
     return (
       <div key={result.reporter_country}>
         <YearlyBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
-        <ProductGroupBarGraph data={result.product_group_entry} params={query} />
-        <PartnerCountryBarGraph data={result.partner_country_entry} params={query} />
-        <ProductGroupPie data={result.product_group_entry} params={query} />
-        <PartnerCountryPie data={result.partner_country_entry} params={query} />
-        <br />
-        <br />
-
+        <ProductGroupBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <PartnerCountryBarGraph data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
+        <ProductGroupPie data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <PartnerCountryPie data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
       </div>
     );
   }
