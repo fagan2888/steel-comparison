@@ -12,13 +12,10 @@ function compare(a, b) {
 }
 
 function buildTitle(params) {
-  let units = "";
-  if (params.flow_type === "QTY")
-    units = "Thousands of Metric Tons";
-  else if (params.flow_type === "VALUE")
-    units = "Thousands of U.S. Dollars";
+  let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  let flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
-  const chartTitle = params.reporter_countries + ' Exports for Top 5 Partner Countries of ' + params.product_groups + ' in ' + units;
+  const chartTitle = params.reporter_countries + flow + 'Top 5 Partner Countries of ' + params.product_groups + ' in ' + units;
   return chartTitle;
 }
 
@@ -27,7 +24,7 @@ const Footnote = ({data, params, last_updated}) => {
   //const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
     <p className="graph_footnote"> 
-      Footnote placeholder.  
+      Source: U.S. Department of Commerce, Enforcement and Compliance. 
     </p> 
   );
 }
@@ -45,9 +42,13 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
     return entry.partner_country;
   })
 
+  const ytd_label = 'YTD ' + data_entries[0].ytd_end_month + ' ';
+  const first_dataset_label = params.comparison_interval_start.replace('sum_', '').replace('ytd_', ytd_label);
+  const second_dataset_label = params.comparison_interval_end.replace('sum_', '').replace('ytd_', ytd_label);
+
   const datasets = [
       {
-        label: startCase(params.comparison_interval_start),
+        label: first_dataset_label,
         fill: false,
         backgroundColor:  'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
@@ -57,7 +58,7 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
         data: map(data_entries, (entry) => { return entry[params.comparison_interval_start]/1000; }),
       },
       {
-        label: startCase(params.comparison_interval_end),
+        label: second_dataset_label,
         fill: false,
         backgroundColor:  'rgba(0,99,132,0.2)',
         borderColor: 'rgba(0,99,132,1)',
@@ -73,10 +74,12 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
     datasets: datasets
   };
   
+  const x_axis_label = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   const chartOptions = {
         title: {
             display: true,
-            text: chartTitle
+            text: chartTitle,
+            fontSize: 16
         },
         legend: {
             display: true
@@ -91,7 +94,11 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
                       value = value.join(',');
                       return value;
                     }
-                  }
+                  },
+              scaleLabel: {
+                display: true,
+                labelString: x_axis_label
+              }
             }]
         },
         maintainAspectRatio: false

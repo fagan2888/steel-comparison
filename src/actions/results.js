@@ -42,9 +42,6 @@ function aggregateResults(json, params, offset, agg_results) {
   results.reporter_country = params.reporter_countries;
 
   results.source_last_updated = json[1].sources_used[0].source_last_updated;
-  //agg_results = buildAggResults(results, agg_results, params);
-  
-  //agg_results.results = buildReports(agg_results.results, params);
 
   return receiveAggResults(results);
 }
@@ -53,8 +50,8 @@ const { host, apiKey } = config.api.steel;
 function fetchAggResults(params, offset = 0, aggregated_results = {}) {
   return (dispatch) => {
     dispatch(requestAggResults());
-    const product_group_querystring = stringify(omit(params, 'partner_countries'));
-    const partner_country_querystring = stringify(omit(params, 'product_groups'));
+    const product_group_querystring = stringify(omit(params, ['partner_countries', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
+    const partner_country_querystring = stringify(omit(params, ['product_groups', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
     const requests = [
       fetch(`${host}?api_key=${apiKey}&size=100&offset=${offset}&${product_group_querystring}`).then(response => response.json()),
       fetch(`${host}?api_key=${apiKey}&size=100&offset=${offset}&${partner_country_querystring}`).then(response => response.json()) ];
@@ -88,30 +85,4 @@ export function fetchAggResultsIfNeeded(params) {
 
     return Promise.resolve([]);
   };
-}
-
-function buildQueryString(params) {
-  params = filterSelectValues(params);
-
-  if (params.start_date && params.percent_change) {
-    const date_range = calculateDateRange(moment(params.start_date), params.percent_change);
-    Object.assign(params, { date: date_range });
-  }
-  return stringify(omit(params, ['start_date', 'percent_change', 'select_options', 'flow_direction', 'comparison_interval_start', 'comparison_interval_start', 'pie_period']));
-}
-
-function filterSelectValues(params) {
-  if (params.select_options == 'countries'){
-    params.world_regions = '';
-    params.ntto_groups = '';
-  }
-  else if (params.select_options == 'worldRegions'){
-    params.countries = '';
-    params.ntto_groups = '';
-  }
-  else if (params.select_options == 'nttoGroups'){
-    params.world_regions = '';
-    params.countries = '';
-  }
-  return params;
 }

@@ -22,11 +22,17 @@ export function setFormOptions(options){
   }).sort(propComparator('value', 'asc'));
 
   let flow_types = map(options.aggregations.flow_types, obj => { 
-    return optionObject(obj['key']); 
+    const label = obj['key'] === 'QTY' ? 'Quantity (Metric Tons)' : 'Value (US Dollars)';
+    return {label: label, value: obj['key']}; 
+  }).sort(propComparator('value', 'asc'));
+
+  let trade_flows = map(options.aggregations.trade_flows, obj => {
+    const label = obj['key'] === 'IMP' ? 'Imports' : 'Exports';
+    return {label: label, value: obj['key']};
   }).sort(propComparator('value', 'asc'));
 
   let time_periods = map(extractTimePeriods(options.results[0]), time_period => {
-    return {label: startCase(time_period), value: time_period}
+    return {label: startCase(time_period.replace('sum_', '')).toUpperCase(), value: time_period}
   });
 
   return {  
@@ -35,7 +41,8 @@ export function setFormOptions(options){
     partner_countries: partner_countries,
     product_groups: product_groups,
     flow_types: flow_types,
-    time_periods: time_periods
+    time_periods: time_periods,
+    trade_flows: trade_flows
   };
 }
 
@@ -48,10 +55,15 @@ export function setSubGroups(options){
     return optionObject(obj['key']); 
   }).sort(propComparator('value', 'asc'));
 
+  let trade_flows = map(options.aggregations.trade_flows, obj => {
+    return optionObject(obj['key']);
+  }).sort(propComparator('value', 'asc'));
+
   return {  
     type: SET_SUB_GROUPS,
     partner_countries: partner_countries,
-    product_groups: product_groups
+    product_groups: product_groups,
+    trade_flows: trade_flows
   };
 }
 

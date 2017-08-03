@@ -11,29 +11,27 @@ function compare(a, b) {
   return 0;
 }
 
-function buildTitle(params) {
-  let units = "";
-  if (params.flow_type === "QTY")
-    units = "Thousands of Metric Tons";
-  else if (params.flow_type === "VALUE")
-    units = "Thousands of U.S. Dollars";
+function buildTitle(params, ytd_end_month) {
+  const units = params.flow_type === "QTY" ? "Metric Tons" : "U.S. Dollars";
+  const flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
+  const ytd_label = 'YTD ' + ytd_end_month + ' ';
 
-  const chart_title = 'Share of ' + params.reporter_countries + ' Exports for ' + params.partner_countries + ' by Product in ' + units + ' - ' + startCase(params.pie_period);
+  const chart_title = 'Share of ' + params.reporter_countries + flow + params.partner_countries + ' by Product in ' + units + ' - ' + params.pie_period.replace('sum_', '').replace('ytd_', ytd_label);
   return chart_title;
 }
 
-const Footnote = ({data, params, last_updated}) => {
-  //const ytd_end_month = data[0].ytd_end_month;
-  //const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
+const Footnote = ({data, params, total}) => {
+  const units = params.flow_type === "QTY" ? "metric tons" : "U.S. dollars";
+
   return (
     <p className="graph_footnote"> 
-      Footnote placeholder.  
+      Source:  U.S. Department of Commerce, Enforcement and Compliance:  Trade covered in the table is {total.toFixed(2)} {units}.
     </p> 
   );
 }
 
 const PartnerCountryPie = ({ data, params, last_updated }) => {
-  const chartTitle = buildTitle(params);
+  const chartTitle = buildTitle(params, data[0].ytd_end_month);
 
   const sorted_data = data.sort(compare);
   const data_entries = sorted_data.slice(1, 6);
@@ -65,7 +63,8 @@ const PartnerCountryPie = ({ data, params, last_updated }) => {
   const chartOptions = {
         title: {
             display: true,
-            text: chartTitle
+            text: chartTitle,
+            fontSize: 16
         },
         legend: {
             display: true
@@ -78,7 +77,7 @@ const PartnerCountryPie = ({ data, params, last_updated }) => {
       <div className="pie_graph">
         <Pie data={chartData} options={chartOptions} />
       </div>
-      <Footnote data={data} params={params} last_updated={last_updated}/>
+      <Footnote data={data} params={params} total={total}/>
     </div>
   );
 }

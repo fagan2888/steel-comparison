@@ -20,19 +20,19 @@ import './Form.scss';
     productGroups: {
       required: true
     },
-    flowDirection: {
-      required: false
-    },
     comparisonIntervalStart: {
-      required: false
+      required: true
     },
     comparisonIntervalEnd: {
-      required: false
+      required: true
     },
     piePeriod: {
       required: true
+    },
+    tradeFlow: {
+      required: true
     }
-   };
+  };
 
 const SelectField = ({ description, field, label = 'Untitled', options, multi = false, dispatch = null }) => (
   <div>
@@ -77,7 +77,7 @@ class Form extends Component {
 
   render() {
     const { 
-      fields: {  reporterCountries, partnerCountries, productGroups, flowType, flowDirection, comparisonIntervalStart, comparisonIntervalEnd, piePeriod }, 
+      fields: {  reporterCountries, partnerCountries, productGroups, flowType, tradeFlow, comparisonIntervalStart, comparisonIntervalEnd, piePeriod }, 
       handleSubmit,
       formOptions 
     } = this.props;
@@ -97,7 +97,7 @@ class Form extends Component {
             </div>
 
             <div className="explorer__form__group">
-              <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity (metric tons) or Value (US dollars)" description="" />
+              <SelectField field={flowType} options={formOptions.flowTypes} label="Quantity or Value" description="" />
               <FormMessages field={flowType} >
                  <p className="validation-error" when="required">
                    Must choose to report by quantity or dollar value.  
@@ -118,8 +118,8 @@ class Form extends Component {
 
 
             <div className="explorer__form__group">
-              <SelectField field={flowDirection} options={[]} label="Trade Flow (Imports or Exports)" description="" />
-              <FormMessages field={flowDirection} >
+              <SelectField field={tradeFlow} options={formOptions.tradeFlows} label="Trade Flow" description="" />
+              <FormMessages field={tradeFlow} >
                  <p className="validation-error" when="required">
                    Must choose Imports or Exports.
                  </p>
@@ -180,6 +180,6 @@ class Form extends Component {
 
 export default reduxForm({
   form: 'form',
-  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType', 'flowDirection', 'comparisonIntervalStart', 'comparisonIntervalEnd', 'piePeriod'],
+  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType', 'tradeFlow', 'comparisonIntervalStart', 'comparisonIntervalEnd', 'piePeriod'],
   ...generateValidation(validations)
 })(Form);

@@ -9,16 +9,21 @@ import { compact, get, isEmpty, map, startCase } from '../../utils/lodash';
 
 const Detail = ({ result, query }) => {
   const ReportHeading = ({ reporter }) => {
-    return <h1>Steel Exports for {reporter}</h1>;
+    let flow = query.trade_flow === 'EXP' ? 'Exports' : 'Imports';
+    return <h1>Steel {flow} for {reporter}</h1>;
   }
 
   const ReportDashboard = ({result}) => {
     return (
       <div key={result.reporter_country}>
         <YearlyBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <br />
         <ProductGroupBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <br />
         <PartnerCountryBarGraph data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
+        <br />
         <ProductGroupPie data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <br />
         <PartnerCountryPie data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
       </div>
     );

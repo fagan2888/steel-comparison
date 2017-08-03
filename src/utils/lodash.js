@@ -15,3 +15,4 @@ export pickBy from 'lodash/pickBy';
 export startCase from 'lodash/startCase';
 export remove from 'lodash/remove';
 export pick from 'lodash/pick';
+export range from 'lodash/range';
