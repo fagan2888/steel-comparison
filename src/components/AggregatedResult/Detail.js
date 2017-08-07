@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Row, UnorderedList, } from './DetailItem';
 import YearlyBarGraph from './YearlyBarGraph';
-import ProductGroupBarGraph from './ProductGroupBarGraph';
-import ProductGroupPie from './ProductGroupPie';
-import PartnerCountryPie from './PartnerCountryPie';
-import PartnerCountryBarGraph from './PartnerCountryBarGraph';
+import ComparisonBarGraphs from './ComparisonBarGraphs';
+import PieGraphs from './PieGraphs';
 import { compact, get, isEmpty, map, startCase } from '../../utils/lodash';
 
-const Detail = ({ result, query }) => {
+const Detail = ({ result, query, form_options }) => {
   const ReportHeading = ({ reporter }) => {
     let flow = query.trade_flow === 'EXP' ? 'Exports' : 'Imports';
     return <h1>Steel {flow} for {reporter}</h1>;
@@ -18,13 +15,9 @@ const Detail = ({ result, query }) => {
       <div key={result.reporter_country}>
         <YearlyBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
         <br />
-        <ProductGroupBarGraph data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
+        <ComparisonBarGraphs result={result} query={query} form_options={form_options.timePeriods} />
         <br />
-        <PartnerCountryBarGraph data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
-        <br />
-        <ProductGroupPie data={result.product_group_entry} params={query} last_updated={result.source_last_updated} />
-        <br />
-        <PartnerCountryPie data={result.partner_country_entry} params={query} last_updated={result.source_last_updated} />
+        <PieGraphs result={result} query={query} form_options={form_options.timePeriods} />
       </div>
     );
   }
@@ -65,7 +58,8 @@ const Detail = ({ result, query }) => {
 };
 Detail.propTypes = {
   result: PropTypes.object.isRequired,
-  query: PropTypes.object.isRequired
+  query: PropTypes.object.isRequired,
+  form_options: PropTypes.object.isRequired
 };
 
 export default Detail;

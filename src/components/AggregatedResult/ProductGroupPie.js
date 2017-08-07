@@ -11,12 +11,12 @@ function compare(a, b) {
   return 0;
 }
 
-function buildTitle(params, ytd_end_month) {
+function buildTitle(params, ytd_end_month, time_period) {
   const units = params.flow_type === "QTY" ? "Metric Tons" : "U.S. Dollars";
   const flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
   const ytd_label = 'YTD ' + ytd_end_month + ' ';
 
-  const chart_title = 'Share of ' + params.reporter_countries + flow + 'Top 5 Partner Countries of ' + params.product_groups + ' in ' + units + ' - ' + params.pie_period.replace('sum_', '').replace('ytd_', ytd_label);
+  const chart_title = 'Share of ' + params.reporter_countries + flow + 'Top 5 Partner Countries of ' + params.product_groups + ' in ' + units + ' - ' + time_period.replace('sum_', '').replace('ytd_', ytd_label);
   return chart_title;
 }
 
@@ -30,8 +30,8 @@ const Footnote = ({data, params, total}) => {
   );
 }
 
-const ProductGroupPie = ({ data, params, last_updated }) => {
-  const chartTitle = buildTitle(params, data[0].ytd_end_month);
+const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
+  const chartTitle = buildTitle(params, data[0].ytd_end_month, time_period);
 
   remove(data, function(n) {
     return n.partner_country === 'Other Countries';
@@ -39,7 +39,7 @@ const ProductGroupPie = ({ data, params, last_updated }) => {
 
   const sorted_data = data.sort(compare);
   const data_entries = sorted_data.slice(1, 6);
-  const total = sorted_data[0][params.pie_period];
+  const total = sorted_data[0][time_period];
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;
@@ -48,7 +48,7 @@ const ProductGroupPie = ({ data, params, last_updated }) => {
 
   let percentage_subtotal = 0;
   const data_values = map(data_entries, (entry) => { 
-    let percentage = (entry[params.pie_period]/total)*100;
+    let percentage = (entry[time_period]/total)*100;
     percentage_subtotal += percentage;
     return percentage.toFixed(2); 
   });

@@ -4,7 +4,7 @@ import Detail from './Detail';
 import './Result.scss';
 import moment from 'moment';
 
-const AggregatedResult = ({ query = {}, results }) => {
+const AggregatedResult = ({ query = {}, results, form_options }) => {
   if (results.isFetchingAggs) return null;
   if (results.error != "") 
     return (<div className="explorer__result">{results.error}</div>);
@@ -13,13 +13,14 @@ const AggregatedResult = ({ query = {}, results }) => {
 
   return (
     <div className="explorer__result">
-      <Detail key='explorer__result' result={results.dashboardData} query={query} />
+      <Detail key='explorer__result' result={results.dashboardData} query={query} form_options={form_options}/>
     </div>
   );
 };
 AggregatedResult.propTypes = {
   query: PropTypes.object,
   results: PropTypes.object,
+  form_options: PropTypes.object
 };
 
 export default AggregatedResult;

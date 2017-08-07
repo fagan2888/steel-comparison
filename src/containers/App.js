@@ -50,7 +50,7 @@ class App extends Component {
         </div>
 
         <div className="explorer__content">
-          <AggregatedResult results={results} query={query} />
+          <AggregatedResult results={results} query={query} form_options={form_options} />
         </div>
       </div>
     );

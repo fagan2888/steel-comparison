@@ -136,35 +136,6 @@ class Form extends Component {
                  </p>
               </FormMessages>
             </div>
-
-            <div className="explorer__form__group">
-              <SelectField field={comparisonIntervalStart} options={formOptions.timePeriods} label="Comparison Bar Graph Interval Start" description="" />
-              <FormMessages field={comparisonIntervalStart} >
-                 <p className="validation-error" when="required">
-                   Must choose first comparison interval.
-                 </p>
-              </FormMessages>
-            </div>
-          </div>
-
-          <div className="explorer__form__row">
-            <div className="explorer__form__group">
-              <SelectField field={piePeriod} options={formOptions.timePeriods} label="Time Period for Pie Graphs" description="" />
-              <FormMessages field={piePeriod} >
-                 <p className="validation-error" when="required">
-                   Must choose time period for pie graphs.
-                 </p>
-              </FormMessages>
-            </div>
-
-            <div className="explorer__form__group">
-              <SelectField field={comparisonIntervalEnd} options={formOptions.timePeriods} label="Comparison Bar Graph Interval End" description="" />
-              <FormMessages field={comparisonIntervalEnd} >
-                 <p className="validation-error" when="required">
-                   Must choose second comparison interval.
-                 </p>
-              </FormMessages>
-            </div>
           </div>
 
           <div className="explorer__form__group">

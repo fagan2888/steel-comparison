@@ -29,7 +29,7 @@ const Footnote = ({data, params, last_updated}) => {
   );
 }
 
-const ProductGroupBarGraph = ({ data, params, last_updated }) => {
+const ProductGroupBarGraph = ({ data, params, last_updated, time_periods }) => {
   const chartTitle = buildTitle(params);
 
   data = data.filter(function(entry) {
@@ -43,8 +43,8 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
   })
 
   const ytd_label = 'YTD ' + data_entries[0].ytd_end_month + ' ';
-  const first_dataset_label = params.comparison_interval_start.replace('sum_', '').replace('ytd_', ytd_label);
-  const second_dataset_label = params.comparison_interval_end.replace('sum_', '').replace('ytd_', ytd_label);
+  const first_dataset_label = time_periods.first_interval.replace('sum_', '').replace('ytd_', ytd_label);
+  const second_dataset_label = time_periods.second_interval.replace('sum_', '').replace('ytd_', ytd_label);
 
   const datasets = [
       {
@@ -55,7 +55,7 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: map(data_entries, (entry) => { return entry[params.comparison_interval_start]/1000; }),
+        data: map(data_entries, (entry) => { return entry[time_periods.first_interval]/1000; }),
       },
       {
         label: second_dataset_label,
@@ -65,7 +65,7 @@ const ProductGroupBarGraph = ({ data, params, last_updated }) => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(0,99,132,0.4)',
         hoverBorderColor: 'rgba(0,99,132,1)',
-        data: map(data_entries, (entry) => { return entry[params.comparison_interval_end]/1000; }),
+        data: map(data_entries, (entry) => { return entry[time_periods.second_interval]/1000; }),
       },
     ];
 
