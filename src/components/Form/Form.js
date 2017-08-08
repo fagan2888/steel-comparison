@@ -20,15 +20,6 @@ import './Form.scss';
     productGroups: {
       required: true
     },
-    comparisonIntervalStart: {
-      required: true
-    },
-    comparisonIntervalEnd: {
-      required: true
-    },
-    piePeriod: {
-      required: true
-    },
     tradeFlow: {
       required: true
     }
@@ -77,7 +68,7 @@ class Form extends Component {
 
   render() {
     const { 
-      fields: {  reporterCountries, partnerCountries, productGroups, flowType, tradeFlow, comparisonIntervalStart, comparisonIntervalEnd, piePeriod }, 
+      fields: {  reporterCountries, partnerCountries, productGroups, flowType, tradeFlow }, 
       handleSubmit,
       formOptions 
     } = this.props;
@@ -151,6 +142,6 @@ class Form extends Component {
 
 export default reduxForm({
   form: 'form',
-  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType', 'tradeFlow', 'comparisonIntervalStart', 'comparisonIntervalEnd', 'piePeriod'],
+  fields: ['reporterCountries', 'partnerCountries', 'productGroups', 'flowType', 'tradeFlow'],
   ...generateValidation(validations)
 })(Form);

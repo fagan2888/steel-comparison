@@ -56,7 +56,8 @@ export function setSubGroups(options){
   }).sort(propComparator('value', 'asc'));
 
   let trade_flows = map(options.aggregations.trade_flows, obj => {
-    return optionObject(obj['key']);
+    const label = obj['key'] === 'IMP' ? 'Imports' : 'Exports';
+    return {label: label, value: obj['key']};
   }).sort(propComparator('value', 'asc'));
 
   return {  
