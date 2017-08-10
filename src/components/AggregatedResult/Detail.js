@@ -5,10 +5,6 @@ import PieGraphs from './PieGraphs';
 import { compact, get, isEmpty, map, startCase } from '../../utils/lodash';
 
 const Detail = ({ result, query, form_options }) => {
-  const ReportHeading = ({ reporter }) => {
-    let flow = query.trade_flow === 'EXP' ? 'Exports' : 'Imports';
-    return <h1>Steel {flow} for {reporter}</h1>;
-  }
 
   const ReportDashboard = ({result}) => {
     return (
@@ -50,8 +46,6 @@ const Detail = ({ result, query, form_options }) => {
 
   return (
     <div id="report">
-      <ReportHeading reporter={result.reporter_country} />
-
       <ReportDashboard result={result} />
     </div>
   )
