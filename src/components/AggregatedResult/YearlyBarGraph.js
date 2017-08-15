@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { values, pickBy, has, omit, map, startCase, range } from '../../utils/lodash';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
+import ReportHeading from './ReportHeading';
 
 function buildTitle(params) {
   let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
@@ -20,7 +21,8 @@ const Footnote = ({data, params, last_updated}) => {
   );
 }
 
-const YearlyBarGraph = ({ data, params, last_updated }) => {
+const YearlyBarGraph = ({ result, params, last_updated }) => {
+  const data = result.product_group_entry;
   const chartTitle = buildTitle(params);
 
   const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
@@ -35,19 +37,17 @@ const YearlyBarGraph = ({ data, params, last_updated }) => {
 
   const bar_colors = [];
   for (let i in range(data_values.length)){
-    bar_colors.push('rgba(255,99,132,0.4)');
+    bar_colors.push('rgba(0,99,132,0.7)');
   }
   /// Different color for YTD (final 2 entries)
-  bar_colors[data_values.length - 1] = 'rgba(0,99,132,0.4)';
-  bar_colors[data_values.length - 2] = 'rgba(0,99,132,0.4)';
+  bar_colors[data_values.length - 1] = 'rgba(215,90,0,0.7)';
+  bar_colors[data_values.length - 2] = 'rgba(215,90,0,0.7)';
 
   const datasets = [
       {
         label: '',
         fill: false,
         backgroundColor:  bar_colors,
-        borderWidth: 1,
-        hoverBackgroundColor: bar_colors,
         data: data_values,
       }
     ];
@@ -73,10 +73,18 @@ const YearlyBarGraph = ({ data, params, last_updated }) => {
         legend: {
             display: false
         },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data){
+              return parseFloat(tooltipItem.yLabel.toFixed(2)).toLocaleString()
+            }
+          }
+        },
         scales: { 
           yAxes: [{
               ticks: {
                     maxTicksLimit: 15,
+                    beginAtZero: true,
                     userCallback: function(value, index, values) {
                       value = value.toString();
                       value = value.split(/(?=(?:...)*$)/);
@@ -93,9 +101,10 @@ const YearlyBarGraph = ({ data, params, last_updated }) => {
         maintainAspectRatio: false
     }
 
-
   return  (
     <div>
+      <ReportHeading query={params} results={result} />
+
       <div className="bar_graph">
         <Bar data={chartData} options={chartOptions} />
       </div>

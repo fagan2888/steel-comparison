@@ -4,7 +4,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import FormMessages from 'redux-form-validation';
 import { generateValidation } from 'redux-form-validation';
-import { requestSubGroups } from '../../actions/form_options';
+import { requestTradeFlowSubGroups, requestReporterSubGroups } from '../../actions/form_options';
 import './Form.scss';
 
  const validations = {
@@ -25,7 +25,7 @@ import './Form.scss';
     }
   };
 
-const SelectField = ({ description, field, label = 'Untitled', options, multi = false, dispatch = null }) => (
+const SelectField = ({ description, field, label = 'Untitled', options, multi = false, dispatch = null, handleChange = null }) => (
   <div>
     <label htmlFor={field.name}>{label}</label>
     {description ? <p>{description}</p> : null}
@@ -41,7 +41,7 @@ const SelectField = ({ description, field, label = 'Untitled', options, multi = 
         onChange={event => {
           field.onChange(event)
           if (dispatch)
-            dispatch(requestSubGroups(event))
+            dispatch(handleChange(event))
         }}
       />
     </div>
@@ -79,7 +79,27 @@ class Form extends Component {
 
           <div className="explorer__form__row">
             <div className="explorer__form__group">
-              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" dispatch={this.props.dispatch}/>
+              <SelectField field={tradeFlow} options={formOptions.tradeFlows} label="Trade Flow" description="" dispatch={this.props.dispatch} handleChange={requestTradeFlowSubGroups} />
+              <FormMessages field={tradeFlow} >
+                 <p className="validation-error" when="required">
+                   Must choose Imports or Exports.
+                 </p>
+              </FormMessages>
+            </div>
+
+            <div className="explorer__form__group">
+              <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
+              <FormMessages field={productGroups} >
+                 <p className="validation-error" when="required">
+                   Must choose a product group.  
+                 </p>
+              </FormMessages>
+            </div>
+          </div>
+
+          <div className="explorer__form__row">
+            <div className="explorer__form__group">
+              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" dispatch={this.props.dispatch} handleChange={requestReporterSubGroups} />
               <FormMessages field={reporterCountries} > 
                    <p className="validation-error" when="required">
                      Must enter at least one reporter country.
@@ -103,27 +123,6 @@ class Form extends Component {
               <FormMessages field={partnerCountries} >
                  <p className="validation-error" when="required">
                    Must choose a partner country.  
-                 </p>
-              </FormMessages>
-            </div>
-
-
-            <div className="explorer__form__group">
-              <SelectField field={tradeFlow} options={formOptions.tradeFlows} label="Trade Flow" description="" />
-              <FormMessages field={tradeFlow} >
-                 <p className="validation-error" when="required">
-                   Must choose Imports or Exports.
-                 </p>
-              </FormMessages>
-            </div>
-          </div>
-
-          <div className="explorer__form__row">
-            <div className="explorer__form__group">
-              <SelectField field={productGroups} options={formOptions.productGroups} label="Product Groups" description="" />
-              <FormMessages field={productGroups} >
-                 <p className="validation-error" when="required">
-                   Must choose a product group.  
                  </p>
               </FormMessages>
             </div>

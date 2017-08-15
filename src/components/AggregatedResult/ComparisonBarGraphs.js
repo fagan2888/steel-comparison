@@ -56,19 +56,22 @@ class ComparisonBarGraphs extends React.Component {
   render() {
     return (
       <div>
-
-        <div className="form__content">
-          <form className="explorer__form">
-            <fieldset>
-              <DateSelect form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs Start Interval" />
-              <DateSelect form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs End Interval" />
-            </fieldset>
-          </form>
-        </div>
+        <div>
+          <div className="form__content">
+            <form className="explorer__form">
+              <fieldset>
+                <DateSelect form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs Start Interval" />
+                <DateSelect form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs End Interval" />
+              </fieldset>
+            </form>
+          </div>
         
-        <ProductGroupBarGraph data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
-        <br />
-        <PartnerCountryBarGraph data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
+          <ProductGroupBarGraph data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
+        </div>
+
+        <div>
+          <PartnerCountryBarGraph data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
+        </div>
       </div>
     );
   }

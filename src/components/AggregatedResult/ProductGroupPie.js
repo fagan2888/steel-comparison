@@ -25,7 +25,7 @@ const Footnote = ({data, params, total}) => {
 
   return (
     <p className="graph_footnote"> 
-      Source:  U.S. Department of Commerce, Enforcement and Compliance:  Trade covered in the table is {total.toFixed(2)} {units}.
+      Source:  U.S. Department of Commerce, Enforcement and Compliance:  Trade covered in the table is {parseFloat(total.toFixed(2)).toLocaleString()} {units}.
     </p> 
   );
 }
@@ -58,8 +58,7 @@ const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
       {
         label: 'YTD 2017',
         fill: false,
-        backgroundColor:  ['red', 'green', 'yellow', 'blue', 'orange', 'grey'],
-        hoverBackgroundColor: ['red', 'green', 'yellow', 'blue', 'orange', 'grey'],
+        backgroundColor:  ['rgba(215,90,0,0.7)', 'rgb(0, 158, 103)', 'rgb(235, 228, 0)', 'rgba(0,99,132,0.7)', 'rgb(196, 31, 61)', 'rgb(150, 150, 150)'],
         data: data_values,
       },
     ];

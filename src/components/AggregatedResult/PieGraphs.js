@@ -28,11 +28,9 @@ SelectField.propTypes = {
 
 const DateSelect = ({form_options, onChange, default_val}) => {
   return (
-      
-          <div className="explorer__form__group">
-            <SelectField options={form_options} label="Time Period for Pie Graphs" description="" onChange={onChange} default_val={default_val} />
-          </div>
-
+    <div className="explorer__form__group">
+      <SelectField options={form_options} label="Time Period for Pie Graphs" description="" onChange={onChange} default_val={default_val} />
+    </div>
   );
 }
 
@@ -52,17 +50,21 @@ class PieGraphs extends React.Component {
   render() {
     return (
       <div>
-        <div className="form__content">
-          <form className="explorer__form">
-            <fieldset>
-              <DateSelect form_options={this.props.form_options} onChange={this.handleChange} default_val={this.state.time_period} />
-            </fieldset>
-          </form>
-        </div>
+        <div>
+          <div className="form__content">
+            <form className="explorer__form">
+              <fieldset>
+                <DateSelect form_options={this.props.form_options} onChange={this.handleChange} default_val={this.state.time_period} />
+              </fieldset>
+            </form>
+          </div>
 
-        <ProductGroupPie data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
-        <br />
-        <PartnerCountryPie data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
+          <ProductGroupPie data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
+        </div>
+        
+        <div>
+          <PartnerCountryPie data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
+        </div>
       </div>
     );
   }

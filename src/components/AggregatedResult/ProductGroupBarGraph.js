@@ -50,21 +50,13 @@ const ProductGroupBarGraph = ({ data, params, last_updated, time_periods }) => {
       {
         label: first_dataset_label,
         fill: false,
-        backgroundColor:  'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
+        backgroundColor:  'rgba(215,90,0,0.7)',
         data: map(data_entries, (entry) => { return entry[time_periods.first_interval]/1000; }),
       },
       {
         label: second_dataset_label,
         fill: false,
-        backgroundColor:  'rgba(0,99,132,0.2)',
-        borderColor: 'rgba(0,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(0,99,132,0.4)',
-        hoverBorderColor: 'rgba(0,99,132,1)',
+        backgroundColor:  'rgba(0,99,132,0.7)',
         data: map(data_entries, (entry) => { return entry[time_periods.second_interval]/1000; }),
       },
     ];
@@ -84,10 +76,18 @@ const ProductGroupBarGraph = ({ data, params, last_updated, time_periods }) => {
         legend: {
             display: true
         },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data){
+              return parseFloat(tooltipItem.xLabel.toFixed(2)).toLocaleString()
+            }
+          }
+        },
         scales: { 
           xAxes: [{
               ticks: {
                     maxTicksLimit: 15,
+                    beginAtZero: true,
                     userCallback: function(value, index, values) {
                       value = value.toString();
                       value = value.split(/(?=(?:...)*$)/);
