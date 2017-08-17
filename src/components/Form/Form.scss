@@ -21,8 +21,10 @@
   }
 
   &__submit {
-    float: right;
     margin-top: 20px;
+    position: absolute;
+    right:    125px;
+    bottom:   0;
   }
 
   &__row {

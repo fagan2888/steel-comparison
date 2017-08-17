@@ -126,13 +126,14 @@ class Form extends Component {
                  </p>
               </FormMessages>
             </div>
+
+            <div className="explorer__form__group">
+              <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
+                <i className="fa fa-paper-plane" /> Generate Dashboard
+              </button>
+            </div>
           </div>
 
-          <div className="explorer__form__group">
-            <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
-              <i className="fa fa-paper-plane" /> Generate Reports
-            </button>
-          </div>
         </fieldset>
       </form>
     );

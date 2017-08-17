@@ -55,8 +55,8 @@ class ComparisonBarGraphs extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="pure-u-1 pure-g">
+        <div className="pure-u-1 pure-u-xl-1-2 primary_graph">
           <div className="form__content">
             <form className="explorer__form">
               <fieldset>
@@ -69,7 +69,7 @@ class ComparisonBarGraphs extends React.Component {
           <ProductGroupBarGraph data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
         </div>
 
-        <div>
+        <div className="pure-u-1 pure-u-xl-1-2 bar_graph second_graph">
           <PartnerCountryBarGraph data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
         </div>
       </div>

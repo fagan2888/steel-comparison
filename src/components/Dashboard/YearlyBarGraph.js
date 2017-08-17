@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { values, pickBy, has, omit, map, startCase, range } from '../../utils/lodash';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
-import ReportHeading from './ReportHeading';
 
 function buildTitle(params) {
   let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
@@ -21,7 +20,8 @@ const Footnote = ({data, params, last_updated}) => {
   );
 }
 
-const YearlyBarGraph = ({ result, params, last_updated }) => {
+const YearlyBarGraph = ({ result, params }) => {
+  const last_updated = result.source_last_updated;
   const data = result.product_group_entry;
   const chartTitle = buildTitle(params);
 
@@ -102,9 +102,7 @@ const YearlyBarGraph = ({ result, params, last_updated }) => {
     }
 
   return  (
-    <div>
-      <ReportHeading query={params} results={result} />
-
+    <div className="pure-u-1 pure-u-xl-1-2 first_row yearly_bar primary_graph">
       <div className="bar_graph">
         <Bar data={chartData} options={chartOptions} />
       </div>

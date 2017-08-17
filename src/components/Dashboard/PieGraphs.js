@@ -49,8 +49,8 @@ class PieGraphs extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="pure-u-1 pure-g">
+        <div className="pure-u-1 pure-u-xl-1-2 primary_graph">
           <div className="form__content">
             <form className="explorer__form">
               <fieldset>
@@ -62,7 +62,7 @@ class PieGraphs extends React.Component {
           <ProductGroupPie data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
         </div>
         
-        <div>
+        <div className="pure-u-1 pure-u-xl-1-2 pie_graph second_graph">
           <PartnerCountryPie data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
         </div>
       </div>

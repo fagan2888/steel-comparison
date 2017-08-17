@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase } from '../utils/lodash';
 import { stringify } from 'querystring';
-import { Form, Spinner, AggregatedResult } from '../components';
+import { Form, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
 import { fetchAggResultsIfNeeded, pageResults, requestFormOptions } from '../actions';
 import './App.scss';
 
@@ -38,20 +38,36 @@ class App extends Component {
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
 
-    return (
-      <div className="explorer">
+    let message, yearly, comparisons, pies, download_button;
+    if (results.isFetchingAggs) message = null;
+    else if (results.error != "") 
+      message = <div className="explorer__result">{results.error}</div>;
+    else if (isEmpty(results.dashboardData))
+      message = <h3> Choose a search option from each field to generate a report </h3>;
+    else  {
+      yearly = <YearlyBarGraph result={results.dashboardData} params={query} />;
+      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />;
+      pies = <PieGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />
+      download_button = <DownloadButton results={results.dashboardData} />
+    }
 
-        <div className="form__content">
+    return (
+      <div className="explorer pure-g">
+
+        <div className="form__content pure-u-1 pure-u-xl-1-2 first_row">
           <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
-          <p className="DefaultParagraph-1">Search for steel trade data by first selecting a reporter country. </p>
+          <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports. </p>
       
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
           <Spinner active={results.isFetchingAggs} />
+          {message}
+          {download_button}
         </div>
 
-        <div className="explorer__content">
-          <AggregatedResult results={results} query={query} form_options={form_options} />
-        </div>
+        {yearly}
+        {comparisons}
+        {pies}
+
       </div>
     );
   }

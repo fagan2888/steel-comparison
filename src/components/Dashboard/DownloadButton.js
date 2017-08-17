@@ -1,18 +1,6 @@
-import { isEmpty, map, omit, has, values } from '../../utils/lodash';
+import { omit, values } from '../../utils/lodash';
 import React, { PropTypes } from 'react';
 import FileSaver from 'file-saver';
-
-const ReportHeading = ({ query, results }) => {
-  let flow = query.trade_flow === 'EXP' ? 'Exports' : 'Imports';
-  return (
-    <div>
-      <h1 className="dashboard-heading">
-        Steel {flow} for {results.reporter_country}  
-        <DownloadButton results={results} />
-      </h1>
-    </div>
-  );
-}
 
 const DownloadButton = ( {results} ) => {
   return (
@@ -35,4 +23,4 @@ function downloadReports(results){
   FileSaver.saveAs(blob, "steel-data.csv");
 }
 
-export default ReportHeading;
+export default DownloadButton;
