@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { values, pickBy, has, omit, map, startCase, pick } from '../../utils/lodash';
 import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2';
+import { ComparisonBarColors } from './GraphColors';
 
 function compare(a, b) {
   if (a.ytd_2017 > b.ytd_2017)
@@ -19,8 +20,7 @@ function buildTitle(params) {
   return chart_title;
 }
 
-const Footnote = ({data, params, last_updated}) => {
-  //const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
+const Footnote = ({data, params }) => {
   return (
     <p className="graph_footnote"> 
       Source: U.S. Department of Commerce, Enforcement and Compliance.
@@ -28,7 +28,8 @@ const Footnote = ({data, params, last_updated}) => {
   );
 }
 
-const PartnerCountryBarGraph = ({ data, params, last_updated, time_periods }) => {
+const PartnerCountryBarGraph = ({ result, params, time_periods }) => {
+  const data = result.partner_country_entry;
   const chartTitle = buildTitle(params);
 
   const data_entries = data.sort(compare).slice(1, 6);
@@ -38,23 +39,17 @@ const PartnerCountryBarGraph = ({ data, params, last_updated, time_periods }) =>
   });
 
   const ytd_label = 'YTD ' + data_entries[0].ytd_end_month + ' ';
-  const first_dataset_label = time_periods.first_interval.replace('sum_', '').replace('ytd_', ytd_label);
-  const second_dataset_label = time_periods.second_interval.replace('sum_', '').replace('ytd_', ytd_label);
 
-  const datasets = [
+  const datasets = map(time_periods, (time_period, i) => {
+    return (
       {
-        label: first_dataset_label,
+        label: time_period.replace('sum_', '').replace('ytd_', ytd_label),
         fill: false,
-        backgroundColor:  'rgba(215,90,0,0.7)',
-        data: map(data_entries, (entry) => { return entry[time_periods.first_interval]/1000; }),
-      },
-      {
-        label: second_dataset_label,
-        fill: false,
-        backgroundColor:  'rgba(0,99,132,0.7)',
-        data: map(data_entries, (entry) => { return entry[time_periods.second_interval]/1000; }),
-      },
-    ];
+        backgroundColor:  ComparisonBarColors[i],
+        data: map(data_entries, (entry) => { return entry[time_period]/1000; }),
+      }
+      );
+  });
 
   const chartData = {
     labels: labels,
@@ -105,7 +100,7 @@ const PartnerCountryBarGraph = ({ data, params, last_updated, time_periods }) =>
       <div className="bar_graph">
         <HorizontalBar data={chartData} options={chartOptions} />
       </div>
-      <Footnote data={data} params={params} last_updated={last_updated}/>
+      <Footnote data={data} params={params} />
     </div>
   );
 }

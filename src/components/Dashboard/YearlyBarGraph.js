@@ -37,11 +37,11 @@ const YearlyBarGraph = ({ result, params }) => {
 
   const bar_colors = [];
   for (let i in range(data_values.length)){
-    bar_colors.push('rgba(0,99,132,0.7)');
+    bar_colors.push('#5ab4ac');
   }
   /// Different color for YTD (final 2 entries)
-  bar_colors[data_values.length - 1] = 'rgba(215,90,0,0.7)';
-  bar_colors[data_values.length - 2] = 'rgba(215,90,0,0.7)';
+  bar_colors[data_values.length - 1] = '#d8b365';
+  bar_colors[data_values.length - 2] = '#d8b365';
 
   const datasets = [
       {

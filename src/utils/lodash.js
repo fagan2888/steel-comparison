@@ -16,3 +16,5 @@ export startCase from 'lodash/startCase';
 export remove from 'lodash/remove';
 export pick from 'lodash/pick';
 export range from 'lodash/range';
+export xor from 'lodash/xor';
+export indexOf from 'lodash/indexOf';

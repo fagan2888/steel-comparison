@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import Select from 'react-select';
 import ProductGroupBarGraph from './ProductGroupBarGraph';
 import PartnerCountryBarGraph from './PartnerCountryBarGraph';
+import moment from 'moment';
+import { xor, indexOf } from '../../utils/lodash';
 
 const SelectField = ({ description, label = 'Untitled', options, onChange, default_val }) => (
   <div>
@@ -46,31 +48,42 @@ class ComparisonBarGraphs extends React.Component {
   }
 
   handleStartChange(e) {
-    this.setState({first_interval: e})
+    this.setState({first_interval: e});
   }
 
   handleEndChange(e) {
-    this.setState({second_interval: e})
+    this.setState({second_interval: e});
   }
 
   render() {
+    const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
+    const old_keys = Object.keys(this.props.result.product_group_entry[0]);
+    const keys = xor(old_keys, excluded_fields)
+    const first_index = indexOf(keys, this.state.first_interval)
+    const second_index = indexOf(keys, this.state.second_interval)
+    let date_range = [];
+    if (first_index < second_index)
+     date_range = keys.slice(first_index, second_index+1)
+    else
+      date_range = keys.slice(second_index, first_index+1)
+
     return (
       <div className="pure-u-1 pure-g">
         <div className="pure-u-1 pure-u-xl-1-2 primary_graph">
           <div className="form__content">
             <form className="explorer__form">
               <fieldset>
-                <DateSelect form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs Start Interval" />
-                <DateSelect form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs End Interval" />
+                <DateSelect form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs First Interval" />
+                <DateSelect form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs Second Interval" />
               </fieldset>
             </form>
           </div>
         
-          <ProductGroupBarGraph data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
+          <ProductGroupBarGraph result={this.props.result} params={this.props.query} time_periods={date_range} />
         </div>
 
         <div className="pure-u-1 pure-u-xl-1-2 bar_graph second_graph">
-          <PartnerCountryBarGraph data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_periods={this.state} />
+          <PartnerCountryBarGraph result={this.props.result} params={this.props.query}  time_periods={date_range} />
         </div>
       </div>
     );

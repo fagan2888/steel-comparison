@@ -99,12 +99,14 @@ function extractOptions(aggregations){
 
 function extractPartnerCountries(partners){
   let world_option = {};
-  let partner_countries = map(partners, obj => { 
+  let partner_countries = compact(map(partners, obj => { 
     if (obj['key'] === "World"){
-      world_option = {label: "All Countries", value: obj['key']}
+      world_option = {label: "All Countries", value: obj['key']};
+      return null;
     }
-    return {label: obj['key'], value: obj['key']}; 
-  }).sort(propComparator('value', 'asc'));
+    else
+      return {label: obj['key'], value: obj['key']}; 
+  })).sort(propComparator('value', 'asc'));
   partner_countries = compact(partner_countries);
   partner_countries.unshift(world_option);
   return partner_countries;
