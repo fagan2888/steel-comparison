@@ -4,9 +4,12 @@ import FileSaver from 'file-saver';
 
 const DownloadButton = ( {results} ) => {
   return (
-    <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
-      <i className="fa fa-paper-plane" /> Download Data (CSV)
-    </button> 
+    <div>
+      <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
+        <i className="fa fa-paper-plane" /> Download Data (CSV)
+      </button>
+      <p> This file download contains a subset of the steel trade data based on the selected partner country and product group.  </p>
+    </div> 
   );
 }
 

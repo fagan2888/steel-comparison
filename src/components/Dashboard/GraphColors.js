@@ -1,6 +1,4 @@
 const ComparisonBarColors = [
-  '#543005',
-  '#c7eae5',
   '#8c510a',
   '#80cdc1',
   '#bf812d',
@@ -8,6 +6,8 @@ const ComparisonBarColors = [
   '#dfc27d',
   '#01665e',
   '#f6e8c3',
+  '#543005',
+  '#c7eae5',
   '#003c30' 
 ]
 

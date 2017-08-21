@@ -86,10 +86,7 @@ const YearlyBarGraph = ({ result, params }) => {
                     maxTicksLimit: 15,
                     beginAtZero: true,
                     userCallback: function(value, index, values) {
-                      value = value.toString();
-                      value = value.split(/(?=(?:...)*$)/);
-                      value = value.join(',');
-                      return value;
+                      return parseFloat(value.toFixed(2)).toLocaleString();
                     }
                   },
               scaleLabel: {

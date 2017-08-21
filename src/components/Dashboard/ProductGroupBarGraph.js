@@ -4,12 +4,14 @@ import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2';
 import { ComparisonBarColors } from './GraphColors';
 
-function compare(a, b) {
-  if (a.ytd_2017 > b.ytd_2017)
-    return -1;
-  if (a.ytd_2017 < b.ytd_2017)
-    return 1;
-  return 0;
+function compare(prop) {
+  return function(a, b){
+    if (a[prop] > b[prop])
+      return -1;
+    if (a[prop] < b[prop])
+      return 1;
+    return 0;
+  }
 }
 
 function buildTitle(params) {
@@ -23,7 +25,7 @@ function buildTitle(params) {
 const Footnote = ({data, params}) => {
   return (
     <p className="graph_footnote"> 
-      Source: U.S. Department of Commerce, Enforcement and Compliance. 
+      Source: U.S. Department of Commerce, Enforcement and Compliance.  Partner countries sorted by most recent time period.
     </p> 
   );
 }
@@ -36,7 +38,7 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
     return (entry.partner_country !== "World" && entry.partner_country !== "Other Countries");
   });
 
-  const data_entries = data.sort(compare).slice(0, 5);
+  const data_entries = data.sort(compare(time_periods[time_periods.length-1])).slice(0, 5);
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;
@@ -68,7 +70,8 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
             fontSize: 16
         },
         legend: {
-            display: true
+            display: true,
+            position: 'right'
         },
         tooltips: {
           callbacks: {
@@ -83,10 +86,7 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
                     maxTicksLimit: 15,
                     beginAtZero: true,
                     userCallback: function(value, index, values) {
-                      value = value.toString();
-                      value = value.split(/(?=(?:...)*$)/);
-                      value = value.join(',');
-                      return value;
+                      return parseFloat(value.toFixed(2)).toLocaleString();
                     }
                   },
               scaleLabel: {

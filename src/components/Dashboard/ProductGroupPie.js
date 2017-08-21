@@ -4,12 +4,14 @@ import moment from 'moment';
 import { Pie } from 'react-chartjs-2';
 import { PieColors } from './GraphColors';
 
-function compare(a, b) {
-  if (a.ytd_2017 > b.ytd_2017)
-    return -1;
-  if (a.ytd_2017 < b.ytd_2017)
-    return 1;
-  return 0;
+function compare(prop) {
+  return function(a, b){
+    if (a[prop] > b[prop])
+      return -1;
+    if (a[prop] < b[prop])
+      return 1;
+    return 0;
+  }
 }
 
 function buildTitle(params, ytd_end_month, time_period) {
@@ -34,11 +36,10 @@ const Footnote = ({data, params, total}) => {
 const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
   const chartTitle = buildTitle(params, data[0].ytd_end_month, time_period);
 
-  remove(data, function(n) {
+  const sorted_data = data.sort(compare(time_period)).slice();
+  remove(sorted_data, function(n) {
     return n.partner_country === 'Other Countries';
   });
-
-  const sorted_data = data.sort(compare);
   const data_entries = sorted_data.slice(1, 6);
   const total = sorted_data[0][time_period];
 

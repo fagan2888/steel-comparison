@@ -1,15 +1,17 @@
 import React, { PropTypes } from 'react';
-import { values, pickBy, has, omit, map, startCase, pick } from '../../utils/lodash';
+import { map, remove } from '../../utils/lodash';
 import moment from 'moment';
 import { Pie, Chart } from 'react-chartjs-2';
 import { PieColors } from './GraphColors';
 
-function compare(a, b) {
-  if (a.ytd_2017 > b.ytd_2017)
-    return -1;
-  if (a.ytd_2017 < b.ytd_2017)
-    return 1;
-  return 0;
+function compare(prop) {
+  return function(a, b){
+    if (a[prop] > b[prop])
+      return -1;
+    if (a[prop] < b[prop])
+      return 1;
+    return 0;
+  }
 }
 
 function buildTitle(params, ytd_end_month, time_period) {
@@ -34,9 +36,12 @@ const Footnote = ({data, params, total}) => {
 const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
   const chartTitle = buildTitle(params, data[0].ytd_end_month, time_period);
 
-  const sorted_data = data.sort(compare);
-  const data_entries = sorted_data.slice(1, 6);
-  const total = sorted_data[0][time_period];
+  const data_entries = data.sort(compare(time_period)).slice();
+  const total_entry = remove(data_entries, function(n) {
+         return n.product_group === 'All Steel Mill Products';
+       });
+
+  const total = total_entry[0][time_period];
 
   const labels = map(data_entries, (entry) => {
     return entry.product_group;

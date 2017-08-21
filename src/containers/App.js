@@ -37,7 +37,6 @@ class App extends Component {
       query,
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
-
     let message, yearly, comparisons, pies, download_button;
     if (results.isFetchingAggs) message = null;
     else if (results.error != "") 
@@ -56,7 +55,7 @@ class App extends Component {
 
         <div className="form__content pure-u-1 pure-u-xl-1-2 first_row">
           <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
-          <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports. </p>
+          <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.  All fields are required.</p>
       
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
           <Spinner active={results.isFetchingAggs} />
