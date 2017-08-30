@@ -66,9 +66,7 @@ const YearlyBarGraph = ({ result, params }) => {
   const y_axis_label = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   const chartOptions = {
         title: {
-            display: true,
-            text: chartTitle,
-            fontSize: 16
+            display: false,
         },
         legend: {
             display: false
@@ -100,6 +98,7 @@ const YearlyBarGraph = ({ result, params }) => {
 
   return  (
     <div className="pure-u-1 pure-u-xl-1-2 first_row yearly_bar primary_graph">
+      <h3 className="chart_title"> {chartTitle} </h3>
       <div className="bar_graph">
         <Bar data={chartData} options={chartOptions} />
       </div>

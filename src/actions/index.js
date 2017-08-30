@@ -1,3 +1,3 @@
 export { fetchAggResultsIfNeeded, pageResults } from './results';
-export { requestFormOptions } from './form_options';
+export { requestFormOptions, requestTradeFlowSubGroups, requestReporterSubGroups } from './form_options';
 

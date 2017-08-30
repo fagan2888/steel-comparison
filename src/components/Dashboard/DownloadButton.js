@@ -8,7 +8,7 @@ const DownloadButton = ( {results} ) => {
       <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
         <i className="fa fa-paper-plane" /> Download Data (CSV)
       </button>
-      <p> This file download contains a subset of the steel trade data based on the selected partner country and product group.  </p>
+      <p> This file download contains a subset of the steel trade data based on the selected filters above. </p>
     </div> 
   );
 }

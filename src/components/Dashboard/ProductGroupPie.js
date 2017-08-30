@@ -72,9 +72,7 @@ const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
 
   const chartOptions = {
         title: {
-            display: true,
-            text: chartTitle,
-            fontSize: 16
+            display: false
         },
         legend: {
             display: true,
@@ -124,6 +122,7 @@ const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
 
   return  (
     <div>
+      <h3 className="chart_title"> {chartTitle} </h3>
       <div className="pie_graph">
         <Pie data={chartData} options={chartOptions} />
       </div>

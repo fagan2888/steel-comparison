@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { isEmpty, omit, values, has } from '../utils/lodash';
-import { buildAggResults } from './build_agg_results.js';
-import { buildReports } from './build_reports.js';
 import { REQUEST_AGG_RESULTS, RECEIVE_FAILURE, PAGE_RESULTS, RECEIVE_AGG_RESULTS } from 'constants';
 import config from '../config.js';
 import moment from 'moment';
@@ -39,8 +37,15 @@ function aggregateResults(json, params, offset, agg_results) {
   const results = {};
   results.product_group_entry = json[0].results;
   results.partner_country_entry = json[1].results;
-  results.reporter_country = params.reporter_countries;
 
+  if (results.product_group_entry.length == 0 && results.partner_country_entry == 0)
+    return receiveFailure('No results found for this Trade Flow and Reporter Country combination.' );
+  else if (results.partner_country_entry == 0)
+    return receiveFailure('No results found for this Reporter and Partner Country combination.' );
+  else if (results.product_group_entry.length == 0)
+    return receiveFailure('No results found for this Reporter Country and Product Group combination.' );
+
+  results.reporter_country = params.reporter_countries;
   results.source_last_updated = json[1].sources_used[0].source_last_updated;
 
   return receiveAggResults(results);

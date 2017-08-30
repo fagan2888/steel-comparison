@@ -25,7 +25,7 @@ function buildTitle(params) {
 const Footnote = ({data, params}) => {
   return (
     <p className="graph_footnote"> 
-      Source: U.S. Department of Commerce, Enforcement and Compliance.  Partner countries sorted by most recent time period.
+      Source: U.S. Department of Commerce, Enforcement and Compliance.  Partner countries are sorted by most recent time period.
     </p> 
   );
 }
@@ -56,6 +56,9 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
       }
       );
   });
+  const chart_key = map(datasets, (data) => {
+    return data.label;
+  }).join(',');
 
   const chartData = {
     labels: labels,
@@ -65,9 +68,7 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
   const x_axis_label = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   const chartOptions = {
         title: {
-            display: true,
-            text: chartTitle,
-            fontSize: 16
+            display: false
         },
         legend: {
             display: true,
@@ -101,8 +102,9 @@ const ProductGroupBarGraph = ({ result, params, time_periods }) => {
 
   return  (
     <div>
+      <h3 className="chart_title"> {chartTitle} </h3>
       <div className="bar_graph">
-        <HorizontalBar data={chartData} options={chartOptions} />
+        <HorizontalBar key={chart_key} data={chartData} options={chartOptions} />
       </div>
       <Footnote data={data} params={params} />
     </div>

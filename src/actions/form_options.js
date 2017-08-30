@@ -65,8 +65,8 @@ export function requestFormOptions(){
   };
 }
 
-export function requestTradeFlowSubGroups(query_val){
-  const query = 'trade_flow=' + query_val;
+export function requestTradeFlowSubGroups(trade_flow){
+  const query = 'trade_flow=' + trade_flow;
   return (dispatch) => {
     return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
         .then(response => response.json())
@@ -77,8 +77,8 @@ export function requestTradeFlowSubGroups(query_val){
   };
 }
 
-export function requestReporterSubGroups(query_val){
-  const query = 'reporter_countries=' + query_val;
+export function requestReporterSubGroups(trade_flow, reporter){
+  const query = 'reporter_countries=' + reporter + '&trade_flow=' + trade_flow;
   return (dispatch) => {
     return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
         .then(response => response.json())

@@ -55,16 +55,17 @@
 
 .bar_graph {
   width: 600px;
-  min-height: 400px;
+  height: 350px;
 }
 
 .pie_graph {
   max-width: 600px;
+  height: 350px;
 }
 
 @media (min-width: 1280px) {
   .second_graph {
-    padding-top: 115px;
+    padding-top: 95px;
     min-height: 425px;
   }
   .pure-u-1 {
@@ -73,21 +74,26 @@
 }
 
 .primary-graph {
-  min-height: 425px;
+  min-height: 475px;
 }
 
 .second-graph {
-  min-height: 375px;
+  min-height: 425px;
 }
 
 .first_row {
-  max-height: 425px;
+  max-height: 475px;
 }
 
 .yearly_bar {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .download-button {
   margin-left: 200px;
+}
+
+.chart_title {
+  text-align: center;
+  width: 600px;
 }

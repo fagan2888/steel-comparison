@@ -8,7 +8,7 @@ import './App.scss';
 
 class App extends Component {
   componentWillMount() {
-    const { dispatch } = this.props;
+    const { dispatch, query } = this.props;
     dispatch(requestFormOptions());
   }
 
@@ -53,14 +53,18 @@ class App extends Component {
     return (
       <div className="explorer pure-g">
 
-        <div className="form__content pure-u-1 pure-u-xl-1-2 first_row">
-          <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
-          <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.  All fields are required.</p>
-      
-          <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
-          <Spinner active={results.isFetchingAggs} />
-          {message}
-          {download_button}
+        <div className="pure-u-1 pure-u-xl-1-2 first_row">
+          <div className="form__content">
+            <a href="#">Back Link Placeholder</a>
+            <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
+            <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.</p>
+            <p> <b> All fields are required. </b> </p>
+            
+            <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <Spinner active={results.isFetchingAggs} />
+            {message}
+            {download_button}
+          </div>
         </div>
 
         {yearly}
@@ -80,7 +84,11 @@ App.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  const query = ownProps.history.getCurrentLocation().query;
+  let query = ownProps.history.getCurrentLocation().query;
+  if (isEmpty(ownProps.history.getCurrentLocation().query)){
+    query = {flow_type: "VALUE", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
+  }
+
   const { results, form_options } = state;
   return {
     query,

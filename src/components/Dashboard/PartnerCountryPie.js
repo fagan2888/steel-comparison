@@ -48,7 +48,10 @@ const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
   });
 
   const data_values = map(data_entries, (entry) => { 
-    return ((entry[time_period]/total)*100).toFixed(2); 
+    if (total === 0)
+      return 0;
+    else
+      return ((entry[time_period]/total)*100).toFixed(2); 
   });
 
   const datasets = [
@@ -67,9 +70,7 @@ const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
   
   const chartOptions = {
         title: {
-            display: true,
-            text: chartTitle,
-            fontSize: 16
+            display: false
         },
         legend: {
             display: true,
@@ -118,6 +119,7 @@ const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
 
   return  (
     <div>
+      <h3 className="chart_title"> {chartTitle} </h3>
       <div className="pie_graph">
         <Pie data={chartData} options={chartOptions} />
       </div>

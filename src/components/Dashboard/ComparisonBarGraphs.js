@@ -82,7 +82,7 @@ class ComparisonBarGraphs extends React.Component {
           <ProductGroupBarGraph result={this.props.result} params={this.props.query} time_periods={date_range} />
         </div>
 
-        <div className="pure-u-1 pure-u-xl-1-2 bar_graph second_graph">
+        <div className="pure-u-1 pure-u-xl-1-2 second_graph">
           <PartnerCountryBarGraph result={this.props.result} params={this.props.query}  time_periods={date_range} />
         </div>
       </div>
