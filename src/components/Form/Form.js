@@ -4,9 +4,9 @@ import Select from 'react-select';
 import moment from 'moment';
 import FormMessages from 'redux-form-validation';
 import { generateValidation } from 'redux-form-validation';
-import { requestTradeFlowSubGroups, requestReporterSubGroups } from '../../actions/form_options';
+import { requestFormOptions } from '../../actions/form_options';
 import './Form.scss';
-import { isEmpty, map } from '../../utils/lodash';
+import { isEmpty, map, snakeCase } from '../../utils/lodash';
 
  const validations = {
     reporterCountries: {
@@ -26,11 +26,7 @@ import { isEmpty, map } from '../../utils/lodash';
     }
   };
 
-const SelectField = ({ description, field, label = 'Untitled', options, multi = false }) => {
-  const option_values = map(options, (option) => {
-    return option.value;
-  });
-
+const SelectField = ({ description, field, label = 'Untitled', options, multi = false, handleChange = null }) => {
   return (
   <div>
     <label htmlFor={field.name}>{label}</label>
@@ -46,6 +42,9 @@ const SelectField = ({ description, field, label = 'Untitled', options, multi = 
         simpleValue = {true}
         onChange={event => {
           field.onChange(event)
+          if (handleChange){
+            handleChange(event);
+          }
         }}
       />
     </div>
@@ -70,19 +69,41 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trade_flow: null
+      trade_flow: this.props.fields.tradeFlow.value
     }
     this.handleTradeFlowChange = this.handleTradeFlowChange.bind(this);
     this.handleReporterCountryChange = this.handleReporterCountryChange.bind(this);
   }
 
   handleTradeFlowChange(e) {
-    this.setState({trade_flow: e})
-    return this.props.dispatch(requestTradeFlowSubGroups(e))
+    
+    this.props.fields.reporterCountries.onChange(null);
+    this.props.fields.partnerCountries.onChange(null);
+    this.props.fields.productGroups.onChange(null);
+    
+    const query = {};
+    for(let k in this.props.fields) {
+      let v = this.props.fields[k];
+      query[snakeCase(v.name)] = v.value;
+    }
+    query.trade_flow = e;
+
+    return this.props.dispatch(requestFormOptions(query));
   }
 
   handleReporterCountryChange(e) {
-    return this.props.dispatch(requestReporterSubGroups(this.state.trade_flow, e));
+
+    this.props.fields.partnerCountries.onChange(null);
+    this.props.fields.productGroups.onChange(null);
+    
+    const query = {};
+    for(let k in this.props.fields) {
+      let v = this.props.fields[k];
+      query[snakeCase(v.name)] = v.value;
+    }
+    query.reporter_countries = e;
+
+    return this.props.dispatch(requestFormOptions(query));
   }
 
   render() {
@@ -98,7 +119,7 @@ class Form extends Component {
 
           <div className="explorer__form__row">
             <div className="explorer__form__group">
-              <SelectField field={tradeFlow} options={formOptions.tradeFlows} label="Trade Flow" description="" />
+              <SelectField field={tradeFlow} options={formOptions.tradeFlows} label="Trade Flow" description="" handleChange={this.handleTradeFlowChange} />
               <FormMessages field={tradeFlow} >
                  <p className="validation-error" when="required">
                    Must choose Imports or Exports.
@@ -118,7 +139,7 @@ class Form extends Component {
 
           <div className="explorer__form__row">
             <div className="explorer__form__group">
-              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" />
+              <SelectField field={reporterCountries} options={formOptions.reporterCountries} label="Reporter Country" description="" handleChange={this.handleReporterCountryChange} />
               <FormMessages field={reporterCountries} > 
                    <p className="validation-error" when="required">
                      Must choose a reporter country.

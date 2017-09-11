@@ -1,20 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase } from '../utils/lodash';
+import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase, values } from '../utils/lodash';
 import { stringify } from 'querystring';
 import { Form, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
-import { fetchAggResultsIfNeeded, pageResults, requestFormOptions } from '../actions';
+import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
 import './App.scss';
 
 class App extends Component {
   componentWillMount() {
     const { dispatch, query } = this.props;
-    dispatch(requestFormOptions());
+    dispatch(requestFormOptions(query));
   }
 
   componentDidMount() {
     const { dispatch, query } = this.props;
-    dispatch(fetchAggResultsIfNeeded(query));
+    dispatch(fetchResultsIfNeeded(query));
   }
 
   handleSubmit = (form) => {
@@ -23,7 +23,7 @@ class App extends Component {
       return Object.assign(
         result, { [key]: Array.isArray(value) ? map(value, 'value').join(',') : value });
     }, {});
-    this.props.dispatch(fetchAggResultsIfNeeded(params));
+    this.props.dispatch(fetchResultsIfNeeded(params));
     this.push(params);
   }
 
@@ -38,12 +38,13 @@ class App extends Component {
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
     let message, yearly, comparisons, pies, download_button;
-    if (results.isFetchingAggs) message = null;
+    if (results.isFetching) 
+      message = null;
     else if (results.error != "") 
       message = <div className="explorer__result">{results.error}</div>;
     else if (isEmpty(results.dashboardData))
       message = <h3> Choose a search option from each field to generate a report </h3>;
-    else  {
+    else if (!form_options.isFetching) {
       yearly = <YearlyBarGraph result={results.dashboardData} params={query} />;
       comparisons = <ComparisonBarGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />;
       pies = <PieGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />
@@ -61,7 +62,7 @@ class App extends Component {
             <p> <b> All fields are required. </b> </p>
             
             <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
-            <Spinner active={results.isFetchingAggs} />
+            <Spinner active={results.isFetching} />
             {message}
             {download_button}
           </div>
@@ -88,8 +89,8 @@ function mapStateToProps(state, ownProps) {
   if (isEmpty(ownProps.history.getCurrentLocation().query)){
     query = {flow_type: "VALUE", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
-
   const { results, form_options } = state;
+  
   return {
     query,
     results,

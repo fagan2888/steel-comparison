@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { isEmpty, omit, values, has } from '../utils/lodash';
-import { REQUEST_AGG_RESULTS, RECEIVE_FAILURE, PAGE_RESULTS, RECEIVE_AGG_RESULTS } from 'constants';
+import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from 'constants';
 import config from '../config.js';
 import moment from 'moment';
 
-export function requestAggResults() {
+export function requestResults() {
   return {
-    type: REQUEST_AGG_RESULTS,
+    type: REQUEST_RESULTS,
   };
 }
 
@@ -18,16 +18,9 @@ export function receiveFailure(error) {
   };
 }
 
-export function pageResults(offset) {
+export function receiveResults(payload) {
   return {
-    type: PAGE_RESULTS,
-    offset,
-  };
-}
-
-export function receiveAggResults(payload) {
-  return {
-    type: RECEIVE_AGG_RESULTS,
+    type: RECEIVE_RESULTS,
     payload,
   };
 }
@@ -48,13 +41,13 @@ function aggregateResults(json, params, offset, agg_results) {
   results.reporter_country = params.reporter_countries;
   results.source_last_updated = json[1].sources_used[0].source_last_updated;
 
-  return receiveAggResults(results);
+  return receiveResults(results);
 }
 
 const { host, apiKey } = config.api.steel;
-function fetchAggResults(params, offset = 0, aggregated_results = {}) {
+function fetchResults(params, offset = 0, aggregated_results = {}) {
   return (dispatch) => {
-    dispatch(requestAggResults());
+    dispatch(requestResults());
     const product_group_querystring = stringify(omit(params, ['partner_countries', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
     const partner_country_querystring = stringify(omit(params, ['product_groups', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
     const requests = [
@@ -73,19 +66,19 @@ function shouldFetchResults(state) {
   const { results } = state;
   if (!results) {
     return true;
-  } else if (results.isFetchingAggs) {
+  } else if (results.isFetching) {
     return false;
   }
   return true;
 }
 
-export function fetchAggResultsIfNeeded(params) {
+export function fetchResultsIfNeeded(params) {
   return (dispatch, getState) => {
     if (isEmpty(omit(params, ['offset', 'size'])))
-      return dispatch(receiveAggResults({})); // Don't return anything if no query is entered
+      return dispatch(receiveResults({})); // Don't return anything if no query is entered
     if(shouldFetchResults(getState())){
       const agg_results = {results: [], total: 0}
-      return dispatch(fetchAggResults(params, 0, agg_results));
+      return dispatch(fetchResults(params, 0, agg_results));
     }
 
     return Promise.resolve([]);
