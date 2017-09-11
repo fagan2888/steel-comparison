@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
-import { isEmpty, omit, values, has } from '../utils/lodash';
+import { isEmpty, omit, values, has, startCase, map } from '../utils/lodash';
 import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from 'constants';
 import config from '../config.js';
 import moment from 'moment';
@@ -19,9 +19,16 @@ export function receiveFailure(error) {
 }
 
 export function receiveResults(payload) {
+  const results = {};
+  // Grab the time period fields from one of the result entries: 
+  const time_periods = map(extractTimePeriods(payload.product_group_entry[0]), time_period => {
+    return {label: startCase(time_period.replace('sum_', '')).toUpperCase(), value: time_period}
+  });
+  results.dashboardData = payload;
+  results.time_periods = time_periods;
   return {
     type: RECEIVE_RESULTS,
-    payload,
+    results,
   };
 }
 
@@ -62,16 +69,6 @@ function fetchResults(params, offset = 0, aggregated_results = {}) {
   };
 }
 
-function shouldFetchResults(state) {
-  const { results } = state;
-  if (!results) {
-    return true;
-  } else if (results.isFetching) {
-    return false;
-  }
-  return true;
-}
-
 export function fetchResultsIfNeeded(params) {
   return (dispatch, getState) => {
     if (isEmpty(omit(params, ['offset', 'size'])))
@@ -83,4 +80,23 @@ export function fetchResultsIfNeeded(params) {
 
     return Promise.resolve([]);
   };
+}
+
+function shouldFetchResults(state) {
+  const { results } = state;
+  if (!results) {
+    return true;
+  } else if (results.isFetching) {
+    return false;
+  }
+  return true;
+}
+
+function extractTimePeriods(result){
+  const time_periods = [];
+  for (let key in result){
+    if (/[0-9]{4}/.test(key))
+      time_periods.push(key);
+  }
+  return time_periods;
 }

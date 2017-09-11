@@ -17,15 +17,9 @@ export function requestOptions() {
 export function setFormOptions(json){
   const flow_types = extractFlowTypes(json[0].aggregations.flow_types);
   const trade_flows = extractTradeFlows(json[0].aggregations.trade_flows);
-
   const reporter_countries = extractOptions(json[1].aggregations.reporters);
-
   const partner_countries = extractPartnerCountries(json[2].aggregations.partners);
   const product_groups = extractOptions(json[2].aggregations.product_groups);
-
-  let time_periods = map(extractTimePeriods(json[0].results[0]), time_period => {
-    return {label: startCase(time_period.replace('sum_', '')).toUpperCase(), value: time_period}
-  });
 
   return {  
     type: SET_FORM_OPTIONS,
@@ -33,7 +27,6 @@ export function setFormOptions(json){
     partner_countries: partner_countries,
     product_groups: product_groups,
     flow_types: flow_types,
-    time_periods: time_periods,
     trade_flows: trade_flows
   };
 }
@@ -96,13 +89,4 @@ function extractFlowTypes(flow_type_options){
   }).sort(propComparator('value', 'asc'));
 
   return flow_types;
-}
-
-function extractTimePeriods(result){
-  const time_periods = [];
-  for (let key in result){
-    if (/[0-9]{4}/.test(key))
-      time_periods.push(key);
-  }
-  return time_periods;
 }

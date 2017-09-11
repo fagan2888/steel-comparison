@@ -5,7 +5,8 @@ export function results(state = {
   isFetching: false,
   invalidated: false,
   error: "",
-  dashboardData: {}
+  dashboardData: {},
+  timePeriods: []
 }, action) {
   switch (action.type) {
   case REQUEST_RESULTS:
@@ -24,7 +25,8 @@ export function results(state = {
     return Object.assign({}, state, {
       isFetching: false,
       invalidated: false,
-      dashboardData: action.payload,
+      dashboardData: action.results.dashboardData,
+      timePeriods: action.results.time_periods
     });
   default:
     return state;

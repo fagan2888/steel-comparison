@@ -33,7 +33,7 @@ class App extends Component {
 
   render() {
     const { query, results, form_options } = this.props;
-    const formValues = reduce(
+    const form_values = reduce(
       query,
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
@@ -44,10 +44,10 @@ class App extends Component {
       message = <div className="explorer__result">{results.error}</div>;
     else if (isEmpty(results.dashboardData))
       message = <h3> Choose a search option from each field to generate a report </h3>;
-    else if (!form_options.isFetching) {
+    else {
       yearly = <YearlyBarGraph result={results.dashboardData} params={query} />;
-      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />;
-      pies = <PieGraphs result={results.dashboardData} query={query} form_options={form_options.timePeriods} />
+      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={query} form_options={results.timePeriods} />;
+      pies = <PieGraphs result={results.dashboardData} query={query} form_options={results.timePeriods} />
       download_button = <DownloadButton results={results.dashboardData} />
     }
 
@@ -61,7 +61,7 @@ class App extends Component {
             <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.</p>
             <p> <b> All fields are required. </b> </p>
             
-            <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <Form onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <Spinner active={results.isFetching} />
             {message}
             {download_button}

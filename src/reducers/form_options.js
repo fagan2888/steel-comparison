@@ -7,7 +7,6 @@ export function form_options(state = {
   partnerCountries: [],
   productGroups: [],
   flowTypes: [],
-  timePeriods: [],
   tradeFlows: []
 }, action) {
   switch (action.type) {
@@ -22,7 +21,6 @@ export function form_options(state = {
       partnerCountries: action.partner_countries,
       productGroups: action.product_groups,
       flowTypes: action.flow_types,
-      timePeriods: action.time_periods,
       tradeFlows: action.trade_flows
     });
   default:
