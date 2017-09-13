@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase, values } from '../utils/lodash';
 import { stringify } from 'querystring';
-import { Form, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
+import { DashboardForm, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
 import './App.scss';
 
-class App extends Component {
+class App extends React.Component {
   componentWillMount() {
     const { dispatch, query } = this.props;
     dispatch(requestFormOptions(query));
@@ -61,7 +62,7 @@ class App extends Component {
             <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.</p>
             <p> <b> All fields are required. </b> </p>
             
-            <Form onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <Spinner active={results.isFetching} />
             {message}
             {download_button}

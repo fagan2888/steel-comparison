@@ -1,5 +1,6 @@
 import { omit, values } from '../../utils/lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import FileSaver from 'file-saver';
 
 const DownloadButton = ( {results} ) => {

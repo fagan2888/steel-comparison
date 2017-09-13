@@ -68,8 +68,10 @@ function extractPartnerCountries(partners){
     else
       return {label: obj['key'], value: obj['key']}; 
   })).sort(propComparator('value', 'asc'));
-  partner_countries = compact(partner_countries);
-  partner_countries.unshift(world_option);
+
+  if (!isEmpty(world_option))
+    partner_countries.unshift(world_option);
+
   return partner_countries;
 }
 

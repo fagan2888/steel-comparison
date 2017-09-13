@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { map, remove } from '../../utils/lodash';
 import moment from 'moment';
 import { Pie, Chart } from 'react-chartjs-2';
