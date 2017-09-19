@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase, values } from '../utils/lodash';
 import { stringify } from 'querystring';
 import { DashboardForm, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
-import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
+import { fetchResultsIfNeeded, requestFormOptions, requestTradeFlowSubgroups, requestReporterSubgroups } from '../actions';
 import './App.scss';
 
 class App extends React.Component {
   componentWillMount() {
     const { dispatch, query } = this.props;
-    dispatch(requestFormOptions(query));
+    dispatch(requestFormOptions());
+    dispatch(requestTradeFlowSubgroups(query.trade_flow));
+    dispatch(requestReporterSubgroups(query.trade_flow, query.reporter_countries));
   }
 
   componentDidMount() {
@@ -46,9 +48,9 @@ class App extends React.Component {
     else if (isEmpty(results.dashboardData))
       message = <h3> Choose a search option from each field to generate a report </h3>;
     else {
-      yearly = <YearlyBarGraph result={results.dashboardData} params={query} />;
-      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={query} form_options={results.timePeriods} />;
-      pies = <PieGraphs result={results.dashboardData} query={query} form_options={results.timePeriods} />
+      yearly = <YearlyBarGraph result={results.dashboardData} params={results.query} />;
+      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
+      pies = <PieGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />
       download_button = <DownloadButton results={results.dashboardData} />
     }
 
@@ -91,7 +93,22 @@ function mapStateToProps(state, ownProps) {
     query = {flow_type: "VALUE", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
   const { results, form_options } = state;
-  
+
+  /*
+  May revisit this later... can the form values be changed prior to render based on the form options? 
+
+  const reporter_countries = map(form_options.reporterCountries, obj => { return obj.value});
+  const partner_countries = map(form_options.partnerCountries, obj => { return obj.value});
+  const product_groups = map(form_options.productGroups, obj => { return obj.value});
+
+  if (!isEmpty(reporter_countries) && !reporter_countries.includes(query.reporter_countries))
+    query.reporter_countries = null;
+  if (!isEmpty(partner_countries) && !partner_countries.includes(query.partner_countries))
+    query.partner_countries = null;
+  if (!isEmpty(product_groups) && !product_groups.includes(query.product_groups))
+    query.product_groups = null;
+  */
+
   return {
     query,
     results,

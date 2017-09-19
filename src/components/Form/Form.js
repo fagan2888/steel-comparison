@@ -5,7 +5,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
-import { requestFormOptions } from '../../actions/form_options';
+import { requestTradeFlowSubgroups, requestReporterSubgroups } from '../../actions/form_options';
 import './Form.scss';
 import { isEmpty, map, snakeCase } from '../../utils/lodash';
 
@@ -69,23 +69,20 @@ class DashboardForm extends React.Component {
     this.props.dispatch(change('dashboard', 'reporterCountries', null));
     this.props.dispatch(change('dashboard', 'partnerCountries', null));
     this.props.dispatch(change('dashboard', 'productGroups', null));
-    const query = this.props.formValues;
-    query.trade_flow = e;
-    return this.props.dispatch(requestFormOptions(query));
+
+    return this.props.dispatch(requestTradeFlowSubgroups(e));
   }
 
   handleReporterCountryChange(e) {
-
     this.props.dispatch(change('dashboard', 'partnerCountries', null));
     this.props.dispatch(change('dashboard', 'productGroups', null));
-    const query = this.props.formValues;
-    query.reporter_countries = e;
-    return this.props.dispatch(requestFormOptions(query));
+
+    return this.props.dispatch(requestReporterSubgroups(this.props.formValues.trade_flow, e));
   }
 
   render() {
     const { handleSubmit, formOptions } = this.props;
-    
+
     return (
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
@@ -179,10 +176,6 @@ const selector = formValueSelector('dashboard')
 DashboardForm = connect(state => {
   const formValues = {};
   formValues['trade_flow'] = selector(state, 'tradeFlow');
-  formValues['reporter_countries'] = selector(state, 'reporterCountries');
-  formValues['partner_countries'] = selector(state, 'partnerCountries');
-  formValues['product_groups'] = selector(state, 'productGroups');
-  formValues['flow_type'] = selector(state, 'flowType');
   return {
     formValues
   }

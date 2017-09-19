@@ -18,7 +18,7 @@ export function receiveFailure(error) {
   };
 }
 
-export function receiveResults(payload) {
+export function receiveResults(payload, params) {
   const results = {};
   // Grab the time period fields from one of the result entries: 
   const time_periods = map(extractTimePeriods(payload.product_group_entry[0]), time_period => {
@@ -26,6 +26,7 @@ export function receiveResults(payload) {
   });
   results.dashboardData = payload;
   results.time_periods = time_periods;
+  results.query = params;
   return {
     type: RECEIVE_RESULTS,
     results,
@@ -48,7 +49,7 @@ function aggregateResults(json, params, offset, agg_results) {
   results.reporter_country = params.reporter_countries;
   results.source_last_updated = json[1].sources_used[0].source_last_updated;
 
-  return receiveResults(results);
+  return receiveResults(results, params);
 }
 
 const { host, apiKey } = config.api.steel;

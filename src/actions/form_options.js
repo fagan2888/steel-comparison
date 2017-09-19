@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { isEmpty, omit, values, has, map, startCase, compact } from '../utils/lodash';
-import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS } from 'constants';
+import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS, SET_TRADE_FLOW_SUBGROUPS, SET_REPORTER_SUBGROUPS } from '../constants';
 import config from '../config.js';
 import { propComparator } from './sort_reports';
 import { receiveFailure } from './results.js';
@@ -15,38 +15,59 @@ export function requestOptions() {
 }
 
 export function setFormOptions(json){
-  const flow_types = extractFlowTypes(json[0].aggregations.flow_types);
-  const trade_flows = extractTradeFlows(json[0].aggregations.trade_flows);
-  const reporter_countries = extractOptions(json[1].aggregations.reporters);
-  const partner_countries = extractPartnerCountries(json[2].aggregations.partners);
-  const product_groups = extractOptions(json[2].aggregations.product_groups);
-
-  return {  
+  console.log(JSON.stringify(json))
+  const flow_types = extractFlowTypes(json.aggregations.flow_types);
+  const trade_flows = extractTradeFlows(json.aggregations.trade_flows);
+  const return_action = {  
     type: SET_FORM_OPTIONS,
-    reporter_countries: reporter_countries,
-    partner_countries: partner_countries,
-    product_groups: product_groups,
     flow_types: flow_types,
     trade_flows: trade_flows
   };
+  console.log(JSON.stringify(return_action))
+  return return_action;
 }
 
-export function requestFormOptions(query){
-  const trade_flow_query = 'trade_flow=' + query.trade_flow;
-  const reporter_query = 'reporter_countries=' + query.reporter_countries + '&trade_flow=' + query.trade_flow;
+export function setTradeFlowSubgroups(json){
+  const reporter_countries = extractOptions(json.aggregations.reporters);
+  return {  
+    type: SET_TRADE_FLOW_SUBGROUPS,
+    reporter_countries: reporter_countries
+  };
+}
+
+export function setReporterSubgroups(json){
+  const partner_countries = extractPartnerCountries(json.aggregations.partners);
+  const product_groups = extractOptions(json.aggregations.product_groups);
+  return {  
+    type: SET_REPORTER_SUBGROUPS,
+    partner_countries: partner_countries,
+    product_groups: product_groups
+  };
+}
+
+export function requestFormOptions(){
+  return fetchResults('', setFormOptions);
+}
+
+export function requestTradeFlowSubgroups(trade_flow){
+  const query = 'trade_flow=' + trade_flow;
+  return fetchResults(query, setTradeFlowSubgroups);
+}
+
+export function requestReporterSubgroups(trade_flow, reporter_country){
+  const query = 'trade_flow=' + trade_flow + '&reporter_countries=' + reporter_country;
+  return fetchResults(query, setReporterSubgroups);
+}
+
+function fetchResults(query, callback){
   return (dispatch) => {
     dispatch(requestOptions());
-    const requests = [
-      fetch(`${host}?api_key=${apiKey}&size=1`).then(response => response.json()),
-      fetch(`${host}?api_key=${apiKey}&size=1&${trade_flow_query}`).then(response => response.json()),
-      fetch(`${host}?api_key=${apiKey}&size=1&${reporter_query}`).then(response => response.json())
-    ]
-
-    return Promise.all(requests)
-      .then(json => dispatch(setFormOptions(json)))
-      .catch((error) => {
-        dispatch(receiveFailure('There was an error connecting to the data source:  ' + error ));
-      });
+      fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
+        .then(response => response.json())
+        .then(json => dispatch(callback(json)))
+        .catch((error) => {
+          dispatch(receiveFailure('There was an error connecting to the data source:  ' + error ));
+        });
   }
 }
 
