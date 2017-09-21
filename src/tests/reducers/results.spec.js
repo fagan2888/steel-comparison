@@ -6,7 +6,6 @@ describe('form options reducer', () => {
     expect(results(undefined, {})).toEqual(
       {
         isFetching: false,
-        invalidated: false,
         error: "",
         dashboardData: {},
         timePeriods: [],
@@ -23,8 +22,7 @@ describe('form options reducer', () => {
     ).toEqual(
       {
         error: "",
-        isFetching: true,
-        invalidated: false
+        isFetching: true
       }
     )
   })
@@ -38,7 +36,6 @@ describe('form options reducer', () => {
     ).toEqual(
       {
         isFetching: false,
-        invalidated: false,
         error: 'Error message.'
       }
     )
@@ -57,7 +54,6 @@ describe('form options reducer', () => {
     ).toEqual(
       {
         isFetching: false,
-        invalidated: false,
         dashboardData: {entry: 'data'},
         timePeriods: ['one', 'two'],
         query: {foo: 'bar'}

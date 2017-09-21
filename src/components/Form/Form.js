@@ -121,7 +121,7 @@ class DashboardForm extends React.Component {
                   input={props.input}
                   name="reporterCountries" 
                   options={formOptions.reporterCountries} 
-                  label="Reporter Country" 
+                  label="Reporting Country" 
                   meta={props.meta}
                   handleChange={this.handleReporterCountryChange} 
                 />

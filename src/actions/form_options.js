@@ -15,7 +15,6 @@ export function requestOptions() {
 }
 
 export function setFormOptions(json){
-  console.log(JSON.stringify(json))
   const flow_types = extractFlowTypes(json.aggregations.flow_types);
   const trade_flows = extractTradeFlows(json.aggregations.trade_flows);
   const return_action = {  
@@ -23,7 +22,6 @@ export function setFormOptions(json){
     flow_types: flow_types,
     trade_flows: trade_flows
   };
-  console.log(JSON.stringify(return_action))
   return return_action;
 }
 
@@ -62,7 +60,7 @@ export function requestReporterSubgroups(trade_flow, reporter_country){
 function fetchResults(query, callback){
   return (dispatch) => {
     dispatch(requestOptions());
-      fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
+      return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
         .then(response => response.json())
         .then(json => dispatch(callback(json)))
         .catch((error) => {

@@ -25,11 +25,11 @@ function buildTitle(params, ytd_end_month, time_period) {
 }
 
 const Footnote = ({data, params, total}) => {
-  const units = params.flow_type === "QTY" ? "metric tons" : "U.S. dollars";
+  const units = params.flow_type === "QTY" ? " metric tons" : " U.S. dollars";
 
   return (
     <p className="graph_footnote"> 
-      Source:  U.S. Department of Commerce, Enforcement and Compliance:  Trade covered in the table is {parseFloat(total.toFixed(2)).toLocaleString()} {units}.
+      {"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Trade covered in the table is " + parseFloat(total.toFixed(2)).toLocaleString() + units + "."}
     </p> 
   );
 }

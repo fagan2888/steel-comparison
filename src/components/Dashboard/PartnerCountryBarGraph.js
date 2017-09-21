@@ -19,14 +19,14 @@ function buildTitle(params) {
   const units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   const flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
-  const chart_title = params.reporter_countries + flow + params.partner_countries + ' in ' + units;
+  const chart_title = params.reporter_countries + flow + params.partner_countries + ' by Top Steel Products in ' + units;
   return chart_title;
 }
 
 const Footnote = ({data, params }) => {
   return (
     <p className="graph_footnote"> 
-      Source: U.S. Department of Commerce, Enforcement and Compliance.  Product groups are sorted by most recent time period.
+      {"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Product groups are sorted by most recent time period."}
     </p> 
   );
 }

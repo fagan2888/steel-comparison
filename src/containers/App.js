@@ -6,6 +6,7 @@ import { stringify } from 'querystring';
 import { DashboardForm, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions, requestTradeFlowSubgroups, requestReporterSubgroups } from '../actions';
 import './App.scss';
+import config from '../config.js';
 
 class App extends React.Component {
   componentWillMount() {
@@ -51,7 +52,7 @@ class App extends React.Component {
       yearly = <YearlyBarGraph result={results.dashboardData} params={results.query} />;
       comparisons = <ComparisonBarGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
       pies = <PieGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />
-      download_button = <DownloadButton results={results.dashboardData} />
+      download_button = <DownloadButton results={results} />
     }
 
     return (
@@ -59,15 +60,21 @@ class App extends React.Component {
 
         <div className="pure-u-1 pure-u-xl-1-2 first_row">
           <div className="form__content">
-            <a href="#">Back Link Placeholder</a>
-            <h1 className="Header-1"><b>Global Steel Trade Monitor</b></h1>
-            <p className="DefaultParagraph-1">Search for steel trade data by first selecting Imports or Exports.</p>
+            <h1 className="Header-1"><a href={config.monitor_link}><b>Global Steel Trade Monitor</b></a></h1>
+            <p className="DefaultParagraph-1">Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).</p>
             <p> <b> All fields are required. </b> </p>
             
             <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <Spinner active={results.isFetching} />
             {message}
-            {download_button}
+            <div>
+              {/*
+              <form action={config.monitor_link}>
+                <input className="pure-button pure-button-primary" type="submit" value="Country Reports" />
+              </form>
+              */}
+              {download_button}
+            </div>
           </div>
         </div>
 
@@ -90,7 +97,7 @@ App.propTypes = {
 function mapStateToProps(state, ownProps) {
   let query = ownProps.history.getCurrentLocation().query;
   if (isEmpty(ownProps.history.getCurrentLocation().query)){
-    query = {flow_type: "VALUE", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
+    query = {flow_type: "QTY", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
   const { results, form_options } = state;
 

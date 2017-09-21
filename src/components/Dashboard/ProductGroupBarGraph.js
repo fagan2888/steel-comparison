@@ -19,14 +19,14 @@ function buildTitle(params) {
   let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   let flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
-  const chartTitle = params.reporter_countries + flow + 'Top 5 Partner Countries of ' + params.product_groups + ' in ' + units;
+  const chartTitle = params.reporter_countries + flow + 'Top 5 Trading Countries of ' + params.product_groups + ' in ' + units;
   return chartTitle;
 }
 
 const Footnote = ({data, params}) => {
   return (
     <p className="graph_footnote"> 
-      Source: U.S. Department of Commerce, Enforcement and Compliance.  Partner countries are sorted by most recent time period.
+      {"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Partner countries are sorted by most recent time period."}
     </p> 
   );
 }

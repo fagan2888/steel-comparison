@@ -16,7 +16,7 @@ const Footnote = ({data, params, last_updated}) => {
   const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
     <p className="graph_footnote"> 
-      Source: Department of Commerce, annual data from UN Statistics, YTD data from Global Trade Atlas, updated on {last_updated_date}.
+      {"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Updated on " + last_updated_date + "."}
     </p> 
   );
 }

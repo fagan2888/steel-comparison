@@ -8,6 +8,7 @@ const config = Object.assign({
         apiKey: 'devkey',
       },
     },
+    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
   },
   test: {
     api: {
@@ -16,6 +17,7 @@ const config = Object.assign({
         apiKey: 'devkey',
       },
     },
+    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
   },
   production: {
     api: {
@@ -24,6 +26,7 @@ const config = Object.assign({
         apiKey: 'O6fmOIPtrvDlqoDe2_6UbKJc',
       },
     },
+    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
   },
 });
 

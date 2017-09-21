@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { isEmpty, omit, values, has, startCase, map } from '../utils/lodash';
-import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from 'constants';
+import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from '../constants';
 import config from '../config.js';
 import moment from 'moment';
 
@@ -34,7 +34,6 @@ export function receiveResults(payload, params) {
 }
 
 function aggregateResults(json, params, offset, agg_results) {
-  
   const results = {};
   results.product_group_entry = json[0].results;
   results.partner_country_entry = json[1].results;

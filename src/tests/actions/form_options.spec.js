@@ -43,11 +43,10 @@ describe('async actions', () => {
   });
 
   it('set trade flow and flow type options', () => {
-    var scope = nock(host)
+    nock(host)
       .get(`?api_key=${apiKey}&size=1&`)
       .reply(200, form_options_response)
-      .log(console.log)
-    console.log(scope)
+
     const store = mockStore(initialize_store);
     const expected_actions = [
       {
@@ -56,15 +55,14 @@ describe('async actions', () => {
       {
         type: 'explorer/SET_FORM_OPTIONS',
         trade_flows: [{label: 'Exports', value: 'EXP'}, {label: 'Imports', value: 'IMP'}],
-        flow_types: [{label: 'Value (US Dollars)', value: 'VALUE'}, {label: 'Quantity (Metric Tons)', value: 'QTY'}]
+        flow_types: [{label: 'Quantity (Metric Tons)', value: 'QTY'}, {label: 'Value (US Dollars)', value: 'VALUE'}]
       }
     ]
-    //console.log(store.dispatch(actions.requestFormOptions()))
     return store.dispatch(actions.requestFormOptions()).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
   });
-  /*
+  
   it('set reporter country options from trade flow', () => {
     nock(host)
       .get(`?api_key=${apiKey}&size=1&trade_flow=IMP`)
@@ -77,7 +75,7 @@ describe('async actions', () => {
       },
       {
         type: 'explorer/SET_TRADE_FLOW_SUBGROUPS',
-        reporter_countries: [{label: 'United States', value: 'United States'}, {label: 'China', value: 'China'}]
+        reporter_countries: [{label: 'China', value: 'China'}, {label: 'United States', value: 'United States'}]
       }
     ]
     return store.dispatch(actions.requestTradeFlowSubgroups('IMP')).then(() => {
@@ -106,5 +104,5 @@ describe('async actions', () => {
       expect(store.getActions()).toEqual(expected_actions);
     });
   });
-  */
+  
 });
