@@ -67,13 +67,15 @@ class App extends React.Component {
             <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <Spinner active={results.isFetching} />
             {message}
-            <div>
-              {/*
-              <form action={config.monitor_link}>
-                <input className="pure-button pure-button-primary" type="submit" value="Country Reports" />
-              </form>
-              */}
-              {download_button}
+            <div className="buttons">
+              <div className="button-column">
+                <form action={config.monitor_link} className="form-button">
+                  <input className="pure-button pure-button-primary" type="submit" value="Country Reports" />
+                </form>
+              </div>
+              <div className="button-column">
+                {download_button}
+              </div>
             </div>
           </div>
         </div>

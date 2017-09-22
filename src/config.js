@@ -1,5 +1,8 @@
 import 'babel-polyfill';
 
+const footnote = "Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.";
+const monitor_link = 'http://trade.gov/steel/global-monitor.asp';
+
 const config = Object.assign({
   development: {
     api: {
@@ -8,7 +11,8 @@ const config = Object.assign({
         apiKey: 'devkey',
       },
     },
-    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
+    monitor_link: monitor_link,
+    footnote: footnote
   },
   test: {
     api: {
@@ -17,7 +21,8 @@ const config = Object.assign({
         apiKey: 'devkey',
       },
     },
-    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
+    monitor_link: monitor_link,
+    footnote: footnote
   },
   production: {
     api: {
@@ -26,7 +31,8 @@ const config = Object.assign({
         apiKey: 'O6fmOIPtrvDlqoDe2_6UbKJc',
       },
     },
-    monitor_link: 'http://trade.gov/steel/global-monitor.asp'
+    monitor_link: monitor_link,
+    footnote: footnote
   },
 });
 

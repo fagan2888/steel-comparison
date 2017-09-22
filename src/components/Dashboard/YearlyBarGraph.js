@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { values, pickBy, has, omit, map, startCase, range } from '../../utils/lodash';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
+import config from '../../config';
 
 function buildTitle(params) {
   let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
@@ -12,16 +13,18 @@ function buildTitle(params) {
   return chart_title;
 }
 
-const Footnote = ({data, params, last_updated}) => {
+const Footnote = ({last_updated}) => {
   const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
     <p className="graph_footnote"> 
-      {"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Updated on " + last_updated_date + "."}
+      {config.footnote + "  Updated on " + last_updated_date + "."}
     </p> 
   );
 }
 
 const YearlyBarGraph = ({ result, params }) => {
+  console.log(result)
+  console.log(params)
   const last_updated = result.source_last_updated;
   const data = result.product_group_entry;
   const chartTitle = buildTitle(params);
@@ -103,7 +106,7 @@ const YearlyBarGraph = ({ result, params }) => {
       <div className="bar_graph">
         <Bar data={chartData} options={chartOptions} />
       </div>
-      <Footnote data={data} params={params} last_updated={last_updated}/>
+      <Footnote last_updated={last_updated}/>
     </div>
   );
 }

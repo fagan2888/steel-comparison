@@ -2,14 +2,13 @@ import { map, omit, values } from '../../utils/lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import FileSaver from 'file-saver';
+import config from '../../config';
 
 const DownloadButton = ( {results} ) => {
   return (
-    <div>
-      <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
-        <i className="fa fa-paper-plane" /> Download Selected Trade Data
-      </button>
-    </div> 
+    <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
+      <i className="fa fa-paper-plane" /> Download Selected Trade Data
+    </button>
   );
 }
 
@@ -21,9 +20,9 @@ function downloadReports(results){
   keys = transformKeys(keys);
 
   let csv_string = '"Selected Data: ' + JSON.stringify(results.query).replace(/{|}|"/g, '').replace(/:/g, ': ').replace(/,/g, ', ') + '"\n';
-  csv_string += "\"Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.\"\n";
+  csv_string += '"' + config.footnote + '"';
 
-  csv_string += '\n';
+  csv_string += '\n\n';
   csv_string += keys.join(',') + '\n';
 
   for (let i in data.product_group_entry) {
