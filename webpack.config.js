@@ -7,6 +7,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3001',
     'webpack/hot/only-dev-server',
+    'babel-polyfill',
     './src/index'
   ],
   output: {
@@ -66,5 +67,5 @@ module.exports = {
       'node_modules'
     ],
     extensions: ['', '.json', '.js', '.jsx']
-  }
+  },
 };

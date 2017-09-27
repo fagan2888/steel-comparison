@@ -7,6 +7,7 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   devtool: false,
   entry: [
+    'babel-polyfill',
     './src/index',
   ],
   output: {

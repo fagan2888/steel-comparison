@@ -23,8 +23,6 @@ const Footnote = ({last_updated}) => {
 }
 
 const YearlyBarGraph = ({ result, params }) => {
-  console.log(result)
-  console.log(params)
   const last_updated = result.source_last_updated;
   const data = result.product_group_entry;
   const chartTitle = buildTitle(params);
@@ -102,7 +100,7 @@ const YearlyBarGraph = ({ result, params }) => {
 
   return  (
     <div className="pure-u-1 pure-u-xl-1-2 first_row yearly_bar primary_graph">
-      <h3 className="chart_title"> {chartTitle} </h3>
+      <h3 className="chart_title">{chartTitle}</h3>
       <div className="bar_graph">
         <Bar data={chartData} options={chartOptions} />
       </div>

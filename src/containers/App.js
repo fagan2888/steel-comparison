@@ -61,7 +61,10 @@ class App extends React.Component {
         <div className="pure-u-1 pure-u-xl-1-2 first_row">
           <div className="form__content">
             <h1 className="Header-1"><a href={config.monitor_link}><b>Global Steel Trade Monitor</b></a></h1>
-            <p className="DefaultParagraph-1">Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).</p>
+            <p className="DefaultParagraph-1">
+              Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
+              Select a Trade Flow, then a Reporting Country, then a Partner and Product Group, and finally, Quantity or Value.
+            </p>
             <p> <b> All fields are required. </b> </p>
             
             <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
