@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { requestTradeFlowSubgroups, requestReporterSubgroups } from '../../actions/form_options';
 import './Form.scss';
 import { isEmpty, map, snakeCase } from '../../utils/lodash';
+import DownloadButton from '../Dashboard/DownloadButton';
+import config from '../../config.js';
 
 const required = value => (value ? undefined : 'This value is required.');
 
@@ -82,6 +84,7 @@ class DashboardForm extends React.Component {
 
   render() {
     const { handleSubmit, formOptions } = this.props;
+    const download_button = <DownloadButton results={this.props.results} />;
 
     return (
       <form className="explorer__form" onSubmit={handleSubmit}>
@@ -153,13 +156,25 @@ class DashboardForm extends React.Component {
                 />
               }/>
             </div>
-
-            <div className="explorer__form__group">
-              <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
-                <i className="fa fa-paper-plane" /> Generate Dashboard
-              </button>
-            </div>
           </div>
+
+            <div className="explorer__form__row">
+              <div className="button-column">
+                <form>
+                  <button className="button pure-button pure-button-primary" type="button" onClick={() => {return window.location.href=config.monitor_link}} >
+                    Global Steel Trade Reports
+                  </button>
+                </form>
+              </div>
+              <div className="button-column">
+                {download_button}
+              </div>
+              <div className="button-column">
+                <button className="button explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
+                  Generate Dashboard
+                </button>
+              </div>
+            </div>
 
         </fieldset>
       </form>

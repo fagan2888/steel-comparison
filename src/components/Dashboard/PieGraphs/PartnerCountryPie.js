@@ -49,7 +49,7 @@ const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
 
   return  (
     <div>
-      <h3 className="chart_title"> {chartTitle} </h3>
+      <h3 className="chart_title">{chartTitle}</h3>
       <PieGraph data_values={data_values} labels={labels} time_period={time_period} />
       <Footnote params={params} total={total}/>
     </div>

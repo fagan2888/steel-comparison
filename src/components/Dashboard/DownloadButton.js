@@ -6,7 +6,7 @@ import config from '../../config';
 
 const DownloadButton = ( {results} ) => {
   return (
-    <button className="download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
+    <button className="button download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
       <i className="fa fa-paper-plane" /> Download Selected Trade Data
     </button>
   );

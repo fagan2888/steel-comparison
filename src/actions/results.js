@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
-import { isEmpty, omit, values, has, startCase, map } from '../utils/lodash';
+import { compact, isEmpty, omit, values, has, startCase, map } from '../utils/lodash';
 import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from '../constants';
 import config from '../config.js';
 import moment from 'moment';
@@ -21,11 +21,14 @@ export function receiveFailure(error) {
 export function receiveResults(payload, params) {
   const results = {};
   // Grab the time period fields from one of the result entries: 
-  const time_periods = map(extractTimePeriods(payload.product_group_entry[0]), time_period => {
+  const time_periods = compact(map(extractTimePeriods(payload.product_group_entry[0]).sort(), time_period => {
+    if(payload.product_group_entry[0][time_period] == null)
+      return null;
     return {label: startCase(time_period.replace('sum_', '')).toUpperCase(), value: time_period}
-  });
+  }));
   results.dashboardData = payload;
   results.time_periods = time_periods;
+
   results.query = params;
   return {
     type: RECEIVE_RESULTS,

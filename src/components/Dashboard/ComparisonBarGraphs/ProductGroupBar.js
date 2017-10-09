@@ -6,7 +6,7 @@ import config from '../../../config';
 import HorizontalBarGraph from './HorizontalBarGraph';
 import { compare } from '../sort';
 
-function buildTitle(params) {
+function chartTitle(params) {
   let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   let flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
@@ -14,7 +14,7 @@ function buildTitle(params) {
   return chartTitle;
 }
 
-const Footnote = () => {
+function footnote(){
   return (
     <p className="graph_footnote"> 
       {config.footnote + "  Partner countries are sorted by most recent time period."}
@@ -37,7 +37,7 @@ const ProductGroupBar = ({ result, params, time_periods }) => {
 
   return  (
     <div>
-      <h3 className="chart_title"> {buildTitle(params)} </h3>
+      <h3 className="chart_title">{chartTitle(params)}</h3>
 
       <HorizontalBarGraph 
         data_entries={data_entries} 
@@ -46,7 +46,7 @@ const ProductGroupBar = ({ result, params, time_periods }) => {
         time_periods={time_periods}
       />
 
-      <Footnote />
+      {footnote()}
     </div>
   );
 }

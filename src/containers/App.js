@@ -63,23 +63,13 @@ class App extends React.Component {
             <h1 className="Header-1"><a href={config.monitor_link}><b>Global Steel Trade Monitor</b></a></h1>
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
-              Select a Trade Flow, then a Reporting Country, then a Partner and Product Group, and finally, Quantity or Value.
+              First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
             </p>
             <p> <b> All fields are required. </b> </p>
             
-            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <DashboardForm onSubmit={this.handleSubmit} results={results} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <Spinner active={results.isFetching} />
             {message}
-            <div className="buttons">
-              <div className="button-column">
-                <form action={config.monitor_link} className="form-button">
-                  <input className="pure-button pure-button-primary" type="submit" value="Country Reports" />
-                </form>
-              </div>
-              <div className="button-column">
-                {download_button}
-              </div>
-            </div>
           </div>
         </div>
 

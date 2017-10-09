@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 
-const footnote = "Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.";
-const monitor_link = 'http://trade.gov/steel/global-monitor.asp';
+const footnote = "Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.";
+const monitor_link = 'https://www.trade.gov/steel/global-monitor.asp';
 
 const config = Object.assign({
   development: {

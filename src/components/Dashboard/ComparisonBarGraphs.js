@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import ProductGroupBar from './ComparisonBarGraphs/ProductGroupBar';
 import PartnerCountryBar from './ComparisonBarGraphs/PartnerCountryBar';
-import { xor, indexOf } from '../../utils/lodash';
+import { compact, indexOf, map, xor } from '../../utils/lodash';
 import DateSelect from './DateSelect';
 
 class ComparisonBarGraphs extends React.Component {
@@ -27,8 +27,13 @@ class ComparisonBarGraphs extends React.Component {
 
   render() {
     const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
-    const old_keys = Object.keys(this.props.result.product_group_entry[0]);
-    const keys = xor(old_keys, excluded_fields);
+    const old_keys = Object.keys(this.props.result.product_group_entry[0]).sort();
+    const keys = compact(map(xor(old_keys, excluded_fields), old_key => {
+      if(this.props.result.product_group_entry[0][old_key] == null)
+        return null;
+      return old_key;
+    }));
+
     const first_index = indexOf(keys, this.state.first_interval);
     const second_index = indexOf(keys, this.state.second_interval);
     let date_range = [];
