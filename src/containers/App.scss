@@ -31,69 +31,89 @@
       }
     }
   }
-}
 
-.form__content{
-  max-width: 600px;
-  font-family: Verdana;
-  padding-left: 22px;
-
-  p {
-    font-size: 12px;
+  button::-moz-focus-inner {
+      border:0;
+      padding:0;
   }
-}
 
-.dashboard-heading {
-  max-width: 600px;
-}
+  .button {
+    width: 195px;
+    font-family: Verdana;
+    font-size: 11px;
+  }
 
-.graph_footnote {
-  text-align: center;
-  max-width: 600px;
-  font-size: 11px;
-}
+  .button-column {
+    width: 50%;
+    display: inline-block;
+  }
 
-.bar_graph {
-  width: 600px;
-  height: 350px;
-}
+  .link-button {
+    margin-left: 53px;
+  }
 
-.pie_graph {
-  max-width: 600px;
-  height: 350px;
-}
+  .form__content{
+    max-width: 600px;
+    font-family: Verdana;
+    padding-left: 22px;
 
-@media (min-width: 1280px) {
-  .second_graph {
-    padding-top: 95px;
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .dashboard-heading {
+    max-width: 600px;
+  }
+
+  .graph_footnote {
+    text-align: center;
+    max-width: 600px;
+    font-size: 11px;
+  }
+
+  .bar_graph {
+    width: 600px;
+    height: 350px;
+  }
+
+  .pie_graph {
+    max-width: 600px;
+    height: 350px;
+  }
+
+  @media (min-width: 1280px) {
+    .second_graph {
+      padding-top: 95px;
+      min-height: 425px;
+    }
+    .pure-u-1 {
+      max-height: 575px;
+    }
+  }
+
+  .primary-graph {
+    min-height: 475px;
+  }
+
+  .second-graph {
     min-height: 425px;
   }
-  .pure-u-1 {
-    max-height: 575px;
+
+  .first_row {
+    max-height: 475px;
   }
-}
 
-.primary-graph {
-  min-height: 475px;
-}
+  .yearly_bar {
+    padding-top: 20px;
+  }
 
-.second-graph {
-  min-height: 425px;
-}
+  .pure-button {
+    padding: 5px;
+  }
 
-.first_row {
-  max-height: 475px;
-}
-
-.yearly_bar {
-  padding-top: 20px;
-}
-
-.pure-button {
-  padding: 5px;
-}
-
-.chart_title {
-  text-align: center;
-  width: 600px;
+  .chart_title {
+    text-align: center;
+    width: 600px;
+  }
 }

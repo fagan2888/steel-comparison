@@ -1,28 +1,5 @@
 @import "./Select.scss";
 
-button::-moz-focus-inner {
-    border:0;
-    padding:0;
-}
-
-.button {
-  width: 185px;
-}
-
-.button-column {
-  margin-top: 25px;
-  width: 33%;
-  display: inline-block;
-}
-
-.validation-error {
-  color: red;
-}
-
-.Select {
-  width: 80%;
-}
-
 .explorer__form {
   font-size: 11px;
   margin: 28px 0;
@@ -35,7 +12,7 @@ button::-moz-focus-inner {
   }
 
   &__submit {
-
+    margin-top: 23px;
   }
 
   &__row {
@@ -88,5 +65,13 @@ button::-moz-focus-inner {
   }
   .Select-input {
     height: 30px;
+  }
+  
+  .validation-error {
+  cccolor: red;
+  }
+
+  .Select {
+    width: 80%;
   }
 }

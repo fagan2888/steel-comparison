@@ -64,10 +64,23 @@ class App extends React.Component {
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
+              Click Generate Dashboard to see the resulting graphs.  
             </p>
             <p> <b> All fields are required. </b> </p>
             
-            <DashboardForm onSubmit={this.handleSubmit} results={results} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
+            <div>
+              <div className="button-column">
+                <form>
+                  <button className="button link-button pure-button pure-button-primary" type="button" onClick={() => {return window.location.href=config.monitor_link}} >
+                    Global Steel Trade Reports
+                  </button>
+                </form>
+              </div>
+              <div className="button-column">
+                {download_button}
+              </div>
+            </div>
             <Spinner active={results.isFetching} />
             {message}
           </div>
