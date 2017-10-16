@@ -55,7 +55,7 @@ describe('components', () => {
 
       const footnote = wrapper.find('p')
       expect(footnote.hasClass('graph_footnote')).toBe(true)
-      expect(footnote.text()).toBe("Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Trade covered in the table is 17,852,770.02 metric tons.")
+      expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.  Trade covered in the table is 17,852,770.02 metric tons.")
     })
   })
 })

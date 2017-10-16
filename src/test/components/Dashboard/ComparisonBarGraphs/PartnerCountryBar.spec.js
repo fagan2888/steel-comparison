@@ -44,8 +44,10 @@ describe('components', () => {
            sum_2014: 15113970.345,
            sum_2015: 14308996.302,
            sum_2016: 12216668.735,
+           sum_2017: null,
            ytd_2016: 5722779.542,
            ytd_2017: 6123077.763,
+           ytd_2018: null,
            percent_change_ytd: 6.99482162579,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -61,8 +63,10 @@ describe('components', () => {
            sum_2014: 9446777.504,
            sum_2015: 6456720.94,
            sum_2016: 5941492.25,
+           sum_2017: null,
            ytd_2016: 2556760.115,
            ytd_2017: 4092422.476,
+           ytd_2018: null,
            percent_change_ytd: 60.0628252917,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -78,8 +82,10 @@ describe('components', () => {
            sum_2014: 6830865.196,
            sum_2015: 7264279.857,
            sum_2016: 6937698.23,
+           sum_2017: null,
            ytd_2016: 3468703.841,
            ytd_2017: 3672688.609,
+           ytd_2018: null,
            percent_change_ytd: 5.88072021569,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -95,8 +101,10 @@ describe('components', () => {
            sum_2014: 7822459.855,
            sum_2015: 6333979.097,
            sum_2016: 4087081.663,
+           sum_2017: null,
            ytd_2016: 2010641.806,
            ytd_2017: 3487212.906,
+           ytd_2018: null,
            percent_change_ytd: 73.4377995918,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -112,8 +120,10 @@ describe('components', () => {
            sum_2014: 1072026.105,
            sum_2015: 1011296.997,
            sum_2016: 882107.254,
+           sum_2017: null,
            ytd_2016: 432488.318,
            ytd_2017: 477368.271,
+           ytd_2018: null,
            percent_change_ytd: 10.3771480366,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' } ]
@@ -132,7 +142,7 @@ describe('components', () => {
 
       const footnote = wrapper.find('p')
       expect(footnote.hasClass('graph_footnote')).toBe(true)
-      expect(footnote.text()).toBe("Source: Annual data from UN Comtrade, Desa/UNSD; YTD data from HIS Global Trade Atlas sourced from the reporting country's official statistics.  Product groups are sorted by most recent time period.")
+      expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.  Product groups are sorted by most recent time period.")
     })
   })
 })

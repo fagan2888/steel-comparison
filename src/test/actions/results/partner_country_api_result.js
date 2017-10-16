@@ -23,8 +23,10 @@ export default {
             sum_2014: 15113970.345,
             sum_2015: 14308996.302,
             sum_2016: 12216668.735,
+            sum_2017: null,
             ytd_2016: 5722779.542,
             ytd_2017: 6123077.763,
+            ytd_2018: null,
             percent_change_ytd: 6.99482162579,
             ytd_end_month: "Jun",
             trade_flow: "IMP"
@@ -42,8 +44,10 @@ export default {
             sum_2014: 7822459.855,
             sum_2015: 6333979.097,
             sum_2016: 4087081.663,
+            sum_2017: null,
             ytd_2016: 2010641.806,
             ytd_2017: 3487212.906,
+            ytd_2018: null,
             percent_change_ytd: 73.4377995918,
             ytd_end_month: "Jun",
             trade_flow: "IMP"

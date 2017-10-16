@@ -68,7 +68,7 @@ export default {
         }
     ]
   },
-  initialValue: {
+  initialValues: {
     "flowType": "QTY",
     "partnerCountries": "World",
     "productGroups": "All Steel Mill Products",
