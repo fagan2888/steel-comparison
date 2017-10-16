@@ -48,8 +48,8 @@ class ComparisonBarGraphs extends React.Component {
           <div className="form__content">
             <form className="explorer__form">
               <fieldset>
-                <DateSelect name="compPeriod1" form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs First Interval" />
-                <DateSelect name="compPeriod2" form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs Second Interval" />
+                <DateSelect name="compPeriod1" form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs First  Time Interval" />
+                <DateSelect name="compPeriod2" form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs Second Time Interval" />
               </fieldset>
             </form>
           </div>

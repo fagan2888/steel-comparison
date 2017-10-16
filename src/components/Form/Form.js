@@ -21,10 +21,8 @@ const SelectField = ({ input, name, label = 'Untitled', options, meta, handleCha
         name={name}
         options={options}
         value={input.value}
-        multi={false} autoBlur
-        onBlur={(value) => input.onBlur(value)}
-        joinValues = {true}
-        delimiter = {','}
+        multi={false}
+        onBlur={(option) => input.onBlur(option.value)}
         simpleValue = {true}
         onChange={value => {
           input.onChange(value)

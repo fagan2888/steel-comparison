@@ -64,7 +64,7 @@ class App extends React.Component {
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
-              Click Generate Dashboard to see the resulting graphs.  
+              Click Generate Dashboard to update the graphs and charts.  
             </p>
             <p> <b> All fields are required. </b> </p>
             
