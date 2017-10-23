@@ -16,7 +16,7 @@ function chartTitle(params) {
 function footnote(last_updated) {
   const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
-    <p className="graph_footnote"> 
+    <p className="explorer__graph-footnote"> 
       {config.footnote + "  Updated on " + last_updated_date + "."}
     </p> 
   );
@@ -100,9 +100,9 @@ const YearlyBarGraph = ({ result, params }) => {
     }
 
   return  (
-    <div className="pure-u-1 pure-u-xl-1-2 first_row yearly_bar primary_graph">
-      <h3 className="chart_title">{chartTitle(params)}</h3>
-      <div className="bar_graph">
+    <div className="pure-u-1 pure-u-xl-1-2 explorer__first-row explorer__yearly-bar explorer__primary-graph">
+      <h3 className="explorer__chart-title">{chartTitle(params)}</h3>
+      <div className="explorer__bar-graph">
         <Bar data={chartData} options={chartOptions} />
       </div>
       {footnote(result.source_last_updated)}

@@ -43,9 +43,9 @@ class ComparisonBarGraphs extends React.Component {
       date_range = keys.slice(second_index, first_index+1);
 
     return (
-      <div className="pure-u-1 pure-g">
-        <div className="pure-u-1 pure-u-xl-1-2 primary_graph">
-          <div className="form__content">
+      <div className="explorer__second-row pure-u-1 pure-g">
+        <div className="pure-u-1 pure-u-xl-1-2 explorer__primary-graph">
+          <div className="explorer__form-content">
             <form className="explorer__form">
               <fieldset>
                 <DateSelect name="compPeriod1" form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs First  Time Interval" />
@@ -57,7 +57,7 @@ class ComparisonBarGraphs extends React.Component {
           <ProductGroupBar result={this.props.result} params={this.props.query} time_periods={date_range} />
         </div>
 
-        <div className="pure-u-1 pure-u-xl-1-2 second_graph">
+        <div className="pure-u-1 pure-u-xl-1-2 explorer__second-graph">
           <PartnerCountryBar result={this.props.result} params={this.props.query}  time_periods={date_range} />
         </div>
       </div>

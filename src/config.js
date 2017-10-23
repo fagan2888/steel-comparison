@@ -2,6 +2,7 @@ import 'babel-polyfill';
 
 const footnote = "Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.";
 const monitor_link = 'https://www.trade.gov/steel/global-monitor.asp';
+const faqs_link = "https://www.trade.gov/steel/pdfs/faqs.pdf";
 
 const config = Object.assign({
   development: {
@@ -12,7 +13,8 @@ const config = Object.assign({
       },
     },
     monitor_link: monitor_link,
-    footnote: footnote
+    footnote: footnote,
+    faqs_link: faqs_link
   },
   test: {
     api: {
@@ -22,7 +24,8 @@ const config = Object.assign({
       },
     },
     monitor_link: monitor_link,
-    footnote: footnote
+    footnote: footnote,
+    faqs_link: faqs_link
   },
   production: {
     api: {
@@ -32,7 +35,8 @@ const config = Object.assign({
       },
     },
     monitor_link: monitor_link,
-    footnote: footnote
+    footnote: footnote,
+    faqs_link: faqs_link
   },
 });
 

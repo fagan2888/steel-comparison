@@ -20,7 +20,7 @@ const Footnote = ({params, total}) => {
   const units = params.flow_type === "QTY" ? " metric tons" : " U.S. dollars";
 
   return (
-    <p className="graph_footnote"> 
+    <p className="explorer__graph-footnote"> 
       {config.footnote + "  Trade covered in the table is " + parseFloat(total.toFixed(2)).toLocaleString() + units + "."}
     </p> 
   );
@@ -51,7 +51,7 @@ const ProductGroupPie = ({ data, params, last_updated, time_period }) => {
 
   return  (
     <div>
-      <h3 className="chart_title">{chartTitle}</h3>
+      <h3 className="explorer__chart-title">{chartTitle}</h3>
       <PieGraph data_values={data_values} labels={labels} time_period={time_period} />
       <Footnote params={params} total={total}/>
     </div>

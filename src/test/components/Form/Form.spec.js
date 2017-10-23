@@ -1,17 +1,27 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import { DashboardForm } from '../../../components/Form/Form'
+import { mount } from 'enzyme'
+import ConnectedForm from '../../../components/Form/Form'
 import test_data from './test_data'
 import sinon from 'sinon'
 
-describe('DashboardForm', () => {
-  const handleSubmit = sinon.spy()
-  const dispatch = sinon.spy()
+import { reducer as formReducer } from 'redux-form'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import Select from 'react-select'
+
+describe('ConnectedForm', () => {
+  let dispatch = sinon.spy()
+  let handleSubmit = sinon.spy()
 
   function setup() {
     const props = test_data
     const form_values = {}
-    const wrapper = shallow(<DashboardForm {...props} formValues={form_values} handleSubmit={handleSubmit} dispatch={dispatch} />)
+    const store = createStore(combineReducers({ form: formReducer }))
+    const wrapper = mount(
+      <Provider store={store}>
+        <ConnectedForm {...props} handleSubmit={handleSubmit} dispatch={dispatch} />
+      </Provider>
+    )
 
     return {
       props,
@@ -19,9 +29,9 @@ describe('DashboardForm', () => {
     }
   }
 
-  it('should render the form with select dropdowns in the correct order', () => {
+  it('should render the select dropdowns in the correct order', () => {
     const { wrapper } = setup()
-    let field_array = wrapper.find('Field')
+    const field_array = wrapper.find('Select')
 
     expect(field_array.length).toEqual(5);
     expect(field_array.nodes[0].props.name).toEqual('tradeFlow');
@@ -31,10 +41,28 @@ describe('DashboardForm', () => {
     expect(field_array.nodes[4].props.name).toEqual('partnerCountries');
   })
 
+  it('should render the select dropdowns with the correct initial values', () => {
+    const { wrapper } = setup()
+    const field_array = wrapper.find('Select')
+
+    expect(field_array.length).toEqual(5);
+    expect(field_array.nodes[0].props.value).toEqual('IMP');
+    expect(field_array.nodes[1].props.value).toEqual('All Steel Mill Products');
+    expect(field_array.nodes[2].props.value).toEqual('United States');
+    expect(field_array.nodes[3].props.value).toEqual('QTY');
+    expect(field_array.nodes[4].props.value).toEqual('World');
+  })
+
   it('should handle a Trade Flow change as expected', () => {
     const { wrapper } = setup()
-    const form = wrapper.find('form')
-    //form.handleTradeFlowChange('val')
+    const trade_flow_select = wrapper.find(Select).findWhere(n => {
+        return n.node.props && n.node.props.name === 'tradeFlow'
+    })
+    console.log(trade_flow_select.node.props.value)
+    //console.log(trade_flow_select.debug())
+    trade_flow_select.find('.Select-control').simulate('keyDown', {keyCode: 40})
+    trade_flow_select.find('.Select-control').simulate('keyDown', {keyCode: 13})
+    console.log(trade_flow_select.node.props.value)
     //expect(dispatch.callCount).toEqual(4)
   })
 

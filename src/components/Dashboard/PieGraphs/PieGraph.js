@@ -72,7 +72,7 @@ const PieGraph = ({ data_values, labels, time_period}) => {
       }
 
   return  (
-    <div className="pie_graph">
+    <div className="explorer__pie-graph">
       <Pie data={chartData} options={chartOptions} />
     </div>
   );

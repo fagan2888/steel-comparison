@@ -62,7 +62,7 @@ const HorizontalBarGraph = ({ data_entries, labels, params, time_periods }) => {
     }
 
   return  (
-    <div className="bar_graph">
+    <div className="explorer__bar-graph">
       <HorizontalBar key={chart_key} data={chartData} options={chartOptions} />
     </div>
   );

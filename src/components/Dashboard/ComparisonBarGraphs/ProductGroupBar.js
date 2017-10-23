@@ -16,7 +16,7 @@ function chartTitle(params) {
 
 function footnote(){
   return (
-    <p className="graph_footnote"> 
+    <p className="explorer__graph-footnote"> 
       {config.footnote + "  Partner countries are sorted by most recent time period."}
     </p> 
   );
@@ -37,7 +37,7 @@ const ProductGroupBar = ({ result, params, time_periods }) => {
 
   return  (
     <div>
-      <h3 className="chart_title">{chartTitle(params)}</h3>
+      <h3 className="explorer__chart-title">{chartTitle(params)}</h3>
 
       <HorizontalBarGraph 
         data_entries={data_entries} 

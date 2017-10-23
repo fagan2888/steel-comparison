@@ -152,7 +152,7 @@ class DashboardForm extends React.Component {
               }/>
             </div>
             <div className="explorer__form__group">
-              <button className="button explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
+              <button className="explorer__button explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
                 Generate Dashboard
               </button>
             </div>
