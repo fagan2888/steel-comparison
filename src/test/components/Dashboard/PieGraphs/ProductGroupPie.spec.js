@@ -3,6 +3,10 @@ import { mount } from 'enzyme'
 import ProductGroupPie from '../../../../components/Dashboard/PieGraphs/ProductGroupPie'
 import test_data from '../test_data'
 
+jest.mock('react-chartjs-2', () => ({
+  Pie: () => null,
+}))
+
 function setup() {
   const props = {}
   props.query = test_data.query
@@ -11,10 +15,6 @@ function setup() {
   props.time_period = 'ytd_2017'
 
   const wrapper = mount(<ProductGroupPie {...props} />)
-
-  jest.mock('react-chartjs-2', () => ({
-    Pie: () => null,
-  }))
 
   return {
     props,

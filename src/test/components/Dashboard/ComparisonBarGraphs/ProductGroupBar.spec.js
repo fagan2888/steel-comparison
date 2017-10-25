@@ -3,13 +3,13 @@ import { mount } from 'enzyme'
 import ProductGroupBar from '../../../../components/Dashboard/ComparisonBarGraphs/ProductGroupBar'
 import test_data from '../test_data'
 
+jest.mock('react-chartjs-2', () => ({
+  HorizontalBar: () => null,
+}))
+
 function setup() {
   const time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017']
   const wrapper = mount(<ProductGroupBar data={test_data.dashboardData} query={test_data.query} time_periods={time_periods} />)
-
-  jest.mock('react-chartjs-2', () => ({
-    HorizontalBar: () => null,
-  }))
 
   return {
     wrapper

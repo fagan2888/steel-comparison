@@ -42,12 +42,10 @@ class App extends React.Component {
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
     let message, yearly, comparisons, pies, download_button;
-    if (results.isFetching) 
+    if (results.isFetching || isEmpty(results.dashboardData)) 
       message = null;
     else if (results.error != "") 
       message = <div className="explorer__result">{results.error}</div>;
-    else if (isEmpty(results.dashboardData))
-      message = <h3> Choose a search option from each field to generate a report </h3>;
     else {
       yearly = <YearlyBarGraph data={results.dashboardData} query={results.query} />;
       comparisons = <ComparisonBarGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />;

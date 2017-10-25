@@ -3,12 +3,12 @@ import { mount } from 'enzyme'
 import YearlyBarGraph from '../../../components/Dashboard/YearlyBarGraph'
 import test_data from './test_data'
 
+jest.mock('react-chartjs-2', () => ({
+  Bar: () => null,
+}))
+
 function setup() {
   const wrapper = mount(<YearlyBarGraph data={test_data.dashboardData} query={test_data.query} />)
-
-  jest.mock('react-chartjs-2', () => ({
-    Bar: () => null,
-  }))
 
   return {
     wrapper

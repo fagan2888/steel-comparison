@@ -23,10 +23,9 @@ function footnote(last_updated) {
 }
 
 const YearlyBarGraph = ({ data, query }) => {
-  const graph_data = data.product_group_entry;
   const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
 
-  const data_entry = graph_data.find((element) => {
+  const data_entry = data.product_group_entry.find((element) => {
     return element.partner_country === query.partner_countries
   });
 
