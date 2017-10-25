@@ -4,15 +4,13 @@ import YearlyBarGraph from '../../../components/Dashboard/YearlyBarGraph'
 import test_data from './test_data'
 
 function setup() {
-  const props = test_data
-  const wrapper = mount(<YearlyBarGraph {...props} />)
+  const wrapper = mount(<YearlyBarGraph data={test_data.dashboardData} query={test_data.query} />)
 
   jest.mock('react-chartjs-2', () => ({
     Bar: () => null,
   }))
 
   return {
-    props,
     wrapper
   }
 }
@@ -21,9 +19,9 @@ describe('components', () => {
   describe('YearlyBarGraph', () => {
     it('should render the graph title', () => {
       const { wrapper } = setup()
-  
+
       const heading = wrapper.find('h3')
-      expect(heading.hasClass('chart_title')).toBe(true)
+      expect(heading.hasClass('explorer__chart-title')).toBe(true)
       expect(heading.text()).toBe('United States Imports from World of All Steel Mill Products in Thousands of Metric Tons')
     })
 
@@ -77,7 +75,7 @@ describe('components', () => {
       const { wrapper } = setup()
 
       const footnote = wrapper.find('p')
-      expect(footnote.hasClass('graph_footnote')).toBe(true)
+      expect(footnote.hasClass('explorer__graph-footnote')).toBe(true)
       expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.  Updated on 09-14-2017.")
     })
   })

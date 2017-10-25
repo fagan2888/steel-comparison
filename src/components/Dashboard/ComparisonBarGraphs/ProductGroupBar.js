@@ -6,11 +6,11 @@ import config from '../../../config';
 import HorizontalBarGraph from './HorizontalBarGraph';
 import { compare } from '../sort';
 
-function chartTitle(params) {
-  let units = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
-  let flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
+function chartTitle(query) {
+  let units = query.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  let flow = query.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
-  const chartTitle = params.reporter_countries + flow + 'Top 5 Trading Countries of ' + params.product_groups + ' in ' + units;
+  const chartTitle = query.reporter_countries + flow + 'Top 5 Trading Countries of ' + query.product_groups + ' in ' + units;
   return chartTitle;
 }
 
@@ -22,14 +22,14 @@ function footnote(){
   );
 }
 
-const ProductGroupBar = ({ result, params, time_periods }) => {
-  let data = result.product_group_entry;
+const ProductGroupBar = ({ data, query, time_periods }) => {
+  let graph_data = data.product_group_entry;
 
-  data = data.filter(function(entry) {
+  graph_data = graph_data.filter(function(entry) {
     return (entry.partner_country !== "World" && entry.partner_country !== "Other Countries");
   });
 
-  const data_entries = data.sort(compare(time_periods[time_periods.length-1])).slice(0, 5);
+  const data_entries = graph_data.sort(compare(time_periods[time_periods.length-1])).slice(0, 5);
 
   const labels = map(data_entries, (entry) => {
     return entry.partner_country;
@@ -37,12 +37,12 @@ const ProductGroupBar = ({ result, params, time_periods }) => {
 
   return  (
     <div>
-      <h3 className="explorer__chart-title">{chartTitle(params)}</h3>
+      <h3 className="explorer__chart-title">{chartTitle(query)}</h3>
 
       <HorizontalBarGraph 
         data_entries={data_entries} 
         labels={labels} 
-        params={params}
+        query={query}
         time_periods={time_periods}
       />
 

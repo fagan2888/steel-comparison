@@ -55,19 +55,11 @@ describe('ConnectedForm', () => {
 
   it('should handle a Trade Flow change as expected', () => {
     const { wrapper } = setup()
-    const trade_flow_select = wrapper.find(Select).findWhere(n => {
-        return n.node.props && n.node.props.name === 'tradeFlow'
-    })
-    console.log(trade_flow_select.node.props.value)
-    //console.log(trade_flow_select.debug())
-    trade_flow_select.find('.Select-control').simulate('keyDown', {keyCode: 40})
-    trade_flow_select.find('.Select-control').simulate('keyDown', {keyCode: 13})
-    console.log(trade_flow_select.node.props.value)
-    //expect(dispatch.callCount).toEqual(4)
+    // Not sure how to test this
   })
 
   it('should handle a Reporting Country change as expected', () => {
-
+    // Not sure how to test this
   })
 
   it('should handle a Submit as expected', () => {
@@ -76,5 +68,4 @@ describe('ConnectedForm', () => {
     form.simulate('submit')
     expect(handleSubmit.callCount).toEqual(1)
   })
-
 })

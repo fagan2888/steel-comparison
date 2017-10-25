@@ -1,12 +1,12 @@
 export default {
-  params: {
+  query: {
     flow_type: 'QTY',
     partner_countries: 'World',
     product_groups: 'All Steel Mill Products',
     reporter_countries: 'United States',
     trade_flow: 'IMP'
   },
-  result: {
+  dashboardData: {
     product_group_entry: [
       {
         id: "b5267aab1090bb6742be74df2a0f3eefc39c2c49",
@@ -21,10 +21,8 @@ export default {
         sum_2014: 40286099.005,
         sum_2015: 35375273.193,
         sum_2016: 30065048.132,
-        sum_2017: null,
         ytd_2016: 14191373.622,
         ytd_2017: 17852770.025,
-        ytd_2018: null,
         percent_change_ytd: 25.8001550838,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -42,10 +40,8 @@ export default {
         sum_2014: 20173.718,
         sum_2015: 14982.377,
         sum_2016: 17358.388,
-        sum_2017: null,
         ytd_2016: 7893.024,
         ytd_2017: 17291.64,
-        ytd_2018: null,
         percent_change_ytd: 119.074970506,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -63,10 +59,8 @@ export default {
         sum_2014: 25901.74,
         sum_2015: 19.06,
         sum_2016: 10014.259,
-        sum_2017: null,
         ytd_2016: 139.855,
         ytd_2017: 65923.313,
-        ytd_2018: null,
         percent_change_ytd: 47036.9010761,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -84,10 +78,8 @@ export default {
         sum_2014: 114509.999,
         sum_2015: 34347.314,
         sum_2016: 47960.39,
-        sum_2017: null,
         ytd_2016: 18090.754,
         ytd_2017: 25447.805,
-        ytd_2018: null,
         percent_change_ytd: 40.6674647171,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -105,10 +97,8 @@ export default {
         sum_2014: 2964.726,
         sum_2015: 4007.503,
         sum_2016: 14401.248,
-        sum_2017: null,
         ytd_2016: 3838.477,
         ytd_2017: 14267.045,
-        ytd_2018: null,
         percent_change_ytd: 271.685045918,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -126,10 +116,8 @@ export default {
         sum_2014: 3365430.911,
         sum_2015: 2481159.223,
         sum_2016: 2730494.507,
-        sum_2017: null,
         ytd_2016: 1245010.933,
         ytd_2017: 1582769.391,
-        ytd_2018: null,
         percent_change_ytd: 27.12895518,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -149,10 +137,8 @@ export default {
         sum_2014: 15113970.345,
         sum_2015: 14308996.302,
         sum_2016: 12216668.735,
-        sum_2017: null,
         ytd_2016: 5722779.542,
         ytd_2017: 6123077.763,
-        ytd_2018: null,
         percent_change_ytd: 6.99482162579,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -170,10 +156,8 @@ export default {
         sum_2014: 7822459.855,
         sum_2015: 6333979.097,
         sum_2016: 4087081.663,
-        sum_2017: null,
         ytd_2016: 2010641.806,
         ytd_2017: 3487212.906,
-        ytd_2018: null,
         percent_change_ytd: 73.4377995918,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -191,10 +175,8 @@ export default {
         sum_2014: 40286099.005,
         sum_2015: 35375273.193,
         sum_2016: 30065048.132,
-        sum_2017: null,
         ytd_2016: 14191373.622,
         ytd_2017: 17852770.025,
-        ytd_2018: null,
         percent_change_ytd: 25.8001550838,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -212,10 +194,8 @@ export default {
         sum_2014: 6830865.196,
         sum_2015: 7264279.857,
         sum_2016: 6937698.23,
-        sum_2017: null,
         ytd_2016: 3468703.841,
         ytd_2017: 3672688.609,
-        ytd_2018: null,
         percent_change_ytd: 5.88072021569,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -233,10 +213,8 @@ export default {
         sum_2014: 9446777.504,
         sum_2015: 6456720.94,
         sum_2016: 5941492.25,
-        sum_2017: null,
         ytd_2016: 2556760.115,
         ytd_2017: 4092422.476,
-        ytd_2018: null,
         percent_change_ytd: 60.0628252917,
         ytd_end_month: "Jun",
         trade_flow: "IMP"
@@ -254,10 +232,8 @@ export default {
         sum_2014: 1072026.105,
         sum_2015: 1011296.997,
         sum_2016: 882107.254,
-        sum_2017: null,
         ytd_2016: 432488.318,
         ytd_2017: 477368.271,
-        ytd_2018: null,
         percent_change_ytd: 10.3771480366,
         ytd_end_month: "Jun",
         trade_flow: "IMP"

@@ -4,16 +4,14 @@ import ProductGroupBar from '../../../../components/Dashboard/ComparisonBarGraph
 import test_data from '../test_data'
 
 function setup() {
-  const props = test_data
-  props.time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017']
-  const wrapper = mount(<ProductGroupBar {...props} />)
+  const time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017']
+  const wrapper = mount(<ProductGroupBar data={test_data.dashboardData} query={test_data.query} time_periods={time_periods} />)
 
   jest.mock('react-chartjs-2', () => ({
     HorizontalBar: () => null,
   }))
 
   return {
-    props,
     wrapper
   }
 }
@@ -24,7 +22,7 @@ describe('components', () => {
       const { wrapper } = setup()
   
       const heading = wrapper.find('h3')
-      expect(heading.hasClass('chart_title')).toBe(true)
+      expect(heading.hasClass('explorer__chart-title')).toBe(true)
       expect(heading.text()).toBe('United States Imports from Top 5 Trading Countries of All Steel Mill Products in Thousands of Metric Tons')
     })
 
@@ -44,10 +42,8 @@ describe('components', () => {
            sum_2014: 3365430.911,
            sum_2015: 2481159.223,
            sum_2016: 2730494.507,
-           sum_2017: null,
            ytd_2016: 1245010.933,
            ytd_2017: 1582769.391,
-           ytd_2018: null,
            percent_change_ytd: 27.12895518,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -63,10 +59,8 @@ describe('components', () => {
            sum_2014: 25901.74,
            sum_2015: 19.06,
            sum_2016: 10014.259,
-           sum_2017: null,
            ytd_2016: 139.855,
            ytd_2017: 65923.313,
-           ytd_2018: null,
            percent_change_ytd: 47036.9010761,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -82,10 +76,8 @@ describe('components', () => {
            sum_2014: 114509.999,
            sum_2015: 34347.314,
            sum_2016: 47960.39,
-           sum_2017: null,
            ytd_2016: 18090.754,
            ytd_2017: 25447.805,
-           ytd_2018: null,
            percent_change_ytd: 40.6674647171,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -101,10 +93,8 @@ describe('components', () => {
            sum_2014: 20173.718,
            sum_2015: 14982.377,
            sum_2016: 17358.388,
-           sum_2017: null,
            ytd_2016: 7893.024,
            ytd_2017: 17291.64,
-           ytd_2018: null,
            percent_change_ytd: 119.074970506,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' },
@@ -120,10 +110,8 @@ describe('components', () => {
            sum_2014: 2964.726,
            sum_2015: 4007.503,
            sum_2016: 14401.248,
-           sum_2017: null,
            ytd_2016: 3838.477,
            ytd_2017: 14267.045,
-           ytd_2018: null,
            percent_change_ytd: 271.685045918,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' } ]
@@ -137,7 +125,7 @@ describe('components', () => {
       const { wrapper } = setup()
 
       const footnote = wrapper.find('p')
-      expect(footnote.hasClass('graph_footnote')).toBe(true)
+      expect(footnote.hasClass('explorer__graph-footnote')).toBe(true)
       expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.  Partner countries are sorted by most recent time period.")
     })
   })

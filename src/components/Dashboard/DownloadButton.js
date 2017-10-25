@@ -15,6 +15,22 @@ const DownloadButton = ( {results} ) => {
 export default DownloadButton;
 
 function downloadReports(results){
+  const csv_string = buildCSV(results);
+  //const blob = new Blob([csv_string], {type: "text/plain;charset=utf-8"});
+  //FileSaver.saveAs(blob, "steel-data.csv");
+}
+
+function transformKeys(keys){
+  return map(keys, key =>{
+    if (key.includes('sum'))
+      key = key.replace('sum_', '');
+    if (key === 'flow_type')
+      key = 'Quantity (in metric tons) or Value (in USD)';
+    return key;
+  });
+}
+
+export function buildCSV(results){
   const data = results.dashboardData;
   let keys = Object.keys(omit(data.product_group_entry[0], ['id', 'percent_change_ytd']));
   keys = transformKeys(keys);
@@ -31,16 +47,5 @@ function downloadReports(results){
   for (let i in data.partner_country_entry) {
     csv_string += values(omit(data.partner_country_entry[i], ['id', 'percent_change_ytd'])).join(',') + '\n';
   }
-  const blob = new Blob([csv_string], {type: "text/plain;charset=utf-8"});
-  FileSaver.saveAs(blob, "steel-data.csv");
-}
-
-function transformKeys(keys){
-  return map(keys, key =>{
-    if (key.includes('sum'))
-      key = key.replace('sum_', '');
-    if (key === 'flow_type')
-      key = 'Quantity (in metric tons) or Value (in USD)';
-    return key;
-  });
+  return csv_string;
 }

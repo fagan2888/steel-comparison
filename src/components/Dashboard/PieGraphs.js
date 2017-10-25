@@ -30,11 +30,11 @@ class PieGraphs extends React.Component {
             </form>
           </div>
 
-          <ProductGroupPie data={this.props.result.product_group_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
+          <ProductGroupPie data={this.props.data.product_group_entry} query={this.props.query} last_updated={this.props.data.source_last_updated} time_period={this.state.time_period} />
         </div>
         
         <div className="pure-u-1 pure-u-xl-1-2 explorer__pie-graph explorer__second-graph">
-          <PartnerCountryPie data={this.props.result.partner_country_entry} params={this.props.query} last_updated={this.props.result.source_last_updated} time_period={this.state.time_period} />
+          <PartnerCountryPie data={this.props.data.partner_country_entry} query={this.props.query} last_updated={this.props.data.source_last_updated} time_period={this.state.time_period} />
         </div>
       </div>
     );

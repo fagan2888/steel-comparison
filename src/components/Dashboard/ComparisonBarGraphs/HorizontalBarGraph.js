@@ -5,7 +5,7 @@ import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2';
 import { ComparisonBarColors } from '../GraphColors';
 
-const HorizontalBarGraph = ({ data_entries, labels, params, time_periods }) => {
+const HorizontalBarGraph = ({ data_entries, labels, query, time_periods }) => {
   const ytd_label = 'YTD ' + data_entries[0].ytd_end_month + ' ';
 
   const datasets = map(time_periods, (time_period, i) => {
@@ -27,7 +27,7 @@ const HorizontalBarGraph = ({ data_entries, labels, params, time_periods }) => {
     datasets: datasets
   };
   
-  const x_axis_label = params.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  const x_axis_label = query.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
   const chartOptions = {
         title: {
             display: false

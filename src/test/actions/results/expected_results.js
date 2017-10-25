@@ -1,5 +1,5 @@
 export default {
-    dashboardData: {
+    dashboard_data: {
         product_group_entry: [
             {
                 id: "5b0f7c69ca148f7d43dcb543dff0232381de9d06",
@@ -14,10 +14,8 @@ export default {
                 sum_2014: 20173.718,
                 sum_2015: 14982.377,
                 sum_2016: 17358.388,
-                sum_2017: null,
                 ytd_2016: 7893.024,
                 ytd_2017: 17291.64,
-                ytd_2018: null,
                 percent_change_ytd: 119.074970506,
                 ytd_end_month: "Jun",
                 trade_flow: "IMP"
@@ -35,10 +33,8 @@ export default {
                 sum_2014: 25901.74,
                 sum_2015: 19.06,
                 sum_2016: 10014.259,
-                sum_2017: null,
                 ytd_2016: 139.855,
                 ytd_2017: 65923.313,
-                ytd_2018: null,
                 percent_change_ytd: 47036.9010761,
                 ytd_end_month: "Jun",
                 trade_flow: "IMP"
@@ -58,10 +54,8 @@ export default {
                 sum_2014: 15113970.345,
                 sum_2015: 14308996.302,
                 sum_2016: 12216668.735,
-                sum_2017: null,
                 ytd_2016: 5722779.542,
                 ytd_2017: 6123077.763,
-                ytd_2018: null,
                 percent_change_ytd: 6.99482162579,
                 ytd_end_month: "Jun",
                 trade_flow: "IMP"
@@ -79,10 +73,8 @@ export default {
                 sum_2014: 7822459.855,
                 sum_2015: 6333979.097,
                 sum_2016: 4087081.663,
-                sum_2017: null,
                 ytd_2016: 2010641.806,
                 ytd_2017: 3487212.906,
-                ytd_2018: null,
                 percent_change_ytd: 73.4377995918,
                 ytd_end_month: "Jun",
                 trade_flow: "IMP"

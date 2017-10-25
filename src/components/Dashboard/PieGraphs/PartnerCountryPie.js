@@ -7,17 +7,17 @@ import { PieColors } from '../GraphColors';
 import config from '../../../config';
 import { compare } from '../sort';
 
-function buildTitle(params, ytd_end_month, time_period) {
-  const units = params.flow_type === "QTY" ? "Metric Tons" : "U.S. Dollars";
-  const flow = params.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
+function buildTitle(query, ytd_end_month, time_period) {
+  const units = query.flow_type === "QTY" ? "Metric Tons" : "U.S. Dollars";
+  const flow = query.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
   const ytd_label = 'YTD ' + ytd_end_month + ' ';
 
-  const chart_title = 'Share of ' + params.reporter_countries + flow + params.partner_countries + ' by Product in ' + units + ' - ' + time_period.replace('sum_', '').replace('ytd_', ytd_label);
+  const chart_title = 'Share of ' + query.reporter_countries + flow + query.partner_countries + ' by Product in ' + units + ' - ' + time_period.replace('sum_', '').replace('ytd_', ytd_label);
   return chart_title;
 }
 
-const Footnote = ({params, total}) => {
-  const units = params.flow_type === "QTY" ? " metric tons" : " U.S. dollars";
+const Footnote = ({query, total}) => {
+  const units = query.flow_type === "QTY" ? " metric tons" : " U.S. dollars";
 
   return (
     <p className="explorer__graph-footnote"> 
@@ -26,8 +26,8 @@ const Footnote = ({params, total}) => {
   );
 }
 
-const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
-  const chartTitle = buildTitle(params, data[0].ytd_end_month, time_period);
+const PartnerCountryPie = ({ data, query, last_updated, time_period }) => {
+  const chartTitle = buildTitle(query, data[0].ytd_end_month, time_period);
 
   const data_entries = data.sort(compare(time_period)).slice();
   const total_entry = remove(data_entries, function(n) {
@@ -51,7 +51,7 @@ const PartnerCountryPie = ({ data, params, last_updated, time_period }) => {
     <div>
       <h3 className="explorer__chart-title">{chartTitle}</h3>
       <PieGraph data_values={data_values} labels={labels} time_period={time_period} />
-      <Footnote params={params} total={total}/>
+      <Footnote query={query} total={total}/>
     </div>
   );
 }

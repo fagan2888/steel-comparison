@@ -20,13 +20,13 @@ export function receiveFailure(error) {
 
 export function receiveResults(payload, params) {
   const results = {};
+
+  payload.product_group_entry = removeNullValues(payload.product_group_entry);
+  payload.partner_country_entry = removeNullValues(payload.partner_country_entry);
   // Grab the time period fields from one of the result entries: 
-  const time_periods = compact(map(extractTimePeriods(payload.product_group_entry[0]).sort(), time_period => {
-    if(payload.product_group_entry[0][time_period] == null)
-      return null;
-    return {label: startCase(time_period.replace('sum_', '')).toUpperCase(), value: time_period}
-  }));
-  results.dashboardData = payload;
+  const time_periods = extractTimePeriods(payload.product_group_entry[0]).sort();
+
+  results.dashboard_data = payload;
   results.time_periods = time_periods;
 
   results.query = params;
@@ -40,7 +40,7 @@ function aggregateResults(json, params, offset, agg_results) {
   const results = {};
   results.product_group_entry = json[0].results;
   results.partner_country_entry = json[1].results;
-
+  // Catch any possible errors, even though dynamic form options should prevent these from ever being seen:
   if (results.product_group_entry.length == 0 && results.partner_country_entry == 0)
     return receiveFailure('No results found for this Trade Flow and Reporter Country combination.' );
   else if (results.partner_country_entry == 0)
@@ -95,11 +95,24 @@ function shouldFetchResults(state) {
   return true;
 }
 
+function removeNullValues(entry_array){
+  return compact(map(entry_array, entry => {
+    let no_nulls_entry = {};
+    for (let key in entry){
+      if (entry[key]!= null)
+        no_nulls_entry[key] = entry[key];
+    }
+    return no_nulls_entry;
+  }));
+}
+
 function extractTimePeriods(result){
   const time_periods = [];
   for (let key in result){
-    if (/[0-9]{4}/.test(key))
-      time_periods.push(key);
+    if (/[0-9]{4}/.test(key)){
+      let time_period_option = {label: startCase(key.replace('sum_', '')).toUpperCase(), value: key}
+      time_periods.push(time_period_option);
+    }
   }
   return time_periods;
 }

@@ -22,7 +22,7 @@ export function results(state = {
   case RECEIVE_RESULTS:
     return Object.assign({}, state, {
       isFetching: false,
-      dashboardData: action.results.dashboardData,
+      dashboardData: action.results.dashboard_data,
       timePeriods: action.results.time_periods,
       query: action.results.query
     });

@@ -5,9 +5,9 @@ import test_data from '../test_data'
 
 function setup() {
   const props = {}
-  props.params = test_data.params
-  props.data = test_data.result.product_group_entry
-  props.last_updated = test_data.result.source_last_updated
+  props.query = test_data.query
+  props.data = test_data.dashboardData.product_group_entry
+  props.last_updated = test_data.dashboardData.source_last_updated
   props.time_period = 'ytd_2017'
 
   const wrapper = mount(<ProductGroupPie {...props} />)
@@ -28,7 +28,7 @@ describe('components', () => {
       const { wrapper } = setup()
   
       const heading = wrapper.find('h3')
-      expect(heading.hasClass('chart_title')).toBe(true)
+      expect(heading.hasClass('explorer__chart-title')).toBe(true)
       expect(heading.text()).toBe('Share of United States Imports from Top 5 Partner Countries of All Steel Mill Products in Metric Tons - YTD Jun 2017')
     })
 
@@ -54,7 +54,7 @@ describe('components', () => {
       const { wrapper } = setup()
 
       const footnote = wrapper.find('p')
-      expect(footnote.hasClass('graph_footnote')).toBe(true)
+      expect(footnote.hasClass('explorer__graph-footnote')).toBe(true)
       expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Global Trade Atlas sourced from the reporting country's official statistics.  Trade covered in the table is 17,852,770.02 metric tons.")
     })
   })

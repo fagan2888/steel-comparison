@@ -27,18 +27,14 @@ class ComparisonBarGraphs extends React.Component {
 
   render() {
     const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
-    const old_keys = Object.keys(this.props.result.product_group_entry[0]).sort();
-    const keys = compact(map(xor(old_keys, excluded_fields), old_key => {
-      if(this.props.result.product_group_entry[0][old_key] == null)
-        return null;
-      return old_key;
-    }));
+    const old_keys = Object.keys(this.props.data.product_group_entry[0]).sort();
+    const keys = xor(old_keys, excluded_fields);
 
     const first_index = indexOf(keys, this.state.first_interval);
     const second_index = indexOf(keys, this.state.second_interval);
     let date_range = [];
     if (first_index < second_index)
-     date_range = keys.slice(first_index, second_index+1);
+      date_range = keys.slice(first_index, second_index+1);
     else
       date_range = keys.slice(second_index, first_index+1);
 
@@ -54,11 +50,11 @@ class ComparisonBarGraphs extends React.Component {
             </form>
           </div>
         
-          <ProductGroupBar result={this.props.result} params={this.props.query} time_periods={date_range} />
+          <ProductGroupBar data={this.props.data} query={this.props.query} time_periods={date_range} />
         </div>
 
         <div className="pure-u-1 pure-u-xl-1-2 explorer__second-graph">
-          <PartnerCountryBar result={this.props.result} params={this.props.query}  time_periods={date_range} />
+          <PartnerCountryBar data={this.props.data} query={this.props.query}  time_periods={date_range} />
         </div>
       </div>
     );

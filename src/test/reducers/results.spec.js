@@ -46,7 +46,7 @@ describe('form options reducer', () => {
       results({}, {
         type: types.RECEIVE_RESULTS,
         results: {
-          dashboardData: {entry: 'data'},
+          dashboard_data: {entry: 'data'},
           time_periods: ['one', 'two'],
           query: {foo: 'bar'}
         }

@@ -49,9 +49,9 @@ class App extends React.Component {
     else if (isEmpty(results.dashboardData))
       message = <h3> Choose a search option from each field to generate a report </h3>;
     else {
-      yearly = <YearlyBarGraph result={results.dashboardData} params={results.query} />;
-      comparisons = <ComparisonBarGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
-      pies = <PieGraphs result={results.dashboardData} query={results.query} form_options={results.timePeriods} />
+      yearly = <YearlyBarGraph data={results.dashboardData} query={results.query} />;
+      comparisons = <ComparisonBarGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
+      pies = <PieGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />
       download_button = <DownloadButton results={results} />
     }
 
