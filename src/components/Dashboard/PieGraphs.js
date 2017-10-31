@@ -20,7 +20,7 @@ class PieGraphs extends React.Component {
 
   render() {
     return (
-      <div className="third-row pure-u-1 pure-g">
+      <div className="pure-u-1 pure-g">
         <div className="pure-u-1 pure-u-xl-1-2 explorer__primary-graph">
           <div className="explorer__form-content">
             <form className="explorer__form">
@@ -33,7 +33,7 @@ class PieGraphs extends React.Component {
           <ProductGroupPie data={this.props.data.product_group_entry} query={this.props.query} last_updated={this.props.data.source_last_updated} time_period={this.state.time_period} />
         </div>
         
-        <div className="pure-u-1 pure-u-xl-1-2 explorer__pie-graph explorer__second-graph">
+        <div className="pure-u-1 pure-u-xl-1-2 explorer__second-graph">
           <PartnerCountryPie data={this.props.data.partner_country_entry} query={this.props.query} last_updated={this.props.data.source_last_updated} time_period={this.state.time_period} />
         </div>
       </div>

@@ -1,9 +1,46 @@
+  @media print {
+    .pure-u-xl-1-2 {
+      page-break-after: always;
+    }
+
+    #footer {
+      display: none;
+    }
+  }
+
 .explorer {
   font: 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: normal;
-  margin: 0 auto;
+  margin-right: 10px;
+  margin-left: 10px;
   position: relative;
   text-align: left;
+
+  h1, h3 {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.17em;
+  }
+
+  p {
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #234781;
+  }
 
   &__result {
     clear: both;
@@ -16,8 +53,9 @@
   }
 
   &__button {
-    width: 195px;
+    width: 225px;
     font-size: 11px;
+    padding: 8px;
   }
 
   &__button-column {
@@ -26,7 +64,7 @@
   }
 
   &__link-button {
-    margin-left: 45px;
+    margin-left: 15px;
   }
 
   &__form-content{
@@ -60,13 +98,13 @@
   }
 
   &__dashboard-footnote {
-    margin-top: 170px;
+    margin-top: 70px;
     text-align: left;
   }
 
   @media screen and (min-width: 1280px) {
     &__second-graph {
-      padding-top: 100px;
+      padding-top: 107px;
       min-height: 425px;
     }
 
@@ -87,11 +125,11 @@
     min-height: 440px;
   }
 
-  &__first_row {
+  &__first-row {
     max-height: 475px;
   }
 
-  &__yearly_bar {
+  &__yearly-bar {
     padding-top: 20px;
   }
 
@@ -108,12 +146,6 @@
     float: right;
     margin-right: 25px;
     font-size: 16px;
-  }
-
-  @media print {
-    .pure-u-xl-1-2 {
-      page-break-after: always;
-    }
   }
 }
 
