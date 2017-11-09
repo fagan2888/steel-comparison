@@ -42,6 +42,10 @@
     color: #234781;
   }
 
+  legend {
+    display: none;
+  }
+
   &__result {
     clear: both;
     font-size: 11px;

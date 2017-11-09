@@ -9,6 +9,7 @@ const SelectField = ({ description, name, label = 'Untitled', options, onChange,
     <div>
       <Select
         name={name}
+        inputProps={{'id': name}}
         value={default_val}
         options={options}
         multi={false} autoBlur

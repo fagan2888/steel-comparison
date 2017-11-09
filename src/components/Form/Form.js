@@ -18,6 +18,7 @@ const SelectField = ({ input, name, label = 'Untitled', options, meta, handleCha
     <div>
       <Select
         {...input}
+        inputProps={{'id': name}}
         name={name}
         options={options}
         value={input.value}
@@ -84,6 +85,7 @@ class DashboardForm extends React.Component {
     return (
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
+          <legend>Steel Search Form</legend>
 
           <div className="explorer__form__row">
             <div className="explorer__form__group">

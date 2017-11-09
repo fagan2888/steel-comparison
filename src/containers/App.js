@@ -58,19 +58,19 @@ class App extends React.Component {
 
         <div className="pure-u-1 pure-u-xl-1-2 explorer__first-row">
           <div className="explorer__form-content">
-            <h1 className="Header-1"><a href={config.monitor_link}><b>Global Steel Trade Monitor</b></a></h1>
+            <h1 className="Header-1"><a href={config.monitor_link} target="_blank"><b>Global Steel Trade Monitor</b></a></h1>
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
               Click Generate Dashboard to update the graphs and charts.  
             </p>
-            <p> <b>All fields are required.</b> <span className="explorer__faqs-link"><a href={config.faqs_link}><b>FAQs</b></a></span> </p>
+            <p> <b>All fields are required.</b> <span className="explorer__faqs-link"><a href={config.faqs_link} target="_blank"><b>FAQs</b></a></span> </p>
             
             <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
             <div>
               <div className="explorer__button-column">
                 <form>
-                  <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.location.href=config.monitor_link}} >
+                  <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
                     Global Steel Trade Reports
                   </button>
                 </form>
@@ -91,7 +91,7 @@ class App extends React.Component {
         <div className="explorer__dashboard-footnote">
           <p> For Questions </p>
           <p> Steel Import Monitoring and Analysis Team
-          <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202)482-2105</p>
+          <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202) 482-2105</p>
         </div>
       </div>
     );

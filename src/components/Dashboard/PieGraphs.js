@@ -25,6 +25,7 @@ class PieGraphs extends React.Component {
           <div className="explorer__form-content">
             <form className="explorer__form">
               <fieldset>
+                <legend>Pie Graphs Form</legend>
                 <DateSelect name="piePeriod" form_options={this.props.form_options} onChange={this.handleChange} default_val={this.state.time_period} label="Pie Graphs Time Interval" />
               </fieldset>
             </form>

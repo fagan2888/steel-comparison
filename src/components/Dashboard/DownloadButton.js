@@ -16,8 +16,8 @@ export default DownloadButton;
 
 function downloadReports(results){
   const csv_string = buildCSV(results);
-  //const blob = new Blob([csv_string], {type: "text/plain;charset=utf-8"});
-  //FileSaver.saveAs(blob, "steel-data.csv");
+  const blob = new Blob([csv_string], {type: "text/plain;charset=utf-8"});
+  FileSaver.saveAs(blob, "steel-data.csv");
 }
 
 function transformKeys(keys){
