@@ -45,8 +45,9 @@ class ComparisonBarGraphs extends React.Component {
             <form className="explorer__form">
               <fieldset>
                 <legend>Comparison Bar Graphs Form</legend>
-                <DateSelect name="compPeriod1" form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Bar Graphs First  Time Interval" />
-                <DateSelect name="compPeriod2" form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="Bar Graphs Second Time Interval" />
+                <p>Select the date range for the two charts below: </p>
+                <DateSelect name="compPeriod1" form_options={this.props.form_options} onChange={this.handleStartChange} default_val={this.state.first_interval} label="Start Date" />
+                <DateSelect name="compPeriod2" form_options={this.props.form_options} onChange={this.handleEndChange} default_val={this.state.second_interval} label="End Date" />
               </fieldset>
             </form>
           </div>
@@ -54,7 +55,7 @@ class ComparisonBarGraphs extends React.Component {
           <ProductGroupBar data={this.props.data} query={this.props.query} time_periods={date_range} />
         </div>
 
-        <div className="pure-u-1 pure-u-xl-1-2 explorer__second-graph">
+        <div className="pure-u-1 pure-u-xl-1-2 explorer__second-graph-bar">
           <PartnerCountryBar data={this.props.data} query={this.props.query}  time_periods={date_range} />
         </div>
       </div>

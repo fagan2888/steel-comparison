@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase, values } from '../utils/lodash';
 import { stringify } from 'querystring';
-import { DashboardForm, Spinner, DownloadButton, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
+import { DashboardForm, Spinner, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions, requestTradeFlowSubgroups, requestReporterSubgroups } from '../actions';
 import './App.scss';
 import config from '../config.js';
@@ -50,7 +50,6 @@ class App extends React.Component {
       yearly = <YearlyBarGraph data={results.dashboardData} query={results.query} />;
       comparisons = <ComparisonBarGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
       pies = <PieGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />
-      download_button = <DownloadButton results={results} />
     }
 
     return (
@@ -62,23 +61,12 @@ class App extends React.Component {
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
-              Click Generate Dashboard to update the graphs and charts.  
+              Click Generate Dashboard to update the graphs and downloadable data.  
             </p>
             <p> <b>All fields are required.</b> <span className="explorer__faqs-link"><a href={config.faqs_link} target="_blank"><b>FAQs</b></a></span> </p>
             
-            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch}/>
-            <div>
-              <div className="explorer__button-column">
-                <form>
-                  <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
-                    Global Steel Trade Reports
-                  </button>
-                </form>
-              </div>
-              <div className="explorer__button-column">
-                {download_button}
-              </div>
-            </div>
+            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch} results={results}/>
+
             <Spinner active={results.isFetching} />
             {message}
           </div>
@@ -89,6 +77,9 @@ class App extends React.Component {
         {pies}
 
         <div className="explorer__dashboard-footnote">
+          <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
+            Return to Global Steel Trade Reports
+          </button>
           <p> For Questions </p>
           <p> Steel Import Monitoring and Analysis Team
           <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202) 482-2105</p>

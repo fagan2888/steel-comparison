@@ -34,7 +34,8 @@ const HorizontalBarGraph = ({ data_entries, labels, query, time_periods }) => {
         },
         legend: {
             display: true,
-            position: 'right'
+            position: 'right',
+            onClick: function(e){ e.stopPropagation(); }
         },
         tooltips: {
           callbacks: {

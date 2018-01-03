@@ -28,6 +28,7 @@ const PieGraph = ({ data_values, labels, time_period}) => {
         legend: {
             display: true,
             position: 'right',
+            onClick: function(e){ e.stopPropagation(); },
             labels: {
               generateLabels: function(chart) {
               var data = chart.data;

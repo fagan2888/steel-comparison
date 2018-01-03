@@ -6,7 +6,7 @@ const SelectField = ({ description, name, label = 'Untitled', options, onChange,
   <div>
     <label htmlFor={name}>{label}</label>
     {description ? <p>{description}</p> : null}
-    <div>
+    <div className="explorer__form__date_select">
       <Select
         name={name}
         inputProps={{'id': name}}
