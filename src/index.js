@@ -19,5 +19,5 @@ function renderToElement(elementId, options) {
 
 export default renderToElement;
 window.Explorer = {
-  render: renderToElement,
+  render: renderToElement
 };

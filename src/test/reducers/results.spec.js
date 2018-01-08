@@ -1,18 +1,18 @@
-import { results } from '../../reducers/results'
-import * as types from '../../constants'
+import { results } from '../../reducers/results';
+import * as types from '../../constants';
 
 describe('form options reducer', () => {
   it('should return the initial state', () => {
     expect(results(undefined, {})).toEqual(
       {
         isFetching: false,
-        error: "",
+        error: '',
         dashboardData: {},
         timePeriods: [],
         query: {}
       }
-    )
-  })
+    );
+  });
 
   it('should handle REQUEST_RESULTS', () => {
     expect(
@@ -21,25 +21,25 @@ describe('form options reducer', () => {
       })
     ).toEqual(
       {
-        error: "",
+        error: '',
         isFetching: true
       }
-    )
-  })
+    );
+  });
 
   it('should handle RECEIVE_FAILURE', () => {
     expect(
       results({}, {
         type: types.RECEIVE_FAILURE,
-        error: 'Error message.',
+        error: 'Error message.'
       })
     ).toEqual(
       {
         isFetching: false,
         error: 'Error message.'
       }
-    )
-  })
+    );
+  });
 
   it('should handle RECEIVE_RESULTS', () => {
     expect(
@@ -58,7 +58,7 @@ describe('form options reducer', () => {
         timePeriods: ['one', 'two'],
         query: {foo: 'bar'}
       }
-    )
-  })
+    );
+  });
 
-})
+});

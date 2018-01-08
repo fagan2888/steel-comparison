@@ -18,20 +18,20 @@ const initialize_store = {
 
 const form_options_response = {
   aggregations: {
-    trade_flows: [{key: "EXP"}, {key: "IMP"}],
-    flow_types: [{key: "VALUE"}, {key: "QTY"}],
+    trade_flows: [{key: 'EXP'}, {key: 'IMP'}],
+    flow_types: [{key: 'VALUE'}, {key: 'QTY'}]
   }
 };
 
 const trade_flow_response = {
   aggregations: {
-    reporters: [{key: "United States"}, {key: "China"}],
+    reporters: [{key: 'United States'}, {key: 'China'}]
   }
 };
 const reporter_response = {
   aggregations: {
-    partners: [{key: "Canada"}, {key: "Mexico"}],
-    product_groups: [{key: "Flat Products"}, {key: "Long Products"}],
+    partners: [{key: 'Canada'}, {key: 'Mexico'}],
+    product_groups: [{key: 'Flat Products'}, {key: 'Long Products'}]
   }
 };
 
@@ -45,7 +45,7 @@ describe('async actions', () => {
   it('set trade flow and flow type options', () => {
     nock(host)
       .get(`?api_key=${apiKey}&size=1&`)
-      .reply(200, form_options_response)
+      .reply(200, form_options_response);
 
     const store = mockStore(initialize_store);
     const expected_actions = [
@@ -57,7 +57,7 @@ describe('async actions', () => {
         trade_flows: [{label: 'Exports', value: 'EXP'}, {label: 'Imports', value: 'IMP'}],
         flow_types: [{label: 'Quantity (Metric Tons)', value: 'QTY'}, {label: 'Value (US Dollars)', value: 'VALUE'}]
       }
-    ]
+    ];
     return store.dispatch(actions.requestFormOptions()).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
@@ -66,7 +66,7 @@ describe('async actions', () => {
   it('set reporter country options from trade flow', () => {
     nock(host)
       .get(`?api_key=${apiKey}&size=1&trade_flow=IMP`)
-      .reply(200, trade_flow_response)
+      .reply(200, trade_flow_response);
 
     const store = mockStore(initialize_store);
     const expected_actions = [
@@ -77,7 +77,7 @@ describe('async actions', () => {
         type: 'explorer/SET_TRADE_FLOW_SUBGROUPS',
         reporter_countries: [{label: 'China', value: 'China'}, {label: 'United States', value: 'United States'}]
       }
-    ]
+    ];
     return store.dispatch(actions.requestTradeFlowSubgroups('IMP')).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
@@ -86,7 +86,7 @@ describe('async actions', () => {
   it('set partner and product groups options from trade flow and reporter', () => {
     nock(host)
       .get(`?api_key=${apiKey}&size=1&trade_flow=IMP&reporter_countries=China`)
-      .reply(200, reporter_response)
+      .reply(200, reporter_response);
 
     const store = mockStore(initialize_store);
     const expected_actions = [
@@ -98,7 +98,7 @@ describe('async actions', () => {
         partner_countries: [{label: 'Canada', value: 'Canada'}, {label: 'Mexico', value: 'Mexico'}],
         product_groups: [{label: 'Flat Products', value: 'Flat Products'}, {label: 'Long Products', value: 'Long Products'}]
       }
-    ]
+    ];
 
     return store.dispatch(actions.requestReporterSubgroups('IMP', 'China')).then(() => {
       expect(store.getActions()).toEqual(expected_actions);

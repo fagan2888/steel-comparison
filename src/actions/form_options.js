@@ -10,7 +10,7 @@ const { host, apiKey } = config.api.steel;
 
 export function requestOptions() {
   return {
-    type: REQUEST_FORM_OPTIONS,
+    type: REQUEST_FORM_OPTIONS
   };
 }
 
@@ -60,13 +60,13 @@ export function requestReporterSubgroups(trade_flow, reporter_country){
 function fetchResults(query, callback){
   return (dispatch) => {
     dispatch(requestOptions());
-      return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
+    return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
         .then(response => response.json())
         .then(json => dispatch(callback(json)))
         .catch((error) => {
           dispatch(receiveFailure('There was an error connecting to the data source:  ' + error ));
         });
-  }
+  };
 }
 
 function extractOptions(aggregations){
@@ -80,8 +80,8 @@ function extractOptions(aggregations){
 function extractPartnerCountries(partners){
   let world_option = {};
   let partner_countries = compact(map(partners, obj => { 
-    if (obj['key'] === "World"){
-      world_option = {label: "All Countries", value: obj['key']};
+    if (obj['key'] === 'World'){
+      world_option = {label: 'All Countries', value: obj['key']};
       return null;
     }
     else

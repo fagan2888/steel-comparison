@@ -7,14 +7,14 @@ import moment from 'moment';
 
 export function requestResults() {
   return {
-    type: REQUEST_RESULTS,
+    type: REQUEST_RESULTS
   };
 }
 
 export function receiveFailure(error) {
   return {
     type: RECEIVE_FAILURE,
-    error,
+    error
   };
 }
 
@@ -32,7 +32,7 @@ export function receiveResults(payload, params) {
   results.query = params;
   return {
     type: RECEIVE_RESULTS,
-    results,
+    results
   };
 }
 
@@ -77,7 +77,7 @@ export function fetchResultsIfNeeded(params) {
     if (isEmpty(omit(params, ['offset', 'size'])))
       return dispatch(receiveResults({})); // Don't return anything if no query is entered
     if(shouldFetchResults(getState())){
-      const agg_results = {results: [], total: 0}
+      const agg_results = {results: [], total: 0};
       return dispatch(fetchResults(params, 0, agg_results));
     }
 
@@ -110,7 +110,7 @@ function extractTimePeriods(result){
   const time_periods = [];
   for (let key in result){
     if (/[0-9]{4}/.test(key)){
-      let time_period_option = {label: startCase(key.replace('sum_', '')).toUpperCase(), value: key}
+      let time_period_option = {label: startCase(key.replace('sum_', '')).toUpperCase(), value: key};
       time_periods.push(time_period_option);
     }
   }

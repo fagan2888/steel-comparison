@@ -9,7 +9,7 @@ const ComparisonBarColors = [
   '#543005',
   '#c7eae5',
   '#003c30' 
-]
+];
 
 const PieColors = [
   '#8c510a',
@@ -18,6 +18,6 @@ const PieColors = [
   '#c7eae5',
   '#5ab4ac',
   '#01665e'
-]
+];
 
 export { ComparisonBarColors, PieColors};

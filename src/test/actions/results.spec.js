@@ -12,7 +12,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const initialize_store = {
   isFetching: false,
-  error: "",
+  error: '',
   dashboardData: {},
   timePeriods: [],
   query: {}
@@ -30,10 +30,10 @@ describe('async actions', () => {
       .get(`?api_key=${apiKey}&size=100&offset=0&flow_type=QTY&partner_countries=World&reporter_countries=United%20States&trade_flow=IMP`)
       .reply(200, partner_country_response)
       .get(`?api_key=${apiKey}&size=100&offset=0&flow_type=QTY&product_groups=All%20Steel%20Mill%20Products&reporter_countries=United%20States&trade_flow=IMP`)
-      .reply(200, product_group_response)
+      .reply(200, product_group_response);
 
     const store = mockStore(initialize_store);
-    const params =  { flow_type: "QTY", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
+    const params =  { flow_type: 'QTY', partner_countries: 'World', product_groups: 'All Steel Mill Products', reporter_countries: 'United States', trade_flow: 'IMP' };
     const expected_actions =  [ 
       { type: 'explorer/REQUEST_RESULTS' },
       { type: 'explorer/RECEIVE_RESULTS',

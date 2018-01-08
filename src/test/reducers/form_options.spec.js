@@ -1,5 +1,5 @@
-import { form_options } from '../../reducers/form_options'
-import * as types from '../../constants'
+import { form_options } from '../../reducers/form_options';
+import * as types from '../../constants';
 
 describe('form options reducer', () => {
   it('should return the initial state', () => {
@@ -12,8 +12,8 @@ describe('form options reducer', () => {
         flowTypes: [],
         tradeFlows: []
       }
-    )
-  })
+    );
+  });
 
   it('should handle REQUEST_FORM_OPTIONS', () => {
     expect(
@@ -24,8 +24,8 @@ describe('form options reducer', () => {
       {
         isFetching: true
       }
-    )
-  })
+    );
+  });
 
   it('should handle SET_FORM_OPTIONS', () => {
     expect(
@@ -40,8 +40,8 @@ describe('form options reducer', () => {
         flowTypes: [{label: 'Value (US Dollars)', value: 'VALUE'}, {label: 'Quantity (Metric Tons)', value: 'QTY'}],
         tradeFlows: [{label: 'Exports', value: 'EXP'}, {label: 'Imports', value: 'IMP'}]
       }
-    )
-  })
+    );
+  });
 
   it('should handle SET_TRADE_FLOW_SUBGROUPS', () => {
     expect(
@@ -54,8 +54,8 @@ describe('form options reducer', () => {
         isFetching: false,
         reporterCountries: [{label: 'United States', value: 'United States'}, {label: 'China', value: 'China'}]
       }
-    )
-  })
+    );
+  });
 
   it('should handle SET_REPORTER_SUBGROUPS', () => {
     expect(
@@ -70,7 +70,7 @@ describe('form options reducer', () => {
         partnerCountries: [{label: 'Exports', value: 'EXP'}, {label: 'Imports', value: 'IMP'}],
         productGroups: [{label: 'Value (US Dollars)', value: 'VALUE'}, {label: 'Quantity (Metric Tons)', value: 'QTY'}]
       }
-    )
-  })
+    );
+  });
 
-})
+});

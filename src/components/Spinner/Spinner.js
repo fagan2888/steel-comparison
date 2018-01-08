@@ -25,7 +25,7 @@ const Spinner = (props) => {
 };
 
 Spinner.propTypes = {
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired
 };
 
 export default Spinner;

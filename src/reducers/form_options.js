@@ -12,7 +12,7 @@ export function form_options(state = {
   switch (action.type) {
   case REQUEST_FORM_OPTIONS:
     return Object.assign({}, state, {
-      isFetching: true,
+      isFetching: true
     });
   case SET_FORM_OPTIONS:
     return Object.assign({}, state, {
@@ -23,13 +23,13 @@ export function form_options(state = {
   case SET_TRADE_FLOW_SUBGROUPS:
     return Object.assign({}, state, {
       isFetching: false,
-      reporterCountries: action.reporter_countries,
+      reporterCountries: action.reporter_countries
     });
   case SET_REPORTER_SUBGROUPS:
     return Object.assign({}, state, {
       isFetching: false,
       partnerCountries: action.partner_countries,
-      productGroups: action.product_groups,
+      productGroups: action.product_groups
     });
   default:
     return state;

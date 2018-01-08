@@ -10,12 +10,12 @@ class PieGraphs extends React.Component {
     super(props);
     this.state = {
       time_period: this.props.form_options[this.props.form_options.length - 1].value
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.setState({time_period: e})
+    this.setState({time_period: e});
   }
 
   render() {

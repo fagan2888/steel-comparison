@@ -1,9 +1,9 @@
 import 'babel-polyfill';
-import { RECEIVE_FAILURE, PAGE_RESULTS, RECEIVE_RESULTS, REQUEST_RESULTS } from '../constants';
+import { RECEIVE_FAILURE, RECEIVE_RESULTS, REQUEST_RESULTS } from '../constants';
 
 export function results(state = {
   isFetching: false,
-  error: "",
+  error: '',
   dashboardData: {},
   timePeriods: [],
   query: {}
@@ -11,13 +11,13 @@ export function results(state = {
   switch (action.type) {
   case REQUEST_RESULTS:
     return Object.assign({}, state, {
-      error: "",
-      isFetching: true,
+      error: '',
+      isFetching: true
     });
   case RECEIVE_FAILURE:
     return Object.assign({}, state, {
       isFetching: false,
-      error: action.error,
+      error: action.error
     });
   case RECEIVE_RESULTS:
     return Object.assign({}, state, {

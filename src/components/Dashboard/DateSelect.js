@@ -23,7 +23,7 @@ SelectField.propTypes = {
   description: PropTypes.string,
   label: PropTypes.string,
   options: PropTypes.array.isRequired,
-  multi: PropTypes.bool,
+  multi: PropTypes.bool
 };
 
 const DateSelect = ({name, form_options, onChange, default_val, label}) => {
@@ -32,6 +32,6 @@ const DateSelect = ({name, form_options, onChange, default_val, label}) => {
       <SelectField name={name} options={form_options} label={label} description="" onChange={onChange} default_val={default_val} />
     </div>
   );
-}
+};
 
 export default DateSelect;

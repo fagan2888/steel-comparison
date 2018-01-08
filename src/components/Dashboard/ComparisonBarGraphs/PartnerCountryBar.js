@@ -7,7 +7,7 @@ import HorizontalBarGraph from './HorizontalBarGraph';
 import { compare } from '../sort';
 
 function chartTitle(query) {
-  const units = query.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  const units = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
   const flow = query.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
   const chart_title = query.reporter_countries + flow + query.partner_countries + ' by Top Steel Products in ' + units;
@@ -17,7 +17,7 @@ function chartTitle(query) {
 function footnote() {
   return (
     <p className="explorer__graph-footnote"> 
-      {config.footnote + "  Product groups are sorted by most recent time period."}
+      {config.footnote + '  Product groups are sorted by most recent time period.'}
     </p> 
   );
 }
@@ -43,6 +43,6 @@ const PartnerCountryBar = ({ data, query, time_periods }) => {
       {footnote()}
     </div>
   );
-}
+};
 
 export default PartnerCountryBar;

@@ -12,7 +12,7 @@ class ComparisonBarGraphs extends React.Component {
     this.state = {
       first_interval: this.props.form_options[this.props.form_options.length - 2].value,
       second_interval: this.props.form_options[this.props.form_options.length - 1].value
-    }
+    };
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
   }

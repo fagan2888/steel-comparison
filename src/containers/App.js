@@ -21,7 +21,7 @@ class App extends React.Component {
     dispatch(fetchResultsIfNeeded(query));
   }
 
-  handleSubmit = (form) => {
+  handleSubmit (form) {
     const params = reduce(omitBy(form, isEmpty), (result, value, _key) => {
       const key = snakeCase(_key);
       return Object.assign(

@@ -6,7 +6,7 @@ import { Bar } from 'react-chartjs-2';
 import config from '../../config';
 
 function chartTitle(query) {
-  let units = query.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  let units = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
   let flow = query.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
 
   const chart_title = query.reporter_countries + flow + query.partner_countries + ' of ' + query.product_groups + ' in ' + units;
@@ -17,7 +17,7 @@ function footnote(last_updated) {
   const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
     <p className="explorer__graph-footnote"> 
-      {config.footnote + "  Updated on " + last_updated_date + "."}
+      {config.footnote + '  Updated on ' + last_updated_date + '.'}
     </p> 
   );
 }
@@ -26,7 +26,7 @@ const YearlyBarGraph = ({ data, query }) => {
   const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
 
   const data_entry = data.product_group_entry.find((element) => {
-    return element.partner_country === query.partner_countries
+    return element.partner_country === query.partner_countries;
   });
 
   const data_values = [];
@@ -50,51 +50,51 @@ const YearlyBarGraph = ({ data, query }) => {
   bar_colors[data_values.length - 2] = '#d8b365';
 
   const datasets = [
-      {
-        label: '',
-        fill: false,
-        backgroundColor:  bar_colors,
-        data: data_values,
-      }
-    ];
+    {
+      label: '',
+      fill: false,
+      backgroundColor:  bar_colors,
+      data: data_values
+    }
+  ];
 
   const chartData = {
     labels: labels,
     datasets: datasets
   };
   
-  const y_axis_label = query.flow_type === "QTY" ? "Thousands of Metric Tons" : "Thousands of U.S. Dollars";
+  const y_axis_label = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
   const chartOptions = {
-        title: {
-            display: false,
-        },
-        legend: {
-            display: false
-        },
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItem, data){
-              return parseFloat(tooltipItem.yLabel.toFixed(2)).toLocaleString()
-            }
+    title: {
+      display: false
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data){
+          return parseFloat(tooltipItem.yLabel.toFixed(2)).toLocaleString();
+        }
+      }
+    },
+    scales: { 
+      yAxes: [{
+        ticks: {
+          maxTicksLimit: 15,
+          beginAtZero: true,
+          userCallback: function(value, index, values) {
+            return parseFloat(value.toFixed(2)).toLocaleString();
           }
         },
-        scales: { 
-          yAxes: [{
-              ticks: {
-                    maxTicksLimit: 15,
-                    beginAtZero: true,
-                    userCallback: function(value, index, values) {
-                      return parseFloat(value.toFixed(2)).toLocaleString();
-                    }
-                  },
-              scaleLabel: {
-                display: true,
-                labelString: y_axis_label
-              }
-            }]
-        },
-        maintainAspectRatio: false
-    }
+        scaleLabel: {
+          display: true,
+          labelString: y_axis_label
+        }
+      }]
+    },
+    maintainAspectRatio: false
+  };
 
   return  (
     <div className="pure-u-1 pure-u-xl-1-2 explorer__first-row explorer__yearly-bar explorer__primary-graph">
@@ -105,6 +105,6 @@ const YearlyBarGraph = ({ data, query }) => {
       {footnote(data.source_last_updated)}
     </div>
   );
-}
+};
 
 export default YearlyBarGraph;

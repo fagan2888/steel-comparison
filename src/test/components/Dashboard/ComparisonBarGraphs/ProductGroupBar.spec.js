@@ -1,33 +1,33 @@
-import React from 'react'
-import { mount } from 'enzyme'
-import ProductGroupBar from '../../../../components/Dashboard/ComparisonBarGraphs/ProductGroupBar'
-import test_data from '../test_data'
+import React from 'react';
+import { mount } from 'enzyme';
+import ProductGroupBar from '../../../../components/Dashboard/ComparisonBarGraphs/ProductGroupBar';
+import test_data from '../test_data';
 
 jest.mock('react-chartjs-2', () => ({
-  HorizontalBar: () => null,
-}))
+  HorizontalBar: () => null
+}));
 
 function setup() {
-  const time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017']
-  const wrapper = mount(<ProductGroupBar data={test_data.dashboardData} query={test_data.query} time_periods={time_periods} />)
+  const time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017'];
+  const wrapper = mount(<ProductGroupBar data={test_data.dashboardData} query={test_data.query} time_periods={time_periods} />);
 
   return {
     wrapper
-  }
+  };
 }
 
 describe('components', () => {
   describe('ProductGroupBar', () => {
     it('should render the graph title', () => {
-      const { wrapper } = setup()
+      const { wrapper } = setup();
   
-      const heading = wrapper.find('h3')
-      expect(heading.hasClass('explorer__chart-title')).toBe(true)
-      expect(heading.text()).toBe('United States Imports from Top 5 Trading Countries of All Steel Mill Products in Thousands of Metric Tons')
-    })
+      const heading = wrapper.find('h3');
+      expect(heading.hasClass('explorer__chart-title')).toBe(true);
+      expect(heading.text()).toBe('United States Imports from Top 5 Trading Countries of All Steel Mill Products in Thousands of Metric Tons');
+    });
 
     it('should render the graph with the correct data and labels', () => {
-      const { wrapper } = setup()
+      const { wrapper } = setup();
       
       expect(wrapper.find('HorizontalBarGraph').props().data_entries).toEqual(
           [ { id: '40f18fa4c89bbefdf38e55e183da2acc20e334f3',
@@ -115,18 +115,18 @@ describe('components', () => {
            percent_change_ytd: 271.685045918,
            ytd_end_month: 'Jun',
            trade_flow: 'IMP' } ]
-        )
+        );
       expect(wrapper.find('HorizontalBarGraph').props().labels).toEqual(
         [ 'Mexico', 'Egypt', 'Finland', 'Colombia', 'Guatemala' ]
-      )
-    })
+      );
+    });
 
     it('should render the footnote', () => {
-      const { wrapper } = setup()
+      const { wrapper } = setup();
 
-      const footnote = wrapper.find('p')
-      expect(footnote.hasClass('explorer__graph-footnote')).toBe(true)
-      expect(footnote.text()).toBe("Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.  Partner countries are sorted by most recent time period.")
-    })
-  })
-})
+      const footnote = wrapper.find('p');
+      expect(footnote.hasClass('explorer__graph-footnote')).toBe(true);
+      expect(footnote.text()).toBe('Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Markit - Global Trade Atlas sourced from the reporting country\'s official statistics.  Partner countries are sorted by most recent time period.');
+    });
+  });
+});

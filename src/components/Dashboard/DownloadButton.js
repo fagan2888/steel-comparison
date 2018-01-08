@@ -6,18 +6,18 @@ import config from '../../config';
 
 const DownloadButton = ( {results} ) => {
   return (
-    <button className="explorer__button explorer__download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results)}}>
+    <button className="explorer__button explorer__download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results);}}>
       Download Dashboard Data
     </button>
   );
-}
+};
 
 export default DownloadButton;
 
 function downloadReports(results){
   const csv_string = buildCSV(results);
-  const blob = new Blob([csv_string], {type: "text/csv;charset=utf-8"});
-  FileSaver.saveAs(blob, "steel-data.csv");
+  const blob = new Blob([csv_string], {type: 'text/csv;charset=utf-8'});
+  FileSaver.saveAs(blob, 'steel-data.csv');
 }
 
 function transformKeys(keys){

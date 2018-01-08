@@ -52,11 +52,6 @@ SelectField.propTypes = {
 };
 
 class DashboardForm extends React.Component {
-  static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    formOptions: PropTypes.object.isRequired,
-    formValues: PropTypes.object.isRequired
-  }
 
   constructor(props) {
     super(props);
@@ -204,6 +199,12 @@ class DashboardForm extends React.Component {
       </form>
     );
   }
+}
+
+DashboardForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  formOptions: PropTypes.object.isRequired,
+  formValues: PropTypes.object.isRequired
 }
 
 export { DashboardForm };

@@ -8,7 +8,7 @@ import config from '../../../config';
 import { compare } from '../sort';
 
 function buildTitle(query, ytd_end_month, time_period) {
-  const units = query.flow_type === "QTY" ? "Metric Tons" : "U.S. Dollars";
+  const units = query.flow_type === 'QTY' ? 'Metric Tons' : 'U.S. Dollars';
   const flow = query.trade_flow === 'EXP' ? ' Exports to ' : ' Imports from ';
   const ytd_label = 'YTD ' + ytd_end_month + ' ';
 
@@ -17,22 +17,22 @@ function buildTitle(query, ytd_end_month, time_period) {
 }
 
 const Footnote = ({query, total}) => {
-  const units = query.flow_type === "QTY" ? " metric tons" : " U.S. dollars";
+  const units = query.flow_type === 'QTY' ? ' metric tons' : ' U.S. dollars';
 
   return (
     <p className="explorer__graph-footnote"> 
-      {config.footnote + "  Trade covered in the table is " + parseFloat(total.toFixed(2)).toLocaleString() + units + "."}
+      {config.footnote + '  Trade covered in the table is ' + parseFloat(total.toFixed(2)).toLocaleString() + units + '.'}
     </p> 
   );
-}
+};
 
 const PartnerCountryPie = ({ data, query, last_updated, time_period }) => {
   const chartTitle = buildTitle(query, data[0].ytd_end_month, time_period);
 
   const data_entries = data.sort(compare(time_period)).slice();
   const total_entry = remove(data_entries, function(n) {
-         return n.product_group === 'All Steel Mill Products';
-       });
+    return n.product_group === 'All Steel Mill Products';
+  });
 
   const total = total_entry[0][time_period];
 
@@ -54,6 +54,6 @@ const PartnerCountryPie = ({ data, query, last_updated, time_period }) => {
       <Footnote query={query} total={total}/>
     </div>
   );
-}
+};
 
 export default PartnerCountryPie;

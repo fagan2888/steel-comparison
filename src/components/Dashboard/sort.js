@@ -5,7 +5,7 @@ function compare(prop) {
     if (a[prop] < b[prop])
       return 1;
     return 0;
-  }
+  };
 }
 
 export { compare };
