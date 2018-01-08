@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -18,5 +19,5 @@ function renderToElement(elementId, options) {
 
 export default renderToElement;
 window.Explorer = {
-  render: renderToElement,
+  render: renderToElement
 };

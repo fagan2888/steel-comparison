@@ -1,17 +1,9 @@
 @import "./Select.scss";
-@import "./month-picker/MonthPicker.min.css";
-
-.validation-error {
-  color: red;
-}
-
-.Select {
-  width: 80%;
-}
 
 .explorer__form {
   font-size: 11px;
-  margin: 28px 0;
+  margin-bottom: 28px;
+  margin-top: 20px;
   position: relative;
 
   fieldset {
@@ -21,14 +13,13 @@
   }
 
   &__submit {
-    margin-top: 20px;
-    position: absolute;
-    right:    125px;
-    bottom:   0;
+    margin-top: 10px;
+    margin-left: 60px;
   }
 
   &__row {
     display: block;
+    margin-bottom: 10px;
   }
 
   &__row_group {
@@ -42,20 +33,34 @@
     margin-top: 10px;
     width: 50%;
     vertical-align: top;
+  }
 
-    label {
-      color: #000;
-      font-size: 1.17em;
-      font-weight: bold;
-      margin-bottom: 0px;
-      zoom: 1;
-    }
+  &__label_group {
+    display: inline-block;
+    margin-top: 10px;
+    width: 68%;
+    vertical-align: top;
 
     p {
       font-size: 11px;
       margin: 0;
       margin-top: -2px;
     }
+  }
+
+  label {
+    color: #000;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 0px;
+    zoom: 1;
+  }
+
+  &__select_group {
+    display: inline-block;
+    margin-top: 10px;
+    width: 32%;
+    vertical-align: top;
   }
 
   &__input {
@@ -77,5 +82,19 @@
   }
   .Select-input {
     height: 30px;
+  }
+  
+  .validation-error {
+  color: red;
+  }
+
+  .Select {
+    width: 100%;
+  }
+
+  &__date_select {
+    .Select {
+      width: 80%;
+    }
   }
 }

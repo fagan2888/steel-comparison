@@ -1,15 +1,17 @@
-I94 Search
+Steel Search
 =====================
 
-A search client for I94 arrivals data by month.  
+A search client for Global Steel Trade Data.
 
 ### Setup
 
 ```
 npm install
 npm start
-open http://localhost:3000
+open http://localhost:3001
 ```
+
+See instructions here for setting up the search API locally:  https://github.com/GovWizely/webservices.
 
 ### Linting
 
@@ -17,6 +19,13 @@ This boilerplate project includes React-friendly ESLint configuration.
 
 ```
 npm run lint
+```
+
+### Running Jest Specs
+
+```
+npm run test
+npm run test relative/path/to/file.spec.js
 ```
 
 ### Build & Deploy to GitHub Page
@@ -32,8 +41,8 @@ Include the build output (e.g. `bundle.js` and `explorer.css`) within the `head`
 <html>
   <head>
     ...
-    <script src="bundle.js"></script> <!-- CSL Search js -->
-    <link href="explorer.css"></script> <!-- CSL Search styles -->
+    <script src="bundle.js"></script> 
+    <link href="explorer.css"></script> 
     ...
   </head>
   <body>
