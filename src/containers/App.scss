@@ -8,33 +8,37 @@
     }
   }
 
+html {
+  font-size: 16px;
+}
+
 .explorer {
-  font: 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 1rem Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: normal;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 0.625rem;
+  margin-left: 0.625rem;
   position: relative;
   text-align: left;
 
   h1, h3 {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
     font-weight: bold;
     margin: 0;
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 2rem;
   }
 
   h3 {
-    font-size: 1.17em;
+    font-size: 1.17rem;
   }
 
   p {
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 0.3125rem;
+    padding-top: 0.3125rem;
   }
 
   a {
@@ -48,7 +52,7 @@
 
   &__result {
     clear: both;
-    font-size: 11px;
+    font-size: 0.75rem;
   }
 
   button::-moz-focus-inner {
@@ -57,14 +61,14 @@
   }
 
   &__button {
-    width: 225px;
-    font-size: 11px;
-    padding: 8px;
+    width: 15rem;
+    font-size: 0.75rem;
+    padding: 0.5rem;
   }
 
   &__download-button {
-    margin-top: 10px;
-    margin-left: 30px;
+    margin-top: 0.625rem;
+    margin-left: 1.875rem;
   }
 
   &__button-column {
@@ -73,96 +77,97 @@
   }
 
   &__link-button {
-    margin-left: 15px;
+    width: 18rem;
   }
 
   &__form-content{
-    max-width: 600px;
+    max-width: 37.5rem;
     font-family: Verdana;
-    padding-left: 22px;
+    padding-left: 1.375rem;
 
     p {
-      font-size: 12px;
+      font-size: 0.75rem;
+      margin: 0;
     }
   }
 
   &__dashboard-heading {
-    max-width: 600px;
+    max-width: 37.5rem;
   }
 
   &__graph-footnote {
     text-align: center;
-    max-width: 600px;
-    font-size: 11px;
+    width: 37.5rem;
+    font-size: 0.75rem;
   }
 
   &__bar-graph {
-    width: 600px;
-    height: 350px;
+    width: 37.5rem;
+    height: 21.875rem;
   }
 
   &__pie-graph {
-    max-width: 600px;
-    height: 350px;
+    max-width: 37.5rem;
+    height: 21.875rem;
   }
 
   &__dashboard-footnote {
-    margin-top: 70px;
+    margin-top: 4.375rem;
     text-align: left;
   }
 
   @media screen and (min-width: 1280px) {
     &__second-graph-bar {
-      padding-top: 137px;
-      min-height: 425px;
+      padding-top: 8.5625rem;
+      min-height: 26.5625rem;
     }
 
     &__second-graph-pie {
-      padding-top: 110px;
-      min-height: 425px;
+      padding-top: 6.875rem;
+      min-height: 26.5625rem;
     }
 
     &__second-row {
-      max-height: 625px;
+      max-height: 39.0625rem;
     }
     &__dashboard-footnote {
-      margin-top: 50px;
+      margin-top: 3.125rem;
       text-align: center;
     }
     &__yearly-bar {
-      margin-top: 100px;
+      margin-top: 6.25rem;
     }
   }
 
   &__primary-graph {
-    min-height: 500px;
+    min-height: 31.25rem;
   }
 
   &__second-graph {
-    min-height: 440px;
+    min-height: 27.5rem;
   }
 
   &__first-row {
-    max-height: 615px;
+    max-height: 38.4375rem;
   }
 
   &__yearly-bar {
-    padding-top: 20px;
+    padding-top: 1.25rem;
   }
 
   &__pure-button {
-    padding: 5px;
+    padding: 0.3125rem;
   }
 
   &__chart-title {
     text-align: center;
-    width: 600px;
+    width: 37.5rem;
   }
 
   &__faqs-link {
     float: right;
-    margin-right: 25px;
-    font-size: 16px;
+    margin-right: 1.5625rem;
+    font-size: 1rem;
   }
 }
 
