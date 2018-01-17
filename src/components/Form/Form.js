@@ -5,6 +5,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import DownloadButton from '../Dashboard/DownloadButton';
+import DynamicLink from '../Dashboard/DynamicLink';
 
 import { requestTradeFlowSubgroups, requestReporterSubgroups } from '../../actions/form_options';
 import './Form.scss';
@@ -148,7 +149,7 @@ class DashboardForm extends React.Component {
             <div className="explorer__form__label_group">
               <label htmlFor="productGroups">Product Groups</label>
               <p>
-                Steel Mill Products are contained in Flat, Long, Pipe/Tube, Semi-Finished or Stainless products. <a href="https://www.trade.gov/steel/pdfs/product-definitions.pdf">More Information.</a>
+                Steel Mill Products are contained in Flat, Long, Pipe/Tube, Semi-Finished or Stainless products. <a href="https://www.trade.gov/steel/pdfs/product-definitions.pdf" target="_blank">More Information.</a>
               </p>
             </div>
 
@@ -185,10 +186,14 @@ class DashboardForm extends React.Component {
           </div>
 
           <div className="explorer__form__row">
-            <div className="explorer__form__group explorer__button_column">
               <button className="explorer__button explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit}>
                 Generate Dashboard
               </button>
+          </div>
+
+          <div className="explorer__form__row">
+            <div className="explorer__form__group explorer__button_column">
+              <DynamicLink reporter_country={results.query.reporter_countries} trade_flow={results.query.trade_flow} />
             </div>
 
             <div className="explorer__form__group explorer__button_column">

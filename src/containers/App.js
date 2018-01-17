@@ -80,7 +80,7 @@ class App extends React.Component {
           <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
             Return to Global Steel Trade Reports
           </button>
-          <p> For Questions </p>
+          <p> For Questions and Feedback: </p>
           <p> Steel Import Monitoring and Analysis Team
           <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202) 482-2105</p>
         </div>
