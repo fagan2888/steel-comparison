@@ -1,4 +1,4 @@
-import { map, omit, values } from '../../utils/lodash';
+import { map, omit, values, isEmpty } from '../../utils/lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -55,11 +55,15 @@ const URLS = {
 	}
 };
 
-const DynamicLink = ({results, reporter_country, trade_flow}) => {
+const DynamicLink = ({query}) => {
+	if(isEmpty(query))
+		return null;
+	const reporter_country = query.reporter_countries;
+	const trade_flow = query.trade_flow;
 	const trade_flow_text = TRADE_FLOWS[trade_flow];
 	return(
 			<button className="explorer__button explorer__download-button pure-button pure-button-primary" onClick={() => {return window.open(URLS[trade_flow][reporter_country], '_blank')}} >
-				{'View ' + reporter_country + ' ' + trade_flow_text}
+				{'View ' + reporter_country + ' ' + trade_flow_text + ' ' + 'Reports'}
 			</button>
 		)
 }

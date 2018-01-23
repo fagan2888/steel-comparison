@@ -130,7 +130,7 @@ describe('components', () => {
 
       const footnote = wrapper.find('p');
       expect(footnote.hasClass('explorer__graph-footnote')).toBe(true);
-      expect(footnote.text()).toBe('Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Markit - Global Trade Atlas sourced from the reporting country\'s official statistics.  Product groups are sorted by most recent time period.');
+      expect(footnote.text()).toBe('Source: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country\'s official statistics.  Updated on 09-14-2017.  Product groups are sorted by most recent time period.');
     });
   });
 });

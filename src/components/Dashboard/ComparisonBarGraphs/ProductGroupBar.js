@@ -14,10 +14,11 @@ function chartTitle(query) {
   return chartTitle;
 }
 
-function footnote(){
+function footnote(last_updated){
+  const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
   return (
     <p className="explorer__graph-footnote"> 
-      {config.footnote + '  Partner countries are sorted by most recent time period.'}
+      {config.footnote + '  Updated on ' + last_updated_date + '.  Partner countries are sorted by most recent time period.'}
     </p> 
   );
 }
@@ -46,7 +47,7 @@ const ProductGroupBar = ({ data, query, time_periods }) => {
         time_periods={time_periods}
       />
 
-      {footnote()}
+      {footnote(data.source_last_updated)}
     </div>
   );
 };

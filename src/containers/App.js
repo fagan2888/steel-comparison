@@ -63,6 +63,9 @@ class App extends React.Component {
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
               Click Generate Dashboard to update the graphs and downloadable data.  
             </p>
+            <p>
+              Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
+            </p>
             <p> <b>All fields are required.</b> <span className="explorer__faqs-link"><a href={config.faqs_link} target="_blank"><b>FAQs</b></a></span> </p>
             
             <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch} results={results}/>
@@ -78,11 +81,13 @@ class App extends React.Component {
 
         <div className="explorer__dashboard-footnote">
           <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
-            Return to Global Steel Trade Reports
+            Go to Global Steel Trade Reports
           </button>
-          <p> For Questions and Feedback: </p>
-          <p> Steel Import Monitoring and Analysis Team
+          <p> For Questions and Feedback:
+          <br /> Steel Import Monitoring and Analysis Team
           <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202) 482-2105</p>
+        
+          <p> Data Source: Global Trade Atlas; Copyright © IHS Markit Global Inc. 2018.  All rights reserved.  </p>
         </div>
       </div>
     );
@@ -102,7 +107,7 @@ function mapStateToProps(state, ownProps) {
     query = {flow_type: "QTY", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
   const { results, form_options } = state;
-
+  
   /*
   May revisit this later... can the form values be changed prior to render based on the form options? 
 

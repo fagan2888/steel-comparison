@@ -43,11 +43,11 @@ const YearlyBarGraph = ({ data, query }) => {
   }
 
   for (let i in range(data_values.length)){
-    bar_colors.push('#5ab4ac');
+    if (keys[i].includes('ytd'))
+      bar_colors.push('#d8b365');
+    else
+      bar_colors.push('#5ab4ac');
   }
-  /// Different color for YTD (final 2 entries)
-  bar_colors[data_values.length - 1] = '#d8b365';
-  bar_colors[data_values.length - 2] = '#d8b365';
 
   const datasets = [
     {
@@ -99,7 +99,7 @@ const YearlyBarGraph = ({ data, query }) => {
   return  (
     <div className="pure-u-1 pure-u-xl-1-2 explorer__first-row explorer__yearly-bar explorer__primary-graph">
       <h3 className="explorer__chart-title">{chartTitle(query)}</h3>
-      <div className="explorer__bar-graph">
+      <div className="explorer__yearly-bar-graph">
         <Bar data={chartData} options={chartOptions} />
       </div>
       {footnote(data.source_last_updated)}

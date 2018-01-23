@@ -43,6 +43,7 @@ const SelectField = ({ input, name, options, meta, handleChange = null }) => {
   </div>
 );
 }
+
 SelectField.propTypes = {
   input: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
@@ -193,7 +194,7 @@ class DashboardForm extends React.Component {
 
           <div className="explorer__form__row">
             <div className="explorer__form__group explorer__button_column">
-              <DynamicLink reporter_country={results.query.reporter_countries} trade_flow={results.query.trade_flow} />
+              <DynamicLink query={results.query} />
             </div>
 
             <div className="explorer__form__group explorer__button_column">

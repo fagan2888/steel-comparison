@@ -1,5 +1,5 @@
 export default `"Selected Data: flow_type: QTY, partner_countries: World, product_groups: All Steel Mill Products, reporter_countries: United States, trade_flow: IMP"
-"Source: U.S. Department of Commerce, Enforcement and Compliance using annual data from UN Comtrade, Desa/UNSD; YTD data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics."
+"Source: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics."
 
 reporter_country,partner_country,product_group,Quantity (in metric tons) or Value (in USD),2010,2011,2012,2013,2014,2015,2016,ytd_2016,ytd_2017,ytd_end_month,trade_flow
 United States,World,All Steel Mill Products,QTY,21768809.259,26028847.516,30458246.084,29246437.534,40286099.005,35375273.193,30065048.132,14191373.622,17852770.025,Jun,IMP

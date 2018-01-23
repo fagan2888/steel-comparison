@@ -16,12 +16,13 @@ function buildTitle(query, ytd_end_month, time_period) {
   return chart_title;
 }
 
-const Footnote = ({query, total}) => {
+const Footnote = ({query, total, last_updated}) => {
   const units = query.flow_type === 'QTY' ? ' metric tons' : ' U.S. dollars';
+  const last_updated_date = moment(last_updated).utc().format('MM-DD-YYYY');
 
   return (
     <p className="explorer__graph-footnote"> 
-      {config.footnote + '  Trade covered in the table is ' + parseFloat(total.toFixed(2)).toLocaleString() + units + '.'}
+      {config.footnote + '  Updated on ' + last_updated_date + '.  Trade covered in the table is ' + parseFloat(total.toFixed(2)).toLocaleString() + units + '.'}
     </p> 
   );
 };
@@ -53,7 +54,7 @@ const ProductGroupPie = ({ data, query, last_updated, time_period }) => {
     <div>
       <h3 className="explorer__chart-title">{chartTitle}</h3>
       <PieGraph data_values={data_values} labels={labels} time_period={time_period} />
-      <Footnote query={query} total={total}/>
+      <Footnote query={query} total={total} last_updated={last_updated}/>
     </div>
   );
 };

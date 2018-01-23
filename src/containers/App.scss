@@ -61,9 +61,10 @@ html {
   }
 
   &__button {
-    width: 15rem;
+    width: 16rem;
     font-size: 0.75rem;
-    padding: 0.5rem;
+    padding: 0.65rem;
+    font-weight: normal;
   }
 
   &__download-button {
@@ -119,6 +120,7 @@ html {
   &__dashboard-footnote {
     margin-top: 4.375rem;
     text-align: left;
+    max-width: 32rem;
   }
 
   @media screen and (min-width: 1280px) {
@@ -138,9 +140,11 @@ html {
     &__dashboard-footnote {
       margin-top: 3.125rem;
       text-align: center;
+      width: 32rem;
+      margin-left: 25%;
     }
     &__yearly-bar {
-      margin-top: 6.25rem;
+      margin-top: 9rem;
     }
   }
 
@@ -153,11 +157,16 @@ html {
   }
 
   &__first-row {
-    max-height: 40rem;
+    max-height: 46rem;
   }
 
   &__yearly-bar {
     padding-top: 1.25rem;
+  }
+
+  &__yearly-bar-graph {
+    width: 37.5rem;
+    height: 25rem;
   }
 
   &__pure-button {
@@ -167,6 +176,7 @@ html {
   &__chart-title {
     text-align: center;
     width: 37.5rem;
+    height: 3rem;
   }
 
   &__faqs-link {

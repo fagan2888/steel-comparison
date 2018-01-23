@@ -74,5 +74,14 @@ export default {
     'productGroups': 'All Steel Mill Products',
     'reporterCountries': 'United States',
     'tradeFlow': 'IMP'
+  },
+  results: {
+    query: {
+      'flowType': 'QTY',
+      'partnerCountries': 'World',
+      'productGroups': 'All Steel Mill Products',
+      'reporterCountries': 'United States',
+      'tradeFlow': 'IMP'
+    }
   }
 };
