@@ -1,10 +1,12 @@
-import { map, omit, values } from '../../utils/lodash';
+import { map, omit, values, isEmpty } from '../../utils/lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import FileSaver from 'file-saver';
 import config from '../../config';
 
 const DownloadButton = ( {results} ) => {
+  if(isEmpty(results.dashboardData))
+    return null;
   return (
     <button className="explorer__button explorer__download-button pure-button pure-button-primary" onClick={ () => {downloadReports(results);}}>
       Download Dashboard Data

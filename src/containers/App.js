@@ -9,6 +9,11 @@ import './App.scss';
 import config from '../config.js';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillMount() {
     const { dispatch, query } = this.props;
     dispatch(requestFormOptions());
@@ -21,7 +26,7 @@ class App extends React.Component {
     dispatch(fetchResultsIfNeeded(query));
   }
 
-  handleSubmit = (form) => {
+  handleSubmit(form) {
     const params = reduce(omitBy(form, isEmpty), (result, value, _key) => {
       const key = snakeCase(_key);
       return Object.assign(
@@ -42,11 +47,10 @@ class App extends React.Component {
       (result, value, key) => Object.assign(result, { [camelCase(key)]: value }),
       {});
     let message, yearly, comparisons, pies, download_button;
-    if (results.isFetching || isEmpty(results.dashboardData)) 
-      message = null;
-    else if (results.error != "") 
+    if (results.error != "")
       message = <div className="explorer__result">{results.error}</div>;
-    else {
+    else if(results.isFetching == false && !isEmpty(results.dashboardData)){
+      message = null;
       yearly = <YearlyBarGraph data={results.dashboardData} query={results.query} />;
       comparisons = <ComparisonBarGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />;
       pies = <PieGraphs data={results.dashboardData} query={results.query} form_options={results.timePeriods} />
