@@ -30,7 +30,7 @@ export default {
       {
         id: '5b0f7c69ca148f7d43dcb543dff0232381de9d06',
         reporter_country: 'United States',
-        partner_country: 'Colombia',
+        partner_country: 'Colombia, foo',
         product_group: 'All Steel Mill Products',
         flow_type: 'QTY',
         sum_2010: 46089.381,

@@ -32,6 +32,17 @@ function transformKeys(keys){
   });
 }
 
+function buildCSVLine(entry_values){
+  let csv_string = "";
+  for (let j in entry_values){
+    if (typeof entry_values[j] == 'string' && entry_values[j].includes(','))
+      entry_values[j] = '"' + entry_values[j] + '"';
+    csv_string += entry_values[j] + ',';
+  }
+  csv_string = csv_string.slice(0, -1); // Remove trailing comma
+  return csv_string;
+}
+
 export function buildCSV(results){
   const data = results.dashboardData;
   let keys = Object.keys(omit(data.product_group_entry[0], ['id', 'percent_change_ytd']));
@@ -44,10 +55,14 @@ export function buildCSV(results){
   csv_string += keys.join(',') + '\n';
 
   for (let i in data.product_group_entry) {
-    csv_string += values(omit(data.product_group_entry[i], ['id', 'percent_change_ytd'])).join(',') + '\n';
+    let entry_values = values(omit(data.product_group_entry[i], ['id', 'percent_change_ytd']));
+    csv_string += buildCSVLine(entry_values);
+    csv_string += '\n';
   }
   for (let i in data.partner_country_entry) {
-    csv_string += values(omit(data.partner_country_entry[i], ['id', 'percent_change_ytd'])).join(',') + '\n';
+    let entry_values = values(omit(data.partner_country_entry[i], ['id', 'percent_change_ytd']));
+    csv_string += buildCSVLine(entry_values);
+    csv_string += '\n';
   }
   return csv_string;
 }

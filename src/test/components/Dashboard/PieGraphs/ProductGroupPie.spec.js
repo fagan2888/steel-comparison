@@ -43,7 +43,7 @@ describe('components', () => {
           'Mexico',
           'Egypt',
           'Finland',
-          'Colombia',
+          'Colombia, foo',
           'Guatemala',
           'Rest of the World'
         ]
