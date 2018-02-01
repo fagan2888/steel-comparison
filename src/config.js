@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-const footnote = 'Source: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country\'s official statistics.';
+const footnote = 'Source: U.S. Department of Commerce, Enforcement and Compliance.  Includes content supplied by IHS Global Ltd.; Copyright © IHS Global, Ltd., 2018. All rights reserved.';
 const monitor_link = 'https://www.trade.gov/steel/global-monitor.asp';
 const faqs_link = 'https://www.trade.gov/steel/pdfs/faqs.pdf';
 

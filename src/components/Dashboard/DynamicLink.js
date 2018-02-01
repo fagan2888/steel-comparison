@@ -62,7 +62,7 @@ const DynamicLink = ({query}) => {
 	const trade_flow = query.trade_flow;
 	const trade_flow_text = TRADE_FLOWS[trade_flow];
 	return(
-			<button className="explorer__button explorer__download-button pure-button pure-button-primary" onClick={() => {return window.open(URLS[trade_flow][reporter_country], '_blank')}} >
+			<button className="explorer__button explorer__dynamic-button pure-button pure-button-primary" onClick={() => {return window.open(URLS[trade_flow][reporter_country], '_blank')}} >
 				{'View ' + reporter_country + ' ' + trade_flow_text + ' ' + 'Reports'}
 			</button>
 		)

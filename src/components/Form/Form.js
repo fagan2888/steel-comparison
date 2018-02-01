@@ -193,13 +193,7 @@ class DashboardForm extends React.Component {
           </div>
 
           <div className="explorer__form__row">
-            <div className="explorer__form__group explorer__button_column">
-              <DynamicLink query={results.query} />
-            </div>
-
-            <div className="explorer__form__group explorer__button_column">
-              <DownloadButton results={results} />
-            </div>
+            <DynamicLink query={results.query} />
           </div>
         </fieldset>
       </form>

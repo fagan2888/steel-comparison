@@ -126,7 +126,7 @@ describe('components', () => {
 
       const footnote = wrapper.find('p');
       expect(footnote.hasClass('explorer__graph-footnote')).toBe(true);
-      expect(footnote.text()).toBe('Source: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country\'s official statistics.  Updated on 09-14-2017.  Partner countries are sorted by most recent time period.');
+      expect(footnote.text()).toBe('Source: U.S. Department of Commerce, Enforcement and Compliance.  Includes content supplied by IHS Global Ltd.; Copyright © IHS Global, Ltd., 2018. All rights reserved.  Updated on 09-14-2017.  Partner countries are sorted by most recent time period.');
     });
   });
 });

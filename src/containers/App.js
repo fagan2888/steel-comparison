@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { camelCase, isEmpty, map, omit, omitBy, reduce, snakeCase, values } from '../utils/lodash';
 import { stringify } from 'querystring';
-import { DashboardForm, Spinner, YearlyBarGraph, ComparisonBarGraphs, PieGraphs } from '../components';
+import { DashboardForm, Spinner, YearlyBarGraph, ComparisonBarGraphs, PieGraphs, DashboardFootnote } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions, requestTradeFlowSubgroups, requestReporterSubgroups } from '../actions';
 import './App.scss';
 import config from '../config.js';
@@ -83,16 +83,7 @@ class App extends React.Component {
         {comparisons}
         {pies}
 
-        <div className="explorer__dashboard-footnote">
-          <button className="explorer__button explorer__link-button pure-button pure-button-primary" type="button" onClick={() => {return window.open(config.monitor_link, '_blank')}} >
-            Go to Global Steel Trade Reports
-          </button>
-          <p> For Questions and Feedback:
-          <br /> Steel Import Monitoring and Analysis Team
-          <br/> Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: (202) 482-2105</p>
-        
-          <p> Data Source: Global Trade Atlas; Copyright © IHS Markit Global Inc. 2018.  All rights reserved.  </p>
-        </div>
+        <DashboardFootnote />
       </div>
     );
   }

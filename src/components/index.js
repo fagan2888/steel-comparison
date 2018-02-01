@@ -4,3 +4,4 @@ export YearlyBarGraph from './Dashboard/YearlyBarGraph';
 export ComparisonBarGraphs from './Dashboard/ComparisonBarGraphs';
 export PieGraphs from './Dashboard/PieGraphs';
 export DownloadButton from './Dashboard/DownloadButton';
+export DashboardFootnote from './Dashboard/Footnote';
