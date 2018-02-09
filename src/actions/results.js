@@ -4,6 +4,7 @@ import { compact, isEmpty, omit, values, has, startCase, map } from '../utils/lo
 import { REQUEST_RESULTS, RECEIVE_FAILURE, RECEIVE_RESULTS } from '../constants';
 import config from '../config.js';
 import moment from 'moment';
+import { propComparator } from './sort';
 
 export function requestResults() {
   return {
@@ -24,7 +25,7 @@ export function receiveResults(payload, params) {
   payload.product_group_entry = removeNullValues(payload.product_group_entry);
   payload.partner_country_entry = removeNullValues(payload.partner_country_entry);
   // Grab the time period fields from one of the result entries: 
-  const time_periods = extractTimePeriods(payload.product_group_entry[0]).sort();
+  const time_periods = extractTimePeriods(payload.product_group_entry[0]).sort(propComparator('label', 'asc'));
 
   results.dashboard_data = payload;
   results.time_periods = time_periods;

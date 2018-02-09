@@ -46,6 +46,10 @@ html {
     color: #234781;
   }
 
+  a:focus {
+    outline: dotted 1px;
+  }
+
   legend {
     display: none;
   }
@@ -58,6 +62,10 @@ html {
   button::-moz-focus-inner {
       border:0;
       padding:0;
+  }
+
+  button:focus {
+    outline: 3px solid goldenrod;
   }
 
   &__button {

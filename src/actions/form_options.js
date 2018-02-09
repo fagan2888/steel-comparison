@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 import { isEmpty, omit, values, has, map, startCase, compact } from '../utils/lodash';
 import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS, SET_TRADE_FLOW_SUBGROUPS, SET_REPORTER_SUBGROUPS } from '../constants';
 import config from '../config.js';
-import { propComparator } from './sort_reports';
+import { propComparator } from './sort';
 import { receiveFailure } from './results.js';
 
 const { host, apiKey } = config.api.steel;
