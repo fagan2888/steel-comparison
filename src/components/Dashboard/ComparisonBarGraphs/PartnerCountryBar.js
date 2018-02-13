@@ -32,13 +32,12 @@ const PartnerCountryBar = ({ data, query, time_periods }) => {
 
   return  (
     <div>
-      <h3 className="explorer__chart-title">{chartTitle(query)}</h3>
-
       <HorizontalBarGraph 
         data_entries={data_entries} 
         labels={labels} 
         query={query}
         time_periods={time_periods}
+        title={chartTitle(query)}
       />
 
       {footnote(data.source_last_updated)}

@@ -23,9 +23,9 @@ html {
   h1, h3 {
     display: block;
     padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
     font-weight: bold;
     margin: 0;
+    padding-bottom: 0.625rem;
   }
 
   h1 {
@@ -117,7 +117,7 @@ html {
 
   &__bar-graph {
     width: 37.5rem;
-    height: 21.875rem;
+    height: 22rem;
   }
 
   &__pie-graph {
@@ -143,7 +143,7 @@ html {
     }
 
     &__second-row {
-      max-height: 39.0625rem;
+      max-height: 41rem;
     }
     &__dashboard-footnote {
       margin-top: 3.125rem;
@@ -199,6 +199,16 @@ html {
 
   &__footnote-terms-header {
     margin-bottom: 0.2rem;
+  }
+
+  &__modal-table {
+    th, td {
+      border: 0.1rem solid black;
+      padding: 0.5rem;
+    }
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+    border: 0.1rem solid black;
   }
 }
 

@@ -52,8 +52,7 @@ const ProductGroupPie = ({ data, query, last_updated, time_period }) => {
 
   return  (
     <div>
-      <h3 className="explorer__chart-title">{chartTitle}</h3>
-      <PieGraph data_values={data_values} labels={labels} time_period={time_period} />
+      <PieGraph data_values={data_values} labels={labels} time_period={time_period} query={query} title={chartTitle} />
       <Footnote query={query} total={total} last_updated={last_updated}/>
     </div>
   );
