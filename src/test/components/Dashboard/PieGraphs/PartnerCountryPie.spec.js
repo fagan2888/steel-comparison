@@ -29,7 +29,7 @@ describe('components', () => {
   
       const heading = wrapper.find('h3');
       expect(heading.hasClass('explorer__chart-title')).toBe(true);
-      expect(heading.text()).toBe('Share of United States Imports from World by Product in Metric Tons - YTD Jun 2017');
+      expect(heading.text()).toBe('Share of United States Imports from World by Product in Metric Tons - YTD Jun 2017 - View Data');
     });
 
     it('should render the graph with the correct data and labels', () => {

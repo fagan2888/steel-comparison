@@ -52,7 +52,7 @@ const ProductGroupPie = ({ data, query, last_updated, time_period }) => {
 
   return  (
     <div>
-      <PieGraph data_values={data_values} labels={labels} time_period={time_period} query={query} title={chartTitle} />
+      <PieGraph data_values={data_values} labels={labels} time_period={time_period} query={query} title={chartTitle} key_type="Country"/>
       <Footnote query={query} total={total} last_updated={last_updated}/>
     </div>
   );

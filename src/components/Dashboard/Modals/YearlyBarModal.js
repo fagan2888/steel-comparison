@@ -1,17 +1,7 @@
 import { map } from '../../../utils/lodash';
 import React from 'react';
 import Modal from 'react-modal';
-
-const styles = {
-	content:{
-		top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-	}
-};
+import styles from './styles';
 
 const YearlyBarModal = ({modalOpen, closeModal, labels, data, query, title}) => {
 	const units = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars'
@@ -19,7 +9,7 @@ const YearlyBarModal = ({modalOpen, closeModal, labels, data, query, title}) => 
 		return (
 			<tr key={label + data[i]}>
   			<td>{label}</td>
-  			<td>{data[i].toFixed(2)}</td>
+  			<td>{parseFloat(data[i].toFixed(2)).toLocaleString()}</td>
   		</tr>
 		)
 	});
@@ -36,12 +26,14 @@ const YearlyBarModal = ({modalOpen, closeModal, labels, data, query, title}) => 
 	  		<tbody>
 		  		<tr>
 		  			<th>Time Period</th>
-		  			<th>{'Value - ' + units}</th>
+		  			<th>Value</th>
 		  		</tr>
 		  		{table_rows}
 	  		</tbody>
 	  	</table>
-	  <button onClick={closeModal}>Close</button>
+	  	<div className="explorer__modal-button-div">
+	  		<button className="explorer__button" onClick={closeModal}>Close</button>
+	  	</div>
 	  </Modal>
   )
 }

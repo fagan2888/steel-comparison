@@ -24,7 +24,7 @@ class PieGraph extends React.Component {
   }
 
   render(){
-    const { data_values, labels, time_period, title, query } = this.props;
+    const { data_values, labels, time_period, title, query, key_type } = this.props;
     const datasets = [
       {
         label: startCase(time_period),
@@ -99,7 +99,7 @@ class PieGraph extends React.Component {
         <div className="explorer__pie-graph">
           <Pie data={chartData} options={chartOptions} />
         </div>
-        <Modal modalOpen={this.state.modalOpen} closeModal={this.closeModal} labels={labels} data={datasets} query={query} title={title}/>
+        <Modal modalOpen={this.state.modalOpen} closeModal={this.closeModal} labels={labels} data={datasets} query={query} title={title} key_type={key_type} />
       </div>
     );
   }

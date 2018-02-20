@@ -22,7 +22,7 @@ describe('components', () => {
 
       const heading = wrapper.find('h3');
       expect(heading.hasClass('explorer__chart-title')).toBe(true);
-      expect(heading.text()).toBe('United States Imports from World of All Steel Mill Products in Thousands of Metric Tons');
+      expect(heading.text()).toBe('United States Imports from World of All Steel Mill Products in Thousands of Metric Tons - View Data');
     });
 
     it('should render the graph with the correct data and labels', () => {

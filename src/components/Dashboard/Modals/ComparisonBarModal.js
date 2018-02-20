@@ -1,17 +1,7 @@
 import { map } from '../../../utils/lodash';
 import React from 'react';
 import Modal from 'react-modal';
-
-const styles = {
-	content:{
-		top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-	}
-};
+import styles from './styles';
 
 const ComparisonBarModal = ({modalOpen, closeModal, labels, data, query, title}) => {
 	const units = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars'
@@ -21,7 +11,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, data, query, title})
 
 	const table_rows = map(data, (entry) => {
 		const data_cells = map(entry.data, (data_value) => {
-			return <td key={data_value}>{data_value.toFixed(2)}</td>
+			return <td key={data_value}>{parseFloat(data_value.toFixed(2)).toLocaleString()}</td>
 		});
 		return (
 			<tr key={entry.label + entry.data[0]}>
@@ -48,7 +38,9 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, data, query, title})
 		  		{table_rows}
 	  		</tbody>
 	  	</table>
-	  	<button onClick={closeModal}>Close</button>
+	  	<div className="explorer__modal-button-div">
+	  		<button className="explorer__button" onClick={closeModal}>Close</button>
+	  	</div>
 	  </Modal>
   )
 }
