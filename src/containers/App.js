@@ -27,6 +27,16 @@ class App extends React.Component {
   }
 
   handleSubmit(form) {
+    let form_values = values(form);
+    let error = {};
+    for(let field in form){
+      if(form[field] === null){
+        error[field] = 'This value is required.';
+      }
+    }
+    if(!isEmpty(error)){
+      throw new SubmissionError(error);
+    }
     const params = reduce(omitBy(form, isEmpty), (result, value, _key) => {
       const key = snakeCase(_key);
       return Object.assign(
@@ -102,21 +112,6 @@ function mapStateToProps(state, ownProps) {
     query = {flow_type: "QTY", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
   const { results, form_options } = state;
-  
-  /*
-  May revisit this later... can the form values be changed prior to render based on the form options? 
-
-  const reporter_countries = map(form_options.reporterCountries, obj => { return obj.value});
-  const partner_countries = map(form_options.partnerCountries, obj => { return obj.value});
-  const product_groups = map(form_options.productGroups, obj => { return obj.value});
-
-  if (!isEmpty(reporter_countries) && !reporter_countries.includes(query.reporter_countries))
-    query.reporter_countries = null;
-  if (!isEmpty(partner_countries) && !partner_countries.includes(query.partner_countries))
-    query.partner_countries = null;
-  if (!isEmpty(product_groups) && !product_groups.includes(query.product_groups))
-    query.product_groups = null;
-  */
 
   return {
     query,

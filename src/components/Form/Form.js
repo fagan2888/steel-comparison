@@ -61,24 +61,30 @@ class DashboardForm extends React.Component {
     this.handleReporterCountryChange = this.handleReporterCountryChange.bind(this);
   }
 
-  handleTradeFlowChange(e) {
-    this.props.dispatch(change('dashboard', 'reporterCountries', null));
-    this.props.dispatch(change('dashboard', 'partnerCountries', null));
-    this.props.dispatch(change('dashboard', 'productGroups', null));
+  componentDidUpdate(){
+    const { dispatch, formOptions, formValues } = this.props;
+    const reporter_countries = map(formOptions.reporterCountries, obj => { return obj.value});
+    const partner_countries = map(formOptions.partnerCountries, obj => { return obj.value});
+    const product_groups = map(formOptions.productGroups, obj => { return obj.value});
+    
+    if (!isEmpty(reporter_countries) && !reporter_countries.includes(formValues.reporter_country))
+      dispatch(change('dashboard', 'reporterCountries', null));
+    if (!isEmpty(partner_countries) && !partner_countries.includes(formValues.partner_country))
+      dispatch(change('dashboard', 'partnerCountries', null));
+    if (!isEmpty(product_groups) && !product_groups.includes(formValues.product_group))
+      dispatch(change('dashboard', 'productGroups', null));
+  }
 
-    return this.props.dispatch(requestTradeFlowSubgroups(e));
+  handleTradeFlowChange(e) {
+    return this.props.dispatch(requestTradeFlowSubgroups(e, this.props.formValues.reporter_country));
   }
 
   handleReporterCountryChange(e) {
-    this.props.dispatch(change('dashboard', 'partnerCountries', null));
-    this.props.dispatch(change('dashboard', 'productGroups', null));
-
     return this.props.dispatch(requestReporterSubgroups(this.props.formValues.trade_flow, e));
   }
 
   render() {
     const { handleSubmit, formOptions, results } = this.props;
-
     return (
       <form className="explorer__form" onSubmit={handleSubmit}>
         <fieldset>
@@ -210,15 +216,25 @@ DashboardForm.propTypes = {
 export { DashboardForm };
 
 const ConnectedForm = reduxForm({
-  form: 'dashboard'
+  form: 'dashboard',
+  enableReinitialize: true
 })(DashboardForm);
 
-const selector = formValueSelector('dashboard')
+const selector = formValueSelector('dashboard');
 
-export default connect(state => {
+const mapStateToProps = (state) => {
+  const formOptions = state.form_options;
   const formValues = {};
   formValues['trade_flow'] = selector(state, 'tradeFlow');
+  formValues['reporter_country'] = selector(state, 'reporterCountries');
+  formValues['partner_country'] = selector(state, 'partnerCountries');
+  formValues['product_group'] = selector(state, 'productGroups');
   return {
-    formValues
+    formValues,
+    formOptions
   }
-})(ConnectedForm);
+}
+
+export default connect(
+  mapStateToProps
+)(ConnectedForm);

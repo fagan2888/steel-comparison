@@ -25,8 +25,7 @@ export function setFormOptions(json){
   return return_action;
 }
 
-export function setTradeFlowSubgroups(json){
-  const reporter_countries = extractOptions(json.aggregations.reporters);
+export function setTradeFlowSubgroups(reporter_countries){
   return {  
     type: SET_TRADE_FLOW_SUBGROUPS,
     reporter_countries: reporter_countries
@@ -43,26 +42,39 @@ export function setReporterSubgroups(json){
   };
 }
 
+function reporterSubgroupsNeeded(json, params){
+  const { reporter_country, trade_flow } = params;
+  const reporter_countries = extractOptions(json.aggregations.reporters);
+  const rc_vals = map(reporter_countries, obj => { return obj.value});
+
+  return (dispatch) => {
+    dispatch(setTradeFlowSubgroups(reporter_countries));
+    if(rc_vals.includes(reporter_country)){
+      dispatch(requestReporterSubgroups(trade_flow, reporter_country));
+    }
+  }
+}
+
 export function requestFormOptions(){
   return fetchResults('', setFormOptions);
 }
 
-export function requestTradeFlowSubgroups(trade_flow){
+export function requestTradeFlowSubgroups(trade_flow, reporter_country){
   const query = 'trade_flow=' + trade_flow;
-  return fetchResults(query, setTradeFlowSubgroups);
+  return fetchResults(query, reporterSubgroupsNeeded, {reporter_country: reporter_country, trade_flow: trade_flow});
 }
 
 export function requestReporterSubgroups(trade_flow, reporter_country){
   const query = 'trade_flow=' + trade_flow + '&reporter_countries=' + reporter_country;
-  return fetchResults(query, setReporterSubgroups);
+  return fetchResults(query, setReporterSubgroups, {});
 }
 
-function fetchResults(query, callback){
+function fetchResults(query, callback, params){
   return (dispatch) => {
     dispatch(requestOptions());
     return fetch(`${host}?api_key=${apiKey}&size=1&${query}`)
         .then(response => response.json())
-        .then(json => dispatch(callback(json)))
+        .then(json => dispatch(callback(json, params)))
         .catch((error) => {
           dispatch(receiveFailure('There was an error connecting to the data source:  ' + error ));
         });

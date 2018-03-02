@@ -32,7 +32,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, data, query, title})
 	  	<table className="explorer__modal-table">
 	  		<tbody>
 		  		<tr>
-		  			<th></th>
+		  			<th>Time Period</th>
 		  			{table_headers}
 		  		</tr>
 		  		{table_rows}
