@@ -12,6 +12,7 @@ class HorizontalBarGraph extends React.Component {
     this.state = { modalOpen: false };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.onModalLinkClick = this.onModalLinkClick.bind(this);
   }
 
   openModal() {
@@ -20,6 +21,11 @@ class HorizontalBarGraph extends React.Component {
 
   closeModal() {
     this.setState({modalOpen: false});
+  }
+
+  onModalLinkClick(event){
+    event.preventDefault();
+    this.openModal();
   }
 
   render(){
@@ -84,7 +90,7 @@ class HorizontalBarGraph extends React.Component {
       <div>
         <h3 className="explorer__chart-title">
           {title + ' - '}
-          <a href="#" onClick={this.openModal}>View Data</a>
+          <a href="#" onClick={this.onModalLinkClick}>View Data</a>
         </h3>
         <div className="explorer__bar-graph">
           <HorizontalBar key={chart_key} data={chartData} options={chartOptions} />
