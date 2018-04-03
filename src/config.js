@@ -31,7 +31,7 @@ const config = Object.assign({
     api: {
       steel: {
         host: 'https://api.trade.gov/v1/steel_data/search',
-        apiKey: 'O6fmOIPtrvDlqoDe2_6UbKJc'
+        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
       }
     },
     monitor_link: monitor_link,
