@@ -29,6 +29,7 @@ const URLS = {
 		'Canada': 'https://www.trade.gov/steel/countries/pdfs/exports-Canada.pdf',
 		'Poland': 'https://www.trade.gov/steel/countries/pdfs/exports-Poland.pdf',
 		'Slovakia': 'https://www.trade.gov/steel/countries/pdfs/exports-Slovakia.pdf',
+		'Iran': 'https://www.trade.gov/steel/countries/pdfs/exports-iran.pdf'
 	},
 
 	'IMP': {
