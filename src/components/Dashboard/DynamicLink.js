@@ -29,7 +29,8 @@ const URLS = {
 		'Canada': 'https://www.trade.gov/steel/countries/pdfs/exports-Canada.pdf',
 		'Poland': 'https://www.trade.gov/steel/countries/pdfs/exports-Poland.pdf',
 		'Slovakia': 'https://www.trade.gov/steel/countries/pdfs/exports-Slovakia.pdf',
-		'Iran': 'https://www.trade.gov/steel/countries/pdfs/exports-iran.pdf'
+		'Iran': 'https://www.trade.gov/steel/countries/pdfs/exports-iran.pdf',
+		'EU28 (External)': ' https://www.trade.gov/steel/pdfs/global-monitor-report-2016.pdf'
 	},
 
 	'IMP': {
@@ -53,6 +54,9 @@ const URLS = {
 		'Canada': 'https://www.trade.gov/steel/countries/pdfs/imports-Canada.pdf',
 		'United Kingdom': 'https://www.trade.gov/steel/countries/pdfs/imports-UK.pdf',
 		'Czech Republic': 'https://www.trade.gov/steel/countries/pdfs/imports-Czech.pdf',
+		'United States (For Domestic Consumption)': 'https://www.trade.gov/steel/countries/pdfs/imports-us.pdf',
+		'Indonesia': 'https://www.trade.gov/steel/countries/pdfs/imports-indonesia.pdf',
+		'EU28 (External)': 'https://www.trade.gov/steel/pdfs/global-monitor-report-2016.pdf'
 	}
 };
 
