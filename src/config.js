@@ -8,8 +8,8 @@ const config = Object.assign({
   development: {
     api: {
       steel: {
-        host: 'http://127.0.0.1:3000/v1/steel_data/search',
-        apiKey: 'devkey'
+        host: 'https://api.trade.gov/v1/steel_data/search',
+        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
       }
     },
     monitor_link: monitor_link,

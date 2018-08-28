@@ -1,6 +1,6 @@
 {
   "name": "steel-search",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Steel Exports Data Search App",
   "license": "MIT",
   "repository": {
@@ -16,9 +16,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --color -p && cp -r ./public ./dist/public",
-    "clean": "rm -rf ./dist",
-    "deploy": "node ./tasks/deploy.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --color -p",
+    "deploy": "gh-pages -d dist",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
@@ -32,6 +31,8 @@
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
     "babel-register": "^6.11.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.23.1",
     "enzyme": "^2.4.1",
     "eslint": "^2.13.1",

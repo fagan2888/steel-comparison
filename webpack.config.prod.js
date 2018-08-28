@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -15,6 +17,11 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new CopyWebpackPlugin([{
+      from: 'public',
+      to: 'public'
+    }]),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({

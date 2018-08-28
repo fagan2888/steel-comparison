@@ -11,7 +11,7 @@ npm start
 open http://localhost:3001
 ```
 
-See instructions here for setting up the search API locally:  https://github.com/GovWizely/webservices.
+See instructions here for setting up the search API locally:  https://github.com/InternationalTradeAdministration/webservices.
 
 ### Linting
 
@@ -31,7 +31,7 @@ npm run test relative/path/to/file.spec.js
 ### Build & Deploy to GitHub Page
 
 ```
-npm run clean && npm run build && npm run deploy
+npm run build && npm run deploy
 ```
 
 ### Use as a plugin.

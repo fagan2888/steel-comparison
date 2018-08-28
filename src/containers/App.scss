@@ -1,53 +1,47 @@
-  @media print {
-    .pure-u-xl-1-2 {
-      page-break-after: always;
-    }
+@import '../scss/variables';
 
-    #footer {
-      display: none;
-    }
+@media print {
+  .pure-u-xl-1-2 {
+    page-break-after: always;
   }
 
-html {
-  font-size: 16px;
+  #footer {
+    display: none;
+  }
 }
 
 .explorer {
-  font: 1rem Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: ($rem-to-base-ratio * 1rem) Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: normal;
-  margin-right: 0.625rem;
-  margin-left: 0.625rem;
+  margin-right: $rem-to-base-ratio * 0.625rem;
+  margin-left: $rem-to-base-ratio * 0.625rem;
   position: relative;
   text-align: left;
 
   h1, h3 {
     display: block;
-    padding-top: 0.625rem;
+    padding-top: $rem-to-base-ratio * 0.625rem;
     font-weight: bold;
     margin: 0;
-    padding-bottom: 0.625rem;
+    padding-bottom: $rem-to-base-ratio * 0.625rem;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: $rem-to-base-ratio * 2rem;
   }
 
   h3 {
-    font-size: 1.17rem;
+    font-size: $rem-to-base-ratio * 1.12rem;
   }
 
   p {
-    padding-bottom: 0.3125rem;
-    padding-top: 0.3125rem;
+    padding-bottom: $rem-to-base-ratio * 0.3125rem;
+    padding-top: $rem-to-base-ratio * 0.3125rem;
   }
 
   a {
     text-decoration: underline;
     color: #234781;
-  }
-
-  a:focus {
-    outline: dotted 1px;
   }
 
   legend {
@@ -56,7 +50,7 @@ html {
 
   &__result {
     clear: both;
-    font-size: 0.75rem;
+    font-size: $rem-to-base-ratio * 0.75rem;
   }
 
   button::-moz-focus-inner {
@@ -64,25 +58,22 @@ html {
       padding:0;
   }
 
-  &__button:focus {
-    outline: 3px solid goldenrod;
-  }
-
   &__button {
-    width: 16rem;
-    font-size: 0.75rem;
-    padding: 0.65rem;
+    display: block;
+    width: $rem-to-base-ratio * 16rem;
+    font-size: $rem-to-base-ratio * 0.9rem;
+    padding: $rem-to-base-ratio * 0.65rem;
     font-weight: normal;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   &__download-button {
-    margin-top: 0.625rem;
-    margin-left: 1.875rem;
+    margin-top: $rem-to-base-ratio * 0.625rem;
   }
 
   &__dynamic-button {
-    margin-top: 1rem;
-    margin-left: 11rem;
+    margin-top: $rem-to-base-ratio * 1rem;
   }
 
   &__button-column {
@@ -91,106 +82,106 @@ html {
   }
 
   &__link-button {
-    width: 18rem;
+    width: $rem-to-base-ratio * 18rem;
   }
 
   &__form-content{
-    max-width: 37.5rem;
+    max-width: $rem-to-base-ratio * 37.5rem;
     font-family: Verdana;
-    padding-left: 1.375rem;
+    padding-left: $rem-to-base-ratio * 1.375rem;
 
     p {
-      font-size: 0.75rem;
+      font-size: $rem-to-base-ratio * 0.75rem;
       margin: 0;
     }
   }
 
   &__dashboard-heading {
-    max-width: 37.5rem;
+    max-width: $rem-to-base-ratio * 37.5rem;
   }
 
   &__graph-footnote {
     text-align: center;
-    width: 37.5rem;
-    font-size: 0.75rem;
+    width: $rem-to-base-ratio * 37.5rem;
+    font-size: $rem-to-base-ratio * 0.75rem;
   }
 
   &__bar-graph {
-    width: 37.5rem;
-    height: 22rem;
+    width: $rem-to-base-ratio * 37.5rem;
+    height: $rem-to-base-ratio * 22rem;
   }
 
   &__pie-graph {
-    max-width: 37.5rem;
-    height: 21.875rem;
+    max-width: $rem-to-base-ratio * 37.5rem;
+    height: $rem-to-base-ratio * 21.875rem;
   }
 
   &__dashboard-footnote {
-    margin-top: 4.375rem;
+    margin-top: $rem-to-base-ratio * 4.375rem;
     text-align: left;
-    max-width: 32rem;
+    max-width: $rem-to-base-ratio * 32rem;
   }
 
   @media screen and (min-width: 1280px) {
     &__second-graph-bar {
-      padding-top: 8.5625rem;
-      min-height: 26.5625rem;
+      padding-top: $rem-to-base-ratio * 8.5625rem;
+      min-height: $rem-to-base-ratio * 26.5625rem;
     }
 
     &__second-graph-pie {
-      padding-top: 6.875rem;
-      min-height: 26.5625rem;
+      padding-top: $rem-to-base-ratio * 6.875rem;
+      min-height: $rem-to-base-ratio * 26.5625rem;
     }
 
     &__second-row {
-      max-height: 41rem;
+      max-height: $rem-to-base-ratio * 41rem;
     }
     &__dashboard-footnote {
-      margin-top: 3.125rem;
+      margin-top: $rem-to-base-ratio * 3.125rem;
       text-align: center;
-      width: 32rem;
+      width: $rem-to-base-ratio * 32rem;
       margin-left: 30%;
     }
     &__yearly-bar {
-      margin-top: 9rem;
+      margin-top: $rem-to-base-ratio * 9rem;
     }
   }
 
   &__primary-graph {
-    min-height: 31.25rem;
+    min-height: $rem-to-base-ratio * 31.25rem;
   }
 
   &__second-graph {
-    min-height: 27.5rem;
+    min-height: $rem-to-base-ratio * 27.5rem;
   }
 
   &__first-row {
-    max-height: 46rem;
+    max-height: $rem-to-base-ratio * 46rem;
   }
 
   &__yearly-bar {
-    padding-top: 1.25rem;
+    padding-top: $rem-to-base-ratio * 1.25rem;
   }
 
   &__yearly-bar-graph {
-    width: 37.5rem;
-    height: 25rem;
+    width: $rem-to-base-ratio * 37.5rem;
+    height: $rem-to-base-ratio * 25rem;
   }
 
   &__pure-button {
-    padding: 0.3125rem;
+    padding: $rem-to-base-ratio * 0.3125rem;
   }
 
   &__chart-title {
     text-align: center;
-    width: 37.5rem;
-    height: 4rem;
+    height: $rem-to-base-ratio * 5rem;
+    width: $rem-to-base-ratio * 37.5rem;
   }
 
   &__faqs-link {
     float: right;
-    margin-right: 1.5625rem;
-    font-size: 1rem;
+    margin-right: $rem-to-base-ratio * 1.5625rem;
+    font-size: $rem-to-base-ratio * 1rem;
   }
 
   &__footnote-terms {
@@ -198,20 +189,20 @@ html {
   }
 
   &__footnote-terms-header {
-    margin-bottom: 0.2rem;
+    margin-bottom: $rem-to-base-ratio * 0.2rem;
   }
 
   &__modal-table {
     th, td {
-      border: 0.1rem solid black;
-      padding: 0.5rem;
+      border: ($rem-to-base-ratio * 0.1rem) solid black;
+      padding: $rem-to-base-ratio * 0.5rem;
     }
-    margin-bottom: 1.5rem;
+    margin-bottom: $rem-to-base-ratio * 1.5rem;
     border-collapse: collapse;
-    border: 0.1rem solid black;
+    border: ($rem-to-base-ratio * 0.1rem) solid black;
     margin-left:auto; 
     margin-right:auto;
-    margin-top: 1rem;
+    margin-top: $rem-to-base-ratio * 1rem;
   }
 
   &__modal-button-div {

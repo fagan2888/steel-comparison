@@ -1,3 +1,5 @@
+@import '../../scss/variables';
+
 /**
  * React Select
  * ============
@@ -7,7 +9,6 @@
  */
 .Select {
   position: relative;
-
 }
 .Select,
 .Select div,
@@ -46,7 +47,6 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-
 }
 .Select-control:hover {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -92,7 +92,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
 }
 .has-value.Select--single > .Select-control .Select-value .Select-value-label,
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
@@ -130,6 +129,7 @@
   display: inline-block;
   font-family: inherit;
   font-size: inherit;
+  height: $rem-to-base-ratio * 0.88rem;
   margin: 0;
   outline: none;
   line-height: 14px;
