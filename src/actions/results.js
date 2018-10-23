@@ -24,7 +24,7 @@ export function receiveResults(payload, params) {
 
   payload.product_group_entry = removeNullValues(payload.product_group_entry);
   payload.partner_country_entry = removeNullValues(payload.partner_country_entry);
-  // Grab the time period fields from one of the result entries: 
+  // Grab the time period fields from one of the result entries:
   const time_periods = extractTimePeriods(payload.product_group_entry[0]).sort(propComparator('label', 'asc'));
 
   results.dashboard_data = payload;
@@ -55,10 +55,11 @@ function aggregateResults(json, params, offset, agg_results) {
   return receiveResults(results, params);
 }
 
-const { host, apiKey } = config.api.steel;
-function fetchResults(params, offset = 0, aggregated_results = {}) {
+function fetchResults(endpointKey, params, offset = 0, aggregated_results = {}) {
   return (dispatch) => {
     dispatch(requestResults());
+
+    const { host, apiKey } = config.endpoints[endpointKey].api.steel;
     const product_group_querystring = stringify(omit(params, ['partner_countries', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
     const partner_country_querystring = stringify(omit(params, ['product_groups', 'comparison_interval_start', 'comparison_interval_end', 'pie_period']));
     const requests = [
@@ -73,13 +74,13 @@ function fetchResults(params, offset = 0, aggregated_results = {}) {
   };
 }
 
-export function fetchResultsIfNeeded(params) {
+export function fetchResultsIfNeeded(endpointKey, params) {
   return (dispatch, getState) => {
     if (isEmpty(omit(params, ['offset', 'size'])))
       return dispatch(receiveResults({})); // Don't return anything if no query is entered
     if(shouldFetchResults(getState())){
       const agg_results = {results: [], total: 0};
-      return dispatch(fetchResults(params, 0, agg_results));
+      return dispatch(fetchResults(endpointKey, params, 0, agg_results));
     }
 
     return Promise.resolve([]);

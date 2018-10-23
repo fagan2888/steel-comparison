@@ -5,39 +5,43 @@ const monitor_link = 'https://www.trade.gov/steel/global-monitor.asp';
 const faqs_link = 'https://www.trade.gov/steel/pdfs/faqs.pdf';
 
 const config = Object.assign({
-  development: {
-    api: {
-      steel: {
-        host: 'https://api.trade.gov/v1/steel_data/search',
-        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
+  endpoints: {
+    development: {
+      api: {
+        steel: {
+          host: 'https://api.trade.gov/v1/steel_data/search',
+          apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
+        }
       }
     },
-    monitor_link: monitor_link,
-    footnote: footnote,
-    faqs_link: faqs_link
+    test: {
+      api: {
+        steel: {
+          host: 'http://127.0.0.1:3000/v1/steel_data/search',
+          apiKey: 'devkey'
+        }
+      }
+    },
+    production: {
+      api: {
+        steel: {
+          host: 'https://api.trade.gov/v1/steel_data/search',
+          apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
+        }
+      }
+    },
+    staging: {
+      api: {
+        steel: {
+          host: 'https://api.trade.gov/v1/steel_data_staging/search',
+          apiKey: 'FGjwxfSkdeVB2GncULww_uFb'
+        }
+      }
+    }
   },
-  test: {
-    api: {
-      steel: {
-        host: 'http://127.0.0.1:3000/v1/steel_data/search',
-        apiKey: 'devkey'
-      }
-    },
-    monitor_link: monitor_link,
-    footnote: footnote,
-    faqs_link: faqs_link
-  },
-  production: {
-    api: {
-      steel: {
-        host: 'https://api.trade.gov/v1/steel_data/search',
-        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC'
-      }
-    },
-    monitor_link: monitor_link,
-    footnote: footnote,
-    faqs_link: faqs_link
-  }
+  monitor_link: monitor_link,
+  footnote: footnote,
+  faqs_link: faqs_link
 });
 
-export default config[process.env.NODE_ENV];
+export default config;

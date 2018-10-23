@@ -18,7 +18,8 @@ const initialize_store = {
   query: {}
 };
 
-const { host, apiKey } = config.api.steel;
+const endpointKey = 'test';
+const { host, apiKey } = config.endpoints[endpointKey].api.steel;
 
 describe('async actions', () => {
   afterEach(() => {
@@ -34,13 +35,13 @@ describe('async actions', () => {
 
     const store = mockStore(initialize_store);
     const params =  { flow_type: 'QTY', partner_countries: 'World', product_groups: 'All Steel Mill Products', reporter_countries: 'United States', trade_flow: 'IMP' };
-    const expected_actions =  [ 
+    const expected_actions =  [
       { type: 'explorer/REQUEST_RESULTS' },
       { type: 'explorer/RECEIVE_RESULTS',
-        results: expected_results } 
+        results: expected_results }
     ];
-    
-    return store.dispatch(actions.fetchResultsIfNeeded(params)).then(() => {
+
+    return store.dispatch(actions.fetchResultsIfNeeded(endpointKey, params)).then(() => {
       expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expected_actions));
     });
   });

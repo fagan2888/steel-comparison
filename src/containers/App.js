@@ -15,15 +15,15 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, query } = this.props;
-    dispatch(requestFormOptions());
-    dispatch(requestTradeFlowSubgroups(query.trade_flow));
-    dispatch(requestReporterSubgroups(query.trade_flow, query.reporter_countries));
+    const { endpointKey, dispatch, query } = this.props;
+    dispatch(requestFormOptions(this.props.endpointKey));
+    dispatch(requestTradeFlowSubgroups(endpointKey, query.trade_flow));
+    dispatch(requestReporterSubgroups(endpointKey, query.trade_flow, query.reporter_countries));
   }
 
   componentDidMount() {
-    const { dispatch, query } = this.props;
-    dispatch(fetchResultsIfNeeded(query));
+    const { endpointKey, dispatch, query } = this.props;
+    dispatch(fetchResultsIfNeeded(endpointKey, query));
   }
 
   handleSubmit(form) {
@@ -42,7 +42,7 @@ class App extends React.Component {
       return Object.assign(
         result, { [key]: Array.isArray(value) ? map(value, 'value').join(',') : value });
     }, {});
-    this.props.dispatch(fetchResultsIfNeeded(params));
+    this.props.dispatch(fetchResultsIfNeeded(this.props.endpointKey, params));
     this.push(params);
   }
 
@@ -75,14 +75,14 @@ class App extends React.Component {
             <p className="DefaultParagraph-1">
               Search for steel trade data from the perspective of the importing or exporting country (Reporting Country).
               First select a Trade Flow, then Reporting Country, Partner Country, Product Group, and Quantity or Value.
-              Click Generate Dashboard to update the graphs and downloadable data.  
+              Click Generate Dashboard to update the graphs and downloadable data.
             </p>
             <p>
               Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
             </p>
             <p> <b>All fields are required.</b> <span className="explorer__faqs-link"><a href={config.faqs_link} target="_blank"><b>FAQs</b></a></span> </p>
-            
-            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch} results={results}/>
+
+            <DashboardForm onSubmit={this.handleSubmit} initialValues={form_values} formOptions={form_options} dispatch={this.props.dispatch} results={results} endpointKey={this.props.endpointKey} />
 
             <Spinner active={results.isFetching} />
             {message}
@@ -99,6 +99,7 @@ class App extends React.Component {
   }
 }
 App.propTypes = {
+  endpointKey: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   query: PropTypes.object.isRequired,
@@ -112,8 +113,10 @@ function mapStateToProps(state, ownProps) {
     query = {flow_type: "QTY", partner_countries: "World", product_groups: "All Steel Mill Products", reporter_countries: "United States", trade_flow: "IMP" };
   }
   const { results, form_options } = state;
+  const endpointKey = ownProps.endpointKey || 'production';
 
   return {
+    endpointKey,
     query,
     results,
     form_options

@@ -39,6 +39,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('explorer.css'),
     new HtmlWebpackPlugin({ template: path.join(__dirname, 'index.html') }),
+    new HtmlWebpackPlugin({ template: path.join(__dirname, 'staging.html'), filename: 'staging.html' }),
   ],
   module: {
     loaders: [

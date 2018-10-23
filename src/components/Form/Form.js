@@ -66,7 +66,7 @@ class DashboardForm extends React.Component {
     const reporter_countries = map(formOptions.reporterCountries, obj => { return obj.value});
     const partner_countries = map(formOptions.partnerCountries, obj => { return obj.value});
     const product_groups = map(formOptions.productGroups, obj => { return obj.value});
-    
+
     if (!isEmpty(reporter_countries) && !reporter_countries.includes(formValues.reporter_country))
       dispatch(change('dashboard', 'reporterCountries', null));
     if (!isEmpty(partner_countries) && !partner_countries.includes(formValues.partner_country))
@@ -76,11 +76,11 @@ class DashboardForm extends React.Component {
   }
 
   handleTradeFlowChange(e) {
-    return this.props.dispatch(requestTradeFlowSubgroups(e, this.props.formValues.reporter_country));
+    return this.props.dispatch(requestTradeFlowSubgroups(this.props.endpointKey, e, this.props.formValues.reporter_country));
   }
 
   handleReporterCountryChange(e) {
-    return this.props.dispatch(requestReporterSubgroups(this.props.formValues.trade_flow, e));
+    return this.props.dispatch(requestReporterSubgroups(this.props.endpointKey, this.props.formValues.trade_flow, e));
   }
 
   render() {
@@ -100,12 +100,12 @@ class DashboardForm extends React.Component {
 
             <div className="explorer__form__select_group">
               <Field name="tradeFlow" validate={required} component={ props =>
-                <SelectField 
+                <SelectField
                   input={props.input}
-                  name="tradeFlow" 
-                  options={formOptions.tradeFlows} 
+                  name="tradeFlow"
+                  options={formOptions.tradeFlows}
                   meta={props.meta}
-                  handleChange={this.handleTradeFlowChange} 
+                  handleChange={this.handleTradeFlowChange}
                 />
               }/>
             </div>
@@ -121,12 +121,12 @@ class DashboardForm extends React.Component {
 
             <div className="explorer__form__select_group">
               <Field name="reporterCountries" validate={required} component={ props =>
-                <SelectField 
+                <SelectField
                   input={props.input}
-                  name="reporterCountries" 
-                  options={formOptions.reporterCountries} 
+                  name="reporterCountries"
+                  options={formOptions.reporterCountries}
                   meta={props.meta}
-                  handleChange={this.handleReporterCountryChange} 
+                  handleChange={this.handleReporterCountryChange}
                 />
               }/>
             </div>
@@ -142,10 +142,10 @@ class DashboardForm extends React.Component {
 
             <div className="explorer__form__select_group">
               <Field name="partnerCountries" validate={required} component={ props =>
-                <SelectField 
+                <SelectField
                   input={props.input}
-                  name="partnerCountries" 
-                  options={formOptions.partnerCountries} 
+                  name="partnerCountries"
+                  options={formOptions.partnerCountries}
                   meta={props.meta}
                 />
               }/>
@@ -162,10 +162,10 @@ class DashboardForm extends React.Component {
 
             <div className="explorer__form__select_group">
               <Field name="productGroups" validate={required} component={ props =>
-                <SelectField 
+                <SelectField
                   input={props.input}
                   name="productGroups"
-                  options={formOptions.productGroups} 
+                  options={formOptions.productGroups}
                   meta={props.meta}
                 />
               }/>
@@ -182,11 +182,11 @@ class DashboardForm extends React.Component {
 
             <div className="explorer__form__select_group">
               <Field name="flowType" validate={required} component={ props =>
-                <SelectField 
+                <SelectField
                   input={props.input}
-                  name="flowType" 
-                  options={formOptions.flowTypes} 
-                  meta={props.meta} 
+                  name="flowType"
+                  options={formOptions.flowTypes}
+                  meta={props.meta}
                 />
               }/>
             </div>
@@ -208,6 +208,7 @@ class DashboardForm extends React.Component {
 }
 
 DashboardForm.propTypes = {
+  endpointKey: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   formOptions: PropTypes.object.isRequired,
   formValues: PropTypes.object.isRequired

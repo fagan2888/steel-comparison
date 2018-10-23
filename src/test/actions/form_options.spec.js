@@ -35,7 +35,8 @@ const reporter_response = {
   }
 };
 
-const { host, apiKey } = config.api.steel;
+const endpointKey = 'test';
+const { host, apiKey } = config.endpoints[endpointKey].api.steel;
 
 describe('async actions', () => {
   afterEach(() => {
@@ -58,11 +59,11 @@ describe('async actions', () => {
         flow_types: [{label: 'Quantity (Metric Tons)', value: 'QTY'}, {label: 'Value (US Dollars)', value: 'VALUE'}]
       }
     ];
-    return store.dispatch(actions.requestFormOptions()).then(() => {
+    return store.dispatch(actions.requestFormOptions(endpointKey)).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
   });
-  
+
   it('set reporter country options from trade flow', () => {
     nock(host)
       .get(`?api_key=${apiKey}&size=1&trade_flow=IMP`)
@@ -78,7 +79,7 @@ describe('async actions', () => {
         reporter_countries: [{label: 'China', value: 'China'}, {label: 'United States', value: 'United States'}]
       }
     ];
-    return store.dispatch(actions.requestTradeFlowSubgroups('IMP')).then(() => {
+    return store.dispatch(actions.requestTradeFlowSubgroups(endpointKey, 'IMP')).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
   });
@@ -100,9 +101,9 @@ describe('async actions', () => {
       }
     ];
 
-    return store.dispatch(actions.requestReporterSubgroups('IMP', 'China')).then(() => {
+    return store.dispatch(actions.requestReporterSubgroups(endpointKey, 'IMP', 'China')).then(() => {
       expect(store.getActions()).toEqual(expected_actions);
     });
   });
-  
+
 });
