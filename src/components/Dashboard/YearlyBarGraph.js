@@ -47,7 +47,7 @@ class YearlyBarGraph extends React.Component {
 
   render() {
     const { data, query } = this.props;
-    const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow'];
+    const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'percent_change_ytd', 'ytd_end_month', 'trade_flow', 'updated_date'];
 
     const data_entry = data.product_group_entry.find((element) => {
       return element.partner_country === query.partner_countries;

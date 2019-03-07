@@ -1,7 +1,7 @@
-export DashboardForm from './Form/Form';
-export Spinner from './Spinner/Spinner';
-export YearlyBarGraph from './Dashboard/YearlyBarGraph';
-export ComparisonBarGraphs from './Dashboard/ComparisonBarGraphs';
-export PieGraphs from './Dashboard/PieGraphs';
-export DownloadButton from './Dashboard/DownloadButton';
-export DashboardFootnote from './Dashboard/Footnote';
+export {default as DashboardForm} from './Form/Form';
+export {default as Spinner} from './Spinner/Spinner';
+export {default as YearlyBarGraph} from './Dashboard/YearlyBarGraph';
+export {default as ComparisonBarGraphs} from './Dashboard/ComparisonBarGraphs';
+export {default as PieGraphs} from './Dashboard/PieGraphs';
+export {default as DownloadButton} from './Dashboard/DownloadButton';
+export {default as DashboardFootnote} from './Dashboard/Footnote';

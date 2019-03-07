@@ -1,3 +1,14 @@
 {
-  "presets": ["es2015", "stage-0", "react"]
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": [
+          "> 1%",
+          "last 2 versions",
+        ]
+      }
+    }],
+    "@babel/react"
+  ],
+  "plugins": ["@babel/plugin-syntax-export-default-from"],
 }

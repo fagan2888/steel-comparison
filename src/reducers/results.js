@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import { RECEIVE_FAILURE, RECEIVE_RESULTS, REQUEST_RESULTS } from '../constants';
 
 export function results(state = {

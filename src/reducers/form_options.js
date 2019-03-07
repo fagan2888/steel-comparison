@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import { SET_FORM_OPTIONS,SET_TRADE_FLOW_SUBGROUPS, SET_REPORTER_SUBGROUPS, REQUEST_FORM_OPTIONS } from '../constants';
 
 export function form_options(state = {

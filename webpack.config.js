@@ -5,11 +5,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   devtool: 'inline-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:3001',
     'webpack/hot/only-dev-server',
-    'babel-polyfill',
+    '@babel/polyfill',
     './src/index'
   ],
   output: {
@@ -26,50 +27,56 @@ module.exports = {
         NODE_ENV: '"development"'
       },
       __DEVELOPMENT__: true
-    })
+    }),
+    new webpack.LoaderOptionsPlugin({
+      // test: /\.xxx$/, // may apply this only for some modules
+      options: {
+        progress: true
+      }
+    }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        use: [{loader: 'babel-loader'}],
         include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'postcss-loader'}],
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass?outputStyle=expanded&sourceMap'
+        use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {loader: 'sass-loader'}],
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        use: [{loader: 'url-loader?limit=10000&mimetype=application/font-woff'}],
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        use: [{loader: 'url-loader?limit=10000&mimetype=application/font-woff'}],
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        use: [{loader: 'url-loader?limit=10000&mimetype=application/octet-stream'}],
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file' },
+        use: [{loader: 'file-loader'}],
+      },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
+        use: [{loader: 'url-loader?limit=10000&mimetype=image/svg+xml'}],
       },
     ]
   },
-  progress: true,
   resolve: {
-    modulesDirectories: [
+    modules: [
       'src',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx'],
   },
 };

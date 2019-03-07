@@ -1,11 +1,14 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import PartnerCountryPie from '../../../../components/Dashboard/PieGraphs/PartnerCountryPie';
 import test_data from '../test_data';
 
 jest.mock('react-chartjs-2', () => ({
   Pie: () => null
 }));
+
+configure ({ adapter: new Adapter() });
 
 function setup() {
   const props = {};

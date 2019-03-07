@@ -1,11 +1,14 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import ProductGroupBar from '../../../../components/Dashboard/ComparisonBarGraphs/ProductGroupBar';
 import test_data from '../test_data';
 
 jest.mock('react-chartjs-2', () => ({
   HorizontalBar: () => null
 }));
+
+configure ({ adapter: new Adapter() });
 
 function setup() {
   const time_periods = ['2015', '2016', 'ytd_2016', 'ytd_2017'];

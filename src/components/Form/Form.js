@@ -44,15 +44,6 @@ const SelectField = ({ input, name, options, meta, handleChange = null }) => {
 );
 }
 
-SelectField.propTypes = {
-  input: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  meta: PropTypes.object,
-  handleChange: PropTypes.func
-};
-
 class DashboardForm extends React.Component {
 
   constructor(props) {
@@ -205,13 +196,6 @@ class DashboardForm extends React.Component {
       </form>
     );
   }
-}
-
-DashboardForm.propTypes = {
-  endpointKey: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  formOptions: PropTypes.object.isRequired,
-  formValues: PropTypes.object.isRequired
 }
 
 export { DashboardForm };

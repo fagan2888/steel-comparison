@@ -81,7 +81,6 @@ export default {
       }
     ],
     reporter_country: 'United States',
-    source_last_updated: '2017-09-14T15:09:14.233+00:00'
   },
   time_periods: [
     {

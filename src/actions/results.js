@@ -50,7 +50,7 @@ function aggregateResults(json, params, offset, agg_results) {
     return receiveFailure('No results found for this Reporter Country and Product Group combination.' );
 
   results.reporter_country = params.reporter_countries;
-  results.source_last_updated = json[1].sources_used[0].source_last_updated;
+  results.source_last_updated = json[1].results[0].updated_date;
 
   return receiveResults(results, params);
 }
