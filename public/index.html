@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Global Steel Trade Monitor</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var BASE_URL = "https://api.trade.gov/v1/steel_data/search";
+        var API_KEY = "FGjwxfSkdeVB2GncULww_uFb";
+        var divID = "GSTM-app";
+        window.Explorer.renderSteelSearch(BASE_URL, API_KEY, divID);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="GSTM-app"></div>
+  </body>
+</html>

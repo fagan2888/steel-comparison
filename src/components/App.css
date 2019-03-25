@@ -1,0 +1,109 @@
+
+#GSTM-app {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,"Roboto",Arial,sans-serif;
+}
+
+#GSTM-app > div > div > p:nth-child(4) {
+  width: 250px;
+  position: relative;
+}
+
+#GSTM-app form {
+  max-width: 525px;
+  display: inline-block;
+}
+
+#GSTM-app form .ReportingCountries, .PartnerCountries, .TradeFlow, .ProductGroups, .FlowType {
+  display: inline-block;
+  min-width: 250px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#GSTM-app form button {
+  display: block;
+  margin-top: 1rem;
+  width: 20rem;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 1.04rem;
+  color: #fff;
+  background-color: #0071bc;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#GSTM-app form button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#GSTM-app form p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#GSTM-app form b {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+#GSTM-app .GraphCollection {
+  display: inline;
+}
+
+#GSTM-app .message {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 200px;
+  margin-left: 50px;
+  color: #234781;
+}
+
+#GSTM-app .spinner {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 200px;
+  margin-left: 50px;
+}
+
+#GSTM-app .Graph {
+  display: inline-block;
+  width: 550px;
+  height: 400px;
+  margin-top: 20px;
+  margin-right: 50px;
+}
+
+#GSTM-app .Graph:first-of-type {
+  margin-left: 30px;
+}
+
+#GSTM-app .Graph .ChartTitle {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+#GSTM-app .Graph .caption {
+  margin-top: 0;
+  margin-bottom: 10px;
+  margin-left: 40px;
+  font-size: 0.8em;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,"Roboto",Arial,sans-serif;
+}
+
+#GSTM-app .Graph button.modalOpen {
+  background: none;
+  color:#234781;
+  border: none; 
+  padding: 0;
+  font: inherit;
+  border-bottom: 1px solid #234781; 
+  cursor: pointer;
+}
