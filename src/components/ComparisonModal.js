@@ -4,13 +4,21 @@ import Modal from 'react-modal';
 Modal.setAppElement('#GSTM-app');
 
 const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title}) => {
-		
+	
+	const formattedData = (dataValue) => {
+		if ((dataValue >= 0) && (dataValue < 1)) {
+			return parseFloat(dataValue).toLocaleString();
+		} else if (dataValue >= 0) {
+			return parseFloat(dataValue.toFixed(2)).toLocaleString();
+		} else return '*';
+	}
+
 	const table_rows = labels.map((label, i) => {
 		return (
 			<tr key={i}>
 				<td style={cellStyle}>{label}</td>
-				<td style={cellStyle}>{data_valuesA[i] ? parseFloat(data_valuesA[i].toFixed(2)).toLocaleString() : null}</td>
-				<td style={cellStyle}>{data_valuesB[i] ? parseFloat(data_valuesB[i].toFixed(2)).toLocaleString() : null}</td>
+				<td style={cellStyle}>{formattedData(data_valuesA[i])}</td>
+				<td style={cellStyle}>{formattedData(data_valuesB[i])}</td>
 			</tr>
 		)
 	})
@@ -33,6 +41,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 					{table_rows}
 	  		</tbody>
 	  	</table>
+			<small>* Asterisk indicates no data available.</small>
 	  	<div className="explorer__modal-button-div">
 	  		<button className="modalClose" onClick={closeModal} style={modalButtonStyle}>Close</button>
 	  	</div>
@@ -42,32 +51,32 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 
 export default ComparisonBarModal;
 
-const cellStyle = {textAlign: 'left', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
-const headerStyle = {textAlign: 'left', fontWeight: 'bold', padding: '5px', border: '1px solid black', borderCollapse: 'collapse'};
+const cellStyle = {textAlign: 'right', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
+const headerStyle = {textAlign: 'center', fontWeight: 'bold', padding: '5px', border: '1px solid black', borderCollapse: 'collapse'};
 const modalStyle = {
-	content:{
-		top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    font									: '1rem Lato,"Helvetica Neue",Helvetica,Arial,sans-serif'
+	content: {
+		top           : '50%',
+    left          : '50%',
+    right         : 'auto',
+    bottom        : 'auto',
+    marginRight   : '-50%',
+    transform     : 'translate(-50%, -50%)',
+    font		      : '1rem Lato,"Helvetica Neue",Helvetica,Arial,sans-serif'
 	}
 };
 const modalButtonStyle = {
-	display: 'block',
-	margin: 'auto',
-	marginTop: '1rem',
-	width: '20rem',
-	fontSize: '0.9rem',
-	lineHeight: '1',
-	padding: '1.04rem',
-	color: '#fff',
-	backgroundColor: '#0071bc',
-	WebkitAppearance: 'none',
-	border: 'none',
-	borderRadius: '5px',
-	cursor: 'pointer',
-	textDecoration: 'none',
+	display           : 'block',
+	margin            : 'auto',
+	marginTop         : '1rem',
+	width             : '20rem',
+	fontSize          : '0.9rem',
+	lineHeight        : '1',
+	padding           : '1.04rem',
+	color             : '#fff',
+	backgroundColor   : '#0071bc',
+	WebkitAppearance  : 'none',
+	border            : 'none',
+	borderRadius      : '5px',
+	cursor            : 'pointer',
+	textDecoration    : 'none',
 };

@@ -12,8 +12,9 @@ The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
 ## Running tests
-In one terminal tab, launch server with `npm run start`.
-In another terminal tab, launch tests with `npm run test`.
+In one terminal tab, launch server with `npm run start`.  
+In another terminal tab, launch tests with `npm run test`.  
+Expect the suite to pass within 10 seconds (depending on network speed).
 
 ## Build and Deploy to GitHub Pages
 `npm run build && npm run deploy`

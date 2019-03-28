@@ -5,8 +5,9 @@ export class TradeRepository {
         this.apiKey = apiKey;
     }
 
-    async _getAggregations() {
-        return fetch(`${this.url}?&api_key=${this.apiKey}`)
+    async _getAggregations(trade_flow, reporters="", partners="") {
+        return fetch(`${this.url}?&reporter_countries=${reporters}&partner_countries=${partners}&trade_flow=${trade_flow}&api_key=${this.apiKey}`)
+        // .then(console.log(`${this.url}?&reporter_countries=${reporters}&partner_countries=${partners}&trade_flow=${trade_flow}&api_key=${this.apiKey}`))
         .then(response => response.json())
         .catch(error => console.log(error))
     }

@@ -65,7 +65,15 @@
   color: #234781;
 }
 
-#GSTM-app .spinner {
+#GSTM-app .spinnerForForm {
+  position: absolute;
+  z-index: 1;
+  vertical-align: top;
+  margin-top: 150px;
+  margin-left: 200px;
+}
+
+#GSTM-app .spinnerForCharts {
   display: inline-block;
   vertical-align: top;
   margin-top: 200px;
@@ -74,7 +82,7 @@
 
 #GSTM-app .Graph {
   display: inline-block;
-  width: 550px;
+  width: 600px;
   height: 400px;
   margin-top: 20px;
   margin-right: 50px;
@@ -99,6 +107,20 @@
 }
 
 #GSTM-app .Graph button.modalOpen {
+  background: none;
+  color:#234781;
+  border: none; 
+  padding: 0;
+  font: inherit;
+  border-bottom: 1px solid #234781; 
+  cursor: pointer;
+}
+
+#GSTM-app button#BackToTop {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
   background: none;
   color:#234781;
   border: none; 

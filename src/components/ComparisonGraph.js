@@ -69,7 +69,7 @@ class ComparisonGraph extends Component {
       if (dataObjB.length > 0) {
         data_valuesB.push(dataObjB[0][label]/1000)
       }
-      /* prepare the x-axis labels by removing 'sum_' */
+      /* prepare the x-axis labels by removing 'sum_' and capitalizing 'ytd' */
       label = label.replace('sum_', '');
       let ytd_label = 'YTD ' + this.props.data_array[0].ytd_end_month + ' ';
       x_axis_values.push(label.replace('ytd_', ytd_label));
@@ -83,6 +83,10 @@ class ComparisonGraph extends Component {
         data_valuesB.splice(index, 1);
       }
     });
+
+    // console.log(this.props.data_array);
+    // console.log(data_valuesA);
+    // console.log(data_valuesB);
 
     function constructChartTitle(dataset_label_key, query, data_array) {
       let units = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
@@ -102,14 +106,14 @@ class ComparisonGraph extends Component {
 
     function constructFootnote(last_updated, query, array1, array2 = []) {
       const last_updated_date = moment(last_updated, 'DDMMMYYYY').utc().format('MM-DD-YYYY');
-      const unit = (query.flow_type === 'QTY') ? ' metric tons.' : ' thousand U.S. dollars.';
+      const unit = (query.flow_type === 'QTY') ? ' thousand metric tons.' : ' thousand U.S. dollars.';
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
       const total_valuesA = (array1.length > 0) ? array1.reduce(reducer) : 0;
       const total_valuesB = (array2.length > 0) ? array2.reduce(reducer) : 0;
       const sum_of_values = parseFloat((total_valuesA + total_valuesB).toFixed(2)).toLocaleString();
       return (
         <p className="caption"> 
-          {config.footnote + '  Updated on ' + last_updated_date + '.  Trade covered in the table is ' + sum_of_values + unit}
+          {`${config.footnote}`}<br/>{`Updated on ${last_updated_date}.  Trade covered in the table is ${sum_of_values}${unit}`}
         </p> 
       );
     }
