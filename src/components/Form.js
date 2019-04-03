@@ -85,6 +85,22 @@ class Form extends Component {
         message: "",
       });
     }
+    if ((this.props.comparisonType === "Product Groups") && (this.state.PartnerCountry1.value !== prevState.PartnerCountry1.value)) {
+      // if change Partner Country while comparing Product Groups, update the Product Group Options based on these new Partner Country
+      await this.setState({ loadingForm: true })
+      const reporters = await `${this.state.ReporterCountry1.value},${this.state.ReporterCountry2.value}`;
+      const partners = await `${this.state.PartnerCountry1.value},${this.state.PartnerCountry2.value}`;
+
+      const tradeResponse = await this.props.tradeRepository._getAggregations(this.state.TradeFlow.value, reporters, partners);
+      await this.setState({
+        loadingForm: false,
+        submitted: false,
+        ProductGroupOptions: this.extractOptions(tradeResponse.aggregations.product_groups),
+        ProductGroup1: { value: "", label: "Select Product Group" },
+        ProductGroup2: { value: "", label: "Select second Product Group" },
+        message: "",
+      });
+    }
     if (this.state.TradeFlow.value !== prevState.TradeFlow.value) {
       // if change the Trade Flow, update the Reporter Options based on this...
       await this.setState({ loadingForm: true });
@@ -137,11 +153,11 @@ class Form extends Component {
     const { ReporterCountry2, PartnerCountry2, ProductGroup1, ProductGroup2 } = this.state;
     let errorMessage;
     if ((comparisonType === "Reporting Countries") && (!ReporterCountry2.value)) {
-      errorMessage = "Must select second Reporting Country";
+      errorMessage = "Please select second Reporting Country";
     } else if ((comparisonType === "Partner Countries") && (!PartnerCountry2.value)) {
-      errorMessage = "Must select second Partner Country";
+      errorMessage = "Please select second Partner Country";
     } else if ((comparisonType === "Product Groups") && ((!ProductGroup1.value) || (!ProductGroup2.value))) {
-      errorMessage = "Must select two Product Groups";
+      errorMessage = "Please select two Product Groups";
     } else errorMessage = "";
     return errorMessage;
   }

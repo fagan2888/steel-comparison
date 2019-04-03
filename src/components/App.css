@@ -82,7 +82,7 @@
 
 #GSTM-app .Graph {
   display: inline-block;
-  width: 600px;
+  width: 525px;
   height: 400px;
   margin-top: 20px;
   margin-right: 50px;
@@ -108,11 +108,11 @@
 
 #GSTM-app .Graph button.modalOpen {
   background: none;
-  color:#234781;
+  color:#0071bc;
   border: none; 
   padding: 0;
   font: inherit;
-  border-bottom: 1px solid #234781; 
+  border-bottom: 1px solid #0071bc; 
   cursor: pointer;
 }
 
@@ -122,10 +122,39 @@
   bottom: 30px;
   right: 30px;
   background: none;
-  color:#234781;
+  color:#0071bc;
   border: none; 
   padding: 0;
   font: inherit;
-  border-bottom: 1px solid #234781; 
+  border-bottom: 1px solid #0071bc; 
   cursor: pointer;
+}
+
+#GSTM-app footer {
+  left: 50vw;
+  width: 600px;
+  text-align: center;
+  margin: 30px auto 20px auto;
+}
+
+#GSTM-app footer b {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+#GSTM-app footer p {
+  font-size: 0.8rem;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+#GSTM-app footer ol {
+  margin-top: 5px;
+}
+
+#GSTM-app footer li {
+  text-align: left;
+  font-size: 0.8rem;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }

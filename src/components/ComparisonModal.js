@@ -4,13 +4,16 @@ import Modal from 'react-modal';
 Modal.setAppElement('#GSTM-app');
 
 const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title}) => {
-	
+	let asteriskCount = 0;
 	const formattedData = (dataValue) => {
 		if ((dataValue >= 0) && (dataValue < 1)) {
 			return parseFloat(dataValue).toLocaleString();
 		} else if (dataValue >= 0) {
 			return parseFloat(dataValue.toFixed(2)).toLocaleString();
-		} else return '*';
+		} else {
+			asteriskCount++;
+			return '*'
+		};
 	}
 
 	const table_rows = labels.map((label, i) => {
@@ -22,7 +25,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 			</tr>
 		)
 	})
-	
+
 	return (
 		<Modal
 	    isOpen={modalOpen}
@@ -31,7 +34,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 	    contentLabel="Comparison Bar Graphs Data"
 	  >
 	  	<h3>{title}</h3>
-	  	<table className="explorer__modal-table" style={{margin: 'auto', border: '1px solid black', borderCollapse: 'collapse'}}>
+	  	<table id="ModalTable" className="explorer__modal-table" style={{margin: 'auto', border: '1px solid black', borderCollapse: 'collapse'}}>
 	  		<tbody>
 		  		<tr>
 		  			<th style={headerStyle}>Year</th>
@@ -41,7 +44,9 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 					{table_rows}
 	  		</tbody>
 	  	</table>
-			<small>* Asterisk indicates no data available.</small>
+			{ (asteriskCount > 0) ? (
+				<small>* Asterisk indicates no data available.</small>
+			) : null }
 	  	<div className="explorer__modal-button-div">
 	  		<button className="modalClose" onClick={closeModal} style={modalButtonStyle}>Close</button>
 	  	</div>

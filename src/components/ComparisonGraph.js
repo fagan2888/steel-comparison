@@ -95,7 +95,7 @@ class ComparisonGraph extends Component {
       if (dataset_label_key === "product_group") {
         chart_title = (query.reporter_countries + flow + query.partner_countries + ' of ' + query.product_groups + ' in ' + units).replace(',', " and ");
       } else if (dataset_label_key === "trade_flow") {
-        chart_title = (query.reporter_countries + ' Imports and Exports from ' + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
+        chart_title = (query.reporter_countries + ' Imports to and Exports from ' + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
       } else {
         chart_title = (query.reporter_countries + flow + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
       }
@@ -150,6 +150,7 @@ class ComparisonGraph extends Component {
               return parseFloat(value.toFixed(2)).toLocaleString();
             },
           },
+          minBarLength: '10px',
         }],
         xAxes: [{
           scaleLabel: {
@@ -157,17 +158,28 @@ class ComparisonGraph extends Component {
           },
           ticks: {
             autoSkip: false,
-          }
+          },
         }],
       },
       maintainAspectRatio: false,
+      tooltips: {
+        mode: 'index',
+        callbacks : {
+          label: function(tooltipItem, data) {
+            let label = data.datasets[tooltipItem.datasetIndex].label || '';
+            if (label) { label += ': '}
+            label += Math.round(tooltipItem.yLabel * 1000) / 1000;
+            return label;
+          },
+        },
+      },
     };
 
     return (
       <div className="Graph">
         <h4 className="ChartTitle">
           {chartTitle + ' - '}
-          <button className="modalOpen" aria-label="Open modal to view data" onClick={this.onModalButtonClick}>View Data</button>
+          <button className="modalOpen" aria-label="Open modal to view data table" title="Open modal to view data table" onClick={this.onModalButtonClick}>View Data Table</button>
         </h4>
         <Bar 
           data={chartData}

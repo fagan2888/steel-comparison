@@ -72,7 +72,7 @@ test('User can search with Two Reporter Countries', async () => {
   const firstChartTitle = `#GSTM-app > div > div > div > div:nth-child(1) > h4`;
   await page.waitForSelector(firstChartTitle, 5000);
   const firstChartTitleText = await page.$eval(firstChartTitle, e => e.innerText);
-  expect(firstChartTitleText).toBe('United States and Canada Imports from World of All Steel Mill Products in Thousands of Metric Tons - View Data');
+  expect(firstChartTitleText).toBe('United States and Canada Imports from World of All Steel Mill Products in Thousands of Metric Tons - View Data Table');
 })
 
 test('User can search with Two Partner Countries', async () => {
@@ -96,7 +96,7 @@ test('User can search with Two Partner Countries', async () => {
   const firstChartTitle = `#GSTM-app > div > div > div > div:nth-child(1) > h4`;
   await page.waitForSelector(firstChartTitle, 5000);
   const firstChartTitleText = await page.$eval(firstChartTitle, e => e.innerText);
-  expect(firstChartTitleText).toBe('United States Imports from World and China of All Steel Mill Products in Thousands of Metric Tons - View Data');  
+  expect(firstChartTitleText).toBe('United States Imports from World and China of All Steel Mill Products in Thousands of Metric Tons - View Data Table');  
 
   // Open the modal
   const modalOpenButton = `#GSTM-app > div > div > div > div:nth-child(1) > h4 > button`;
@@ -124,7 +124,7 @@ test('User can search with Two Trade Flows', async () => {
   const firstChartTitle = `#GSTM-app > div > div > div > div:nth-child(1) > h4`;
   await page.waitForSelector(firstChartTitle, 5000);
   const firstChartTitleText = await page.$eval(firstChartTitle, e => e.innerText);
-  expect(firstChartTitleText).toBe('United States Imports and Exports from World of All Steel Mill Products in Thousands of Metric Tons - View Data');
+  expect(firstChartTitleText).toBe('United States Imports to and Exports from World of All Steel Mill Products in Thousands of Metric Tons - View Data Table');
 })
 
 afterAll(() => browser.close());

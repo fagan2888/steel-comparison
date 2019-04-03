@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Form from './Form';
 import config from '../config';
+import ContactTOS from './ContactTOS';
 import './App.css';
 
 class FormContainer extends Component {
@@ -59,12 +60,16 @@ class FormContainer extends Component {
           <input type="radio" name="comparisonType" value="Trade Flows" id="two-trade-flows" />
           <label htmlFor="two-trade-flows">Two Trade Flows</label><br />
         </fieldset>
+
         {this.state.comparisonType ?
           <Form
             comparisonType={this.state.comparisonType}
             tradeRepository = {this.props.tradeRepository}
           />
-          : null}
+        : null}
+
+        <ContactTOS/>
+
         <button onClick={topFunction} id="BackToTop">Back to Top</button>
       </div>
     );
