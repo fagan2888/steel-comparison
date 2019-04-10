@@ -48,7 +48,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 				<small>* Asterisk indicates no data available.</small>
 			) : null }
 	  	<div className="explorer__modal-button-div">
-	  		<button className="modalClose" onClick={closeModal} style={modalButtonStyle}>Close</button>
+	  		<button className="modalClose" style={modalButtonStyle} onClick={closeModal}>Close</button>
 	  	</div>
 	  </Modal>
   )
@@ -56,8 +56,8 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 
 export default ComparisonBarModal;
 
-const cellStyle = {textAlign: 'right', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
-const headerStyle = {textAlign: 'center', fontWeight: 'bold', padding: '5px', border: '1px solid black', borderCollapse: 'collapse'};
+const cellStyle = { textAlign: 'right', fontSize: '1em', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
+const headerStyle = { textAlign: 'center', fontWeight: 'bold', padding: '5px', border: '1px solid black', borderCollapse: 'collapse' };
 const modalStyle = {
 	content: {
 		top           : '50%',
@@ -74,7 +74,7 @@ const modalButtonStyle = {
 	margin            : 'auto',
 	marginTop         : '1rem',
 	width             : '20rem',
-	fontSize          : '0.9rem',
+	fontSize          : '1em',
 	lineHeight        : '1',
 	padding           : '1.04rem',
 	color             : '#fff',

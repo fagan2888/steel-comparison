@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import Form from './Form';
 import config from '../config';
 import ContactTOS from './ContactTOS';
-import './App.css';
 
 class FormContainer extends Component {
   constructor(props) {

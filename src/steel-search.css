@@ -15,18 +15,26 @@
   display: inline-block;
 }
 
+#GSTM-app fieldset legend {
+  font-size: 1em;
+}
+
+#GSTM-app fieldset label {
+  font-size: 1em;
+  margin: 0 10px 0 10px;
+}
+
 #GSTM-app form .ReportingCountries, .PartnerCountries, .TradeFlow, .ProductGroups, .FlowType {
   display: inline-block;
   min-width: 250px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
 }
 
 #GSTM-app form button {
   display: block;
-  margin-top: 1rem;
-  width: 20rem;
-  font-size: 0.9rem;
+  margin-top: 1em;
+  width: 20em;
+  font-size: 1em;
   line-height: 1;
   padding: 1.04rem;
   color: #fff;
@@ -100,9 +108,8 @@
 
 #GSTM-app .Graph .caption {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   margin-left: 40px;
-  font-size: 0.8em;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,"Roboto",Arial,sans-serif;
 }
 
@@ -138,12 +145,10 @@
 }
 
 #GSTM-app footer b {
-  font-size: 0.8rem;
   margin-bottom: 5px;
 }
 
 #GSTM-app footer p {
-  font-size: 0.8rem;
   margin-top: 3px;
   margin-bottom: 3px;
 }
@@ -154,7 +159,6 @@
 
 #GSTM-app footer li {
   text-align: left;
-  font-size: 0.8rem;
   margin-top: 3px;
   margin-bottom: 3px;
 }
