@@ -495,6 +495,11 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
+      new HtmlWebpackPlugin({
+        inject: true,
+        template: paths.appHtmlStaging, 
+        filename: 'staging.html' 
+      }),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       isEnvProduction &&

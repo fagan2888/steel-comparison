@@ -25,11 +25,11 @@ Include the build output (e.g. `steel-search.js` and `steel-search.css`) within 
 <link rel="stylesheet" type="text/css" href="steel-search.css">
 <script type="text/javascript" src="steel-search.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var BASE_URL = "https://api.trade.gov/v1/steel_data/search";
-    var API_KEY = "your_API_KEY"; // get it from http://api.trade.gov/
-    var divID = "GSTM-app"; // Or the ID of the div where you'd like it to appear
-    window.Explorer.renderSteelSearch(BASE_URL, API_KEY, divID);
+  document.addEventListener('DOMContentLoaded', function() {
+    var BASE_URL = 'https://api.trade.gov/v1/steel_data/search';
+    var API_KEY = 'your_API_KEY'; // get it from http://api.trade.gov/
+    var divID = 'GSTM-app'; // Or the ID of the div where you'd like it to appear
+    window.Explorer.renderSteelSearch(divID, BASE_URL, API_KEY);
   });
 </script>
 ```
