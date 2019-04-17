@@ -85,7 +85,7 @@ class GraphCollection extends Component {
     return (
       <div className="GraphCollection">
 
-        {this.state.loadingResults ? (<div className="spinnerForCharts"><Loader type="Grid" color="#00CC66" width="100" /></div>) : null}
+        {this.state.loadingResults ? (<div className="spinnerForCharts"><Loader type="RevolvingDot" color="#0071bc" width="100" /></div>) : null}
 
         {((this.props.submitted) && (this.state.total > 0)) ? (
           paired_results_array.map((r, i) => <ComparisonGraph key={i} data_array={r} dataset_label_key={dataset_label_key} />)

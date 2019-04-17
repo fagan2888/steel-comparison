@@ -73,14 +73,6 @@
   color: #234781;
 }
 
-#GSTM-app .spinnerForForm {
-  position: absolute;
-  z-index: 1;
-  vertical-align: top;
-  margin-top: 150px;
-  margin-left: 200px;
-}
-
 #GSTM-app .spinnerForCharts {
   display: inline-block;
   vertical-align: top;
