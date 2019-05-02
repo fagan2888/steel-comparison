@@ -1,0 +1,6 @@
+{
+  "short_name": "GSTM 2.0 testing",
+  "name": "Global Steel Trade Monitor 2.0 - Sandbox edition",
+  "start_url": ".",
+  "display": "standalone"
+}
