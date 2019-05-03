@@ -95,7 +95,7 @@ class ComparisonGraph extends Component {
       if (dataset_label_key === "product_group") {
         chart_title = (query.reporter_countries + flow + query.partner_countries + ' of ' + query.product_groups + ' in ' + units).replace(',', " and ");
       } else if (dataset_label_key === "trade_flow") {
-        chart_title = (query.reporter_countries + ' Imports to and Exports from ' + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
+        chart_title = (query.reporter_countries + ' Imports from and Exports to ' + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
       } else {
         chart_title = (query.reporter_countries + flow + query.partner_countries + ' of ' + data_array.product_group + ' in ' + units).replace(',', " and ");
       }
@@ -104,16 +104,11 @@ class ComparisonGraph extends Component {
 
     const chartTitle = constructChartTitle(this.props.dataset_label_key, query, this.props.data_array[0]);
 
-    function constructFootnote(last_updated, query, array1, array2 = []) {
+    function constructFootnote(last_updated) {
       const last_updated_date = moment(last_updated, 'DDMMMYYYY').utc().format('MM-DD-YYYY');
-      const unit = (query.flow_type === 'QTY') ? ' thousand metric tons.' : ' thousand U.S. dollars.';
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      const total_valuesA = (array1.length > 0) ? array1.reduce(reducer) : 0;
-      const total_valuesB = (array2.length > 0) ? array2.reduce(reducer) : 0;
-      const sum_of_values = parseFloat((total_valuesA + total_valuesB).toFixed(2)).toLocaleString();
       return (
         <p className="caption"> 
-          {`${config.footnote}`}<br/>{`Updated on ${last_updated_date}.  Trade covered in the table is ${sum_of_values}${unit}`}
+          {`${config.footnote}  Updated on ${last_updated_date}.`}
         </p> 
       );
     }
@@ -142,6 +137,7 @@ class ComparisonGraph extends Component {
           scaleLabel: {
             display: true,
             labelString: y_axis_label,
+            fontSize: 14,
           },
           ticks: {
             maxTicksLimit: 15,
@@ -149,15 +145,20 @@ class ComparisonGraph extends Component {
             userCallback: function(value) {
               return parseFloat(value.toFixed(2)).toLocaleString();
             },
+            fontSize: 14,
+            lineHeight: 16,
           },
           minBarLength: '10px',
         }],
         xAxes: [{
           scaleLabel: {
             display: true,
+            fontSize: 14,
           },
           ticks: {
             autoSkip: false,
+            fontSize: 14,
+            lineHeight: 16,
           },
         }],
       },
@@ -172,6 +173,21 @@ class ComparisonGraph extends Component {
             return label;
           },
         },
+        titleFontSize: 14,
+        bodyFontSize: 14,
+      },
+      legend: {
+        labels: {
+          fontSize: 14,
+        },
+      },
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }
       },
     };
 

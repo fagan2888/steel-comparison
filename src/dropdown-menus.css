@@ -1,0 +1,62 @@
+#GSTM-app form .React_select__multi-value {
+  background-color: #0071bc;
+  margin: 0 auto 0 0;
+  min-height: 1px;
+  position: absolute;
+}
+#GSTM-app form .React_select__multi-value__label {
+  font-size: 16px;
+  color: white;
+  padding-right: 7px;
+  min-height: 1px;
+}
+#GSTM-app form .React_select__multi-value__remove {
+  display: none;
+}
+#GSTM-app form .React_select__control {
+  border-radius: 0;
+  min-height: 1px;
+  height: 40px;
+}
+#GSTM-app form .React_select__container {
+  display: inline-block;
+  width: 250px;
+  min-height: 1px;
+  text-align: left;
+  border: none;
+}
+#GSTM-app form .React_select__value-container {
+  min-height: 1px;
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  position: static;
+}
+#GSTM-app form .React_select__single-value {
+  min-height: 1px;
+  max-width: 200px;
+  padding-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#GSTM-app form .React_select__input {
+  min-height: 1px;
+}
+#GSTM-app form .React_select__dropdown-indicator {
+  min-height: 1px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#GSTM-app form .React_select__indicator-separator {
+  min-height: 1px;
+}
+#GSTM-app form .React_select__indicator-container {
+  min-height: 1px;
+}
+#GSTM-app form .React_select__dropdown-indicator {
+  min-height: 1px;
+}
+#GSTM-app form .React_select__clear-indicator {
+  min-height: 1px;
+}

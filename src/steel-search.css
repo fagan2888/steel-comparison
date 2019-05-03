@@ -1,8 +1,30 @@
+:root {
+  --color-primary: #0071bc;
+  --color-primary-darker: #205493;
+  --color-primary-darkest: #112e51;
+  --color-secondary-alt: #02bfe7;
+  --color-secondary: #e31c3d;
+  --color-secondary-dark: #cd2026;
+}
 
 #GSTM-app {
   margin-left: 5vw;
   margin-right: 5vw;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,"Roboto",Arial,sans-serif;
+}
+
+#GSTM-app h1 {
+  font-family: "Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif;
+  font-size: 32px;
+}
+
+#GSTM-app h1 > a {
+  color: var(--color-primary-darker);
+}
+
+#GSTM-app p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
 }
 
 #GSTM-app > div > div > p:nth-child(4) {
@@ -15,13 +37,47 @@
   display: inline-block;
 }
 
+#GSTM-app .center-fieldset {
+  text-align: center;
+}
+
+#GSTM-app fieldset {
+  text-align: left;
+  color: white;
+  background-color: var(--color-primary);
+  border: 1px var(--color-primary-darker) solid;
+  padding-top: 5px;
+  padding-bottom: 0;
+  margin: 0 auto;
+  display: inline-block;
+  min-width: 50%;
+}
+
 #GSTM-app fieldset legend {
   font-size: 1em;
+  font-weight: 400;
+  padding: 3px 10px 5px 10px;
+  margin-left: 5px;
+  background-color: var(--color-primary-darkest);
 }
 
 #GSTM-app fieldset label {
   font-size: 1em;
   margin: 0 10px 0 10px;
+  display: block;
+}
+
+#GSTM-app fieldset label::before {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--color-primary-darker);
+}
+
+#GSTM-app [type=radio]:checked+label:before {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-secondary-dark);
+  background-color: var(--color-secondary-dark);
+}
+
+#GSTM-app .form-and-instructions {
+  display: inline;
 }
 
 #GSTM-app form .ReportingCountries, .PartnerCountries, .TradeFlow, .ProductGroups, .FlowType {
@@ -38,7 +94,7 @@
   line-height: 1;
   padding: 1.04rem;
   color: #fff;
-  background-color: #0071bc;
+  background-color: var(--color-primary);
   -webkit-appearance: none;
   border: 0;
   border-radius: 5px;
@@ -70,7 +126,7 @@
   vertical-align: top;
   margin-top: 200px;
   margin-left: 50px;
-  color: #234781;
+  color: var(--color-primary-darkest);
 }
 
 #GSTM-app .spinnerForCharts {
@@ -95,10 +151,11 @@
 #GSTM-app .Graph .ChartTitle {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 #GSTM-app .Graph .caption {
+  padding-top: 0;
   margin-top: 0;
   margin-bottom: 40px;
   margin-left: 40px;
@@ -107,12 +164,19 @@
 
 #GSTM-app .Graph button.modalOpen {
   background: none;
-  color:#0071bc;
-  border: none; 
+  color:var(--color-primary);
   padding: 0;
+  margin: 0;
   font: inherit;
-  border-bottom: 1px solid #0071bc; 
+  border-bottom: 1px solid var(--color-primary);
+  border-radius: 0; 
   cursor: pointer;
+}
+
+.ReactModalPortal .modal-table {
+  min-width: 25%;
+  table-layout: auto;
+  margin: auto;
 }
 
 #GSTM-app button#BackToTop {
@@ -120,12 +184,13 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background: none;
-  color:#0071bc;
-  border: none; 
+  background-color: rgba(255, 255, 255, 0.8);
+  color:var(--color-primary);
   padding: 0;
+  margin: 0;
   font: inherit;
-  border-bottom: 1px solid #0071bc; 
+  border-bottom: 1px solid var(--color-primary); 
+  border-radius: 0; 
   cursor: pointer;
 }
 
@@ -141,11 +206,13 @@
 }
 
 #GSTM-app footer p {
+  font-size: 14px;
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
 #GSTM-app footer ol {
+  font-size: 16px;
   margin-top: 5px;
 }
 

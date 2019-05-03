@@ -7,6 +7,7 @@ import config from '../config.js';
 import { searchQuery } from '../utils/searchQuery';
 import { map, compact, isEmpty } from 'lodash';
 import { propComparator } from '../utils/sort';
+import '../dropdown-menus.css';
 
 class Form extends Component {
   constructor(props) {
@@ -176,118 +177,128 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <h2>Comparing {this.props.comparisonType}</h2>
-        <p>
-          {config.instructions[this.props.comparisonType]}
-        </p>
-        <p>
-          Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
-        </p>
-        <p><b>All fields are required.</b>  <a href={config.faqs_link} target="_blank" rel="noopener noreferrer">FAQs</a></p>
+        <div className="form-and-instructions">
+          <h2>Comparing {this.props.comparisonType}</h2>
+          <p>
+            {config.instructions[this.props.comparisonType]}
+          </p>
+          <p>
+            Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
+          </p>
+          <p><b>All fields are required.</b>  <a href={config.faqs_link} target="_blank" rel="noopener noreferrer">FAQs</a></p>
 
-        <form onSubmit={this.handleSubmit}>
-          <LoadingOverlay active={this.state.loadingForm} spinner text='Updating form options...'>
-            <b>Trade Flow: </b><br /><p>Direction of trade: exports or imports</p>
-            {this.props.comparisonType === "Trade Flows" ? (
-              <Select
-                name="TradeFlow"
-                className="TradeFlow"
-                options={[{ value: "", label: "Imports and Exports" }]}
-                value={{ value: "", label: "Imports and Exports" }}
-                isMulti
-                isDisabled={true}
-                isClearable={false}
-                styles={TradeFlowStyles}
-                onChange={option => this.handleSelect("TradeFlow", option)}
-                aria-label="Select Trade Flow"
-              />
-            ) : (
+          <form onSubmit={this.handleSubmit}>
+            <LoadingOverlay active={this.state.loadingForm} spinner text='Updating form options...'>
+              <b>Trade Flow: </b><br /><p>Direction of trade: exports or imports</p>
+              {this.props.comparisonType === "Trade Flows" ? (
                 <Select
                   name="TradeFlow"
                   className="TradeFlow"
-                  value={this.state.TradeFlow}
-                  defaultValue={{ value: "IMP", label: "Imports" }}
+                  classNamePrefix="React_select"
+                  options={[{ value: "", label: "Imports and Exports" }]}
+                  value={{ value: "", label: "Imports and Exports" }}
+                  isMulti
+                  isDisabled={true}
+                  isClearable={false}
                   onChange={option => this.handleSelect("TradeFlow", option)}
-                  options={[{ value: "IMP", label: "Imports" }, { value: "EXP", label: "Exports" }]}
                   aria-label="Select Trade Flow"
                 />
-              )}
-            <br />
-            <b>Reporting Country: </b><br /><p>A country reporting steel trade from either its exporting or importing perspective</p>
-            <Select
-              name="ReporterCountry1"
-              className="ReportingCountries"
-              options={this.state.ReporterOptions}
-              value={this.state.ReporterCountry1}
-              onChange={(option) => this.handleSelect("ReporterCountry1", option)}
-              aria-label="Select Reporting Country"
-            />
-            {this.props.comparisonType === "Reporting Countries" ? (
+              ) : (
+                  <Select
+                    name="TradeFlow"
+                    className="TradeFlow"
+                    classNamePrefix="React_select"
+                    value={this.state.TradeFlow}
+                    defaultValue={{ value: "IMP", label: "Imports" }}
+                    onChange={option => this.handleSelect("TradeFlow", option)}
+                    options={[{ value: "IMP", label: "Imports" }, { value: "EXP", label: "Exports" }]}
+                    aria-label="Select Trade Flow"
+                  />
+                )}
+              <br />
+              <b>Reporting Country: </b><br /><p>A country reporting steel trade from either its exporting or importing perspective</p>
               <Select
-                name="ReporterCountry2"
+                name="ReporterCountry1"
                 className="ReportingCountries"
+                classNamePrefix="React_select"
                 options={this.state.ReporterOptions}
-                value={this.state.ReporterCountry2}
-                onChange={(option) => this.handleSelect("ReporterCountry2", option)}
-                aria-label="Select Second Reporting Country"
+                value={this.state.ReporterCountry1}
+                onChange={(option) => this.handleSelect("ReporterCountry1", option)}
+                aria-label="Select Reporting Country"
               />
-            ) : null}
-            <br />
-            <b>Partner Country: </b><br /><p>Destination of a reporting country’s steel exports or imports</p>
-            <Select
-              name="PartnerCountry1"
-              className="PartnerCountries"
-              options={this.state.PartnerOptions}
-              value={this.state.PartnerCountry1}
-              onChange={(option) => this.handleSelect("PartnerCountry1", option)}
-              aria-label="Select Partner Country"
-            />
-            {this.props.comparisonType === "Partner Countries" ? (
+              {this.props.comparisonType === "Reporting Countries" ? (
+                <Select
+                  name="ReporterCountry2"
+                  className="ReportingCountries"
+                  classNamePrefix="React_select"
+                  options={this.state.ReporterOptions}
+                  value={this.state.ReporterCountry2}
+                  onChange={(option) => this.handleSelect("ReporterCountry2", option)}
+                  aria-label="Select Second Reporting Country"
+                />
+              ) : null}
+              <br />
+              <b>Partner Country: </b><br /><p>Destination of a reporting country’s steel exports or imports</p>
               <Select
-                name="PartnerCountry2"
+                name="PartnerCountry1"
                 className="PartnerCountries"
+                classNamePrefix="React_select"
                 options={this.state.PartnerOptions}
-                value={this.state.PartnerCountry2}
-                onChange={(option) => this.handleSelect("PartnerCountry2", option)}
-                aria-label="Select Second Partner Country"
+                value={this.state.PartnerCountry1}
+                onChange={(option) => this.handleSelect("PartnerCountry1", option)}
+                aria-label="Select Partner Country"
               />
-            ) : null}
-            {this.props.comparisonType === "Product Groups" ? (
-              <>
-                <br />
-                <b>Product Group: </b><br /><p>Steel Mill Products are contained in Flat, Long, Pipe/Tube, Semi-Finished or Stainless products. <a href="https://www.trade.gov/steel/pdfs/product-definitions.pdf" target="_blank" rel="noopener noreferrer">More Information.</a></p>
+              {this.props.comparisonType === "Partner Countries" ? (
                 <Select
-                  name="ProductGroup1"
-                  className="ProductGroups"
-                  options={this.state.ProductGroupOptions}
-                  value={this.state.ProductGroup1}
-                  onChange={(option) => this.handleSelect("ProductGroup1", option)}
-                  aria-label="Select Product Group"
+                  name="PartnerCountry2"
+                  className="PartnerCountries"
+                  classNamePrefix="React_select"
+                  options={this.state.PartnerOptions}
+                  value={this.state.PartnerCountry2}
+                  onChange={(option) => this.handleSelect("PartnerCountry2", option)}
+                  aria-label="Select Second Partner Country"
                 />
-                <Select
-                  name="ProductGroup2"
-                  className="ProductGroups"
-                  options={this.state.ProductGroupOptions}
-                  value={this.state.ProductGroup2}
-                  onChange={(option) => this.handleSelect("ProductGroup2", option)}
-                  aria-label="Select Second Product Group"
-                />
-              </>
-            ) : null}
-            <br />
-            <b>Quantity or Value: </b><br /><p>Unit of measure - either metric tons or U.S. dollars.</p>
-            <Select
-              name="FlowType"
-              className="FlowType"
-              options={[{ value: "QTY", label: "Quantity (Metric Tons)" }, { value: "VALUE", label: "Value (US Dollars)" }]}
-              value={this.state.FlowType}
-              onChange={(option) => this.handleSelect("FlowType", option)}
-              aria-label="Select Flow Type"
-            />
-            <button type="submit" onSubmit={this.handleSubmit}>Generate Graphs</button>
-            <button><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">Return to the Global Steel Trade Monitor</a></button>
-          </LoadingOverlay>
-        </form>
+              ) : null}
+              {this.props.comparisonType === "Product Groups" ? (
+                <>
+                  <br />
+                  <b>Product Group: </b><br /><p>Steel Mill Products are contained in Flat, Long, Pipe/Tube, Semi-Finished or Stainless products. <a href="https://www.trade.gov/steel/pdfs/product-definitions.pdf" target="_blank" rel="noopener noreferrer">More Information.</a></p>
+                  <Select
+                    name="ProductGroup1"
+                    className="ProductGroups"
+                    classNamePrefix="React_select"
+                    options={this.state.ProductGroupOptions}
+                    value={this.state.ProductGroup1}
+                    onChange={(option) => this.handleSelect("ProductGroup1", option)}
+                    aria-label="Select Product Group"
+                  />
+                  <Select
+                    name="ProductGroup2"
+                    className="ProductGroups"
+                    classNamePrefix="React_select"
+                    options={this.state.ProductGroupOptions}
+                    value={this.state.ProductGroup2}
+                    onChange={(option) => this.handleSelect("ProductGroup2", option)}
+                    aria-label="Select Second Product Group"
+                  />
+                </>
+              ) : null}
+              <br />
+              <b>Quantity or Value: </b><br /><p>Unit of measure - either metric tons or U.S. dollars.</p>
+              <Select
+                name="FlowType"
+                className="FlowType"
+                classNamePrefix="React_select"
+                options={[{ value: "QTY", label: "Quantity (Metric Tons)" }, { value: "VALUE", label: "Value (US Dollars)" }]}
+                value={this.state.FlowType}
+                onChange={(option) => this.handleSelect("FlowType", option)}
+                aria-label="Select Flow Type"
+              />
+              <button type="submit" onSubmit={this.handleSubmit}>Generate Graphs</button>
+              <button><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">Return to the Global Steel Trade Monitor</a></button>
+            </LoadingOverlay>
+          </form>
+        </div>
         { this.state.message ? (
           <h3 className="message">{this.state.message}</h3>
         ) : null }
@@ -302,15 +313,3 @@ class Form extends Component {
 };
 
 export default withRouter(Form);
-
-const TradeFlowStyles = {
-  multiValue: (base) => {
-    return { ...base, backgroundColor: '#0071bc' };
-  },
-  multiValueLabel: (base) => {
-    return { ...base, fontWeight: 'bold', color: 'white', paddingRight: 6 };
-  },
-  multiValueRemove: (base) => {
-    return { ...base, display: 'none' };
-  },
-};

@@ -34,7 +34,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 	    contentLabel="Comparison Bar Graphs Data"
 	  >
 	  	<h3>{title}</h3>
-	  	<table id="ModalTable" className="explorer__modal-table" style={{margin: 'auto', border: '1px solid black', borderCollapse: 'collapse'}}>
+	  	<table id="ModalTable" className="modal-table">
 	  		<tbody>
 		  		<tr>
 		  			<th style={headerStyle}>Year</th>
@@ -47,7 +47,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 			{ (asteriskCount > 0) ? (
 				<small>* Asterisk indicates no data available.</small>
 			) : null }
-	  	<div className="explorer__modal-button-div">
+	  	<div className="modal-button-div">
 	  		<button className="modalClose" style={modalButtonStyle} onClick={closeModal}>Close</button>
 	  	</div>
 	  </Modal>
@@ -56,7 +56,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 
 export default ComparisonBarModal;
 
-const cellStyle = { textAlign: 'right', fontSize: '1em', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
+const cellStyle = { textAlign: 'right', fontSize: '12pt', padding: '5px', border: '1px solid black', borderCollapse: 'collapse', fontFeatureSettings: 'tnum' };
 const headerStyle = { textAlign: 'center', fontWeight: 'bold', padding: '5px', border: '1px solid black', borderCollapse: 'collapse' };
 const modalStyle = {
 	content: {
@@ -66,7 +66,7 @@ const modalStyle = {
     bottom        : 'auto',
     marginRight   : '-50%',
     transform     : 'translate(-50%, -50%)',
-    font		      : '1rem Lato,"Helvetica Neue",Helvetica,Arial,sans-serif'
+		font		      : '16px Lato,"Helvetica Neue",Helvetica,Arial,sans-serif',
 	}
 };
 const modalButtonStyle = {
@@ -74,7 +74,7 @@ const modalButtonStyle = {
 	margin            : 'auto',
 	marginTop         : '1rem',
 	width             : '20rem',
-	fontSize          : '1em',
+	fontSize          : '18px',
 	lineHeight        : '1',
 	padding           : '1.04rem',
 	color             : '#fff',
