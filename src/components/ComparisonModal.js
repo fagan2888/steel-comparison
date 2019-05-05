@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#GSTM-app');
 
-const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title}) => {
+const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title, ytd_disclaimer}) => {
 	let asteriskCount = 0;
 	const formattedData = (dataValue) => {
 		if ((dataValue >= 0) && (dataValue < 1)) {
@@ -46,6 +46,9 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 	  	</table>
 			{ (asteriskCount > 0) ? (
 				<small>* Asterisk indicates no data available.</small>
+			) : null }
+			{ ytd_disclaimer ? (
+				<small>These reporting countries have different Year-To-Date end months. To see more complete data, refer to the <a href="https://beta.trade.gov/gstm">GSTM Search Tool</a>.</small>
 			) : null }
 	  	<div className="modal-button-div">
 	  		<button className="modalClose" style={modalButtonStyle} onClick={closeModal}>Close</button>

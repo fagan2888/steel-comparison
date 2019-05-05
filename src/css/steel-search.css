@@ -46,11 +46,11 @@
   color: white;
   background-color: var(--color-primary);
   border: 1px var(--color-primary-darker) solid;
-  padding-top: 5px;
-  padding-bottom: 0;
+  padding: 20px 15px 15px 15px;
   margin: 0 auto;
   display: inline-block;
   min-width: 50%;
+  box-shadow: 1px 1px 1px var(--color-primary-darker);
 }
 
 #GSTM-app fieldset legend {
@@ -58,13 +58,20 @@
   font-weight: 400;
   padding: 3px 10px 5px 10px;
   margin-left: 5px;
+  margin-bottom: 0;
   background-color: var(--color-primary-darkest);
+  box-shadow: 1px 1px 1px var(--color-primary-darkest);
+}
+
+#GSTM-app fieldset div.comparison-option {
+  display: inline;
 }
 
 #GSTM-app fieldset label {
   font-size: 1em;
   margin: 0 10px 0 10px;
-  display: block;
+  padding-bottom: 10px;
+  display: inline-block;
 }
 
 #GSTM-app fieldset label::before {
@@ -79,6 +86,10 @@
 #GSTM-app .form-and-instructions {
   display: inline;
 }
+#GSTM-app .form-and-instructions > h2 {
+  margin-top: 0.5em;
+}
+
 
 #GSTM-app form .ReportingCountries, .PartnerCountries, .TradeFlow, .ProductGroups, .FlowType {
   display: inline-block;

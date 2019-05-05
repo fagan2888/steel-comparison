@@ -23,7 +23,8 @@ test('main title is present', async () => {
 });
 
 test('Form for comparing Reporter Countries contains correct default values', async () => {
-  await page.click(`#comparisonType > label[for="two-reporting-countries"]`);
+  await page.click(`fieldset > div.comparison-option > label[for="two-reporting-countries"]`);
+  await page.waitFor(2000); // wait for lifecycle methods to complete
   const subtitleElement = `#GSTM-app div.form-and-instructions > h2`;
   const subtitleText = await page.$eval(subtitleElement, e => e.innerText);
   await page.waitForSelector(subtitleElement, 5000);
@@ -53,18 +54,17 @@ test('Form for comparing Reporter Countries contains correct default values', as
 
 test('User can search with Two Reporter Countries', async () => {
   const ReporterSelect = `#GSTM-app form > div > div.ReportingCountries`;
-  await page.waitFor(1000); // wait for Reporter Country options to populate
   await page.click(ReporterSelect);
   await page.focus(ReporterSelect);
   await page.keyboard.type('United States');
   await page.keyboard.press('Tab');
-  await page.waitFor(1000); // wait for lifecycle methods to complete
   await page.keyboard.press('Tab');
+
   await page.keyboard.type('Canada');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Tab');
 
-  await page.waitFor(1000); // wait for the Partner Country state to refresh
+  await page.waitFor(2000); // wait for the Partner Country state to refresh
 
   const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;
   await page.click(GenerateGraphsButton);
@@ -77,8 +77,9 @@ test('User can search with Two Reporter Countries', async () => {
 })
 
 test('User can search with Two Partner Countries', async () => {
-  await page.click(`#comparisonType > label[for="two-partner-countries"]`);
-  await page.waitFor(1000); // wait for lifecycle methods
+  await page.click(`fieldset > div.comparison-option > label[for="two-partner-countries"]`);
+  await page.waitFor(2000); // wait for lifecycle methods
+
   const subtitleElement = `#GSTM-app div.form-and-instructions > h2`;
   const subtitleText = await page.$eval(subtitleElement, e => e.innerText);
   await page.waitForSelector(subtitleElement, 5000);
@@ -87,9 +88,12 @@ test('User can search with Two Partner Countries', async () => {
   await page.click(PartnerSelect);
   await page.keyboard.press('Tab');
   await page.keyboard.press('Tab'); // Press again to focus on the second such menu..
+  await page.waitFor(2000); // wait for lifecycle methods
+
   await page.keyboard.type('China');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Tab');
+  await page.waitFor(2000); // wait for lifecycle methods
 
   const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;
   await page.click(GenerateGraphsButton);
@@ -116,8 +120,8 @@ test('User can search with Two Partner Countries', async () => {
 })
 
 test('User can search with Two Trade Flows', async () => {
-  await page.waitForSelector(`#comparisonType > label[for="two-trade-flows"]`, 5000);
-  await page.click(`#comparisonType > label[for="two-trade-flows"]`);
+  await page.waitForSelector(`fieldset > div.comparison-option > label[for="two-trade-flows"]`, 5000);
+  await page.click(`fieldset > div.comparison-option > label[for="two-trade-flows"]`);
   await page.waitFor(1000); // wait for lifecycle methods
   
   const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;

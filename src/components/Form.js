@@ -7,7 +7,6 @@ import config from '../config.js';
 import { searchQuery } from '../utils/searchQuery';
 import { map, compact, isEmpty } from 'lodash';
 import { propComparator } from '../utils/sort';
-import '../dropdown-menus.css';
 
 class Form extends Component {
   constructor(props) {
@@ -165,14 +164,20 @@ class Form extends Component {
   handleSubmit = (event) => {
     let errorMessage = this.formValidation();
     if (errorMessage === "") {
+      event.preventDefault();
       this.setState({ submitted: true, message: "" })
       this.props.history.push({ search: `${searchQuery(this.state, this.props.comparisonType)}` });
-      event.preventDefault();
     } else {
-      this.setState({ message: errorMessage });
       event.preventDefault();
+      this.setState({ message: errorMessage });
     }
   };
+
+  componentWillMount() {
+    this.setState({ submitted: true }, () => {
+      this.props.history.push({ search: `${searchQuery(this.state, this.props.comparisonType)}` });
+    })
+  }
 
   render() {
     return (

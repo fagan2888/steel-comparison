@@ -34,7 +34,7 @@
 }
 #GSTM-app form .React_select__single-value {
   min-height: 1px;
-  max-width: 200px;
+  padding-right: 25px;
   padding-bottom: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
