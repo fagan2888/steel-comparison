@@ -8,7 +8,7 @@ self.__precacheManifest = [
     "url": "./static/css/steel-search.css"
   },
   {
-    "revision": "dbcbd67213987e2362be43204c34e58d",
+    "revision": "e30e7c4f696bff6497930118758c1d12",
     "url": "./staging.html"
   },
   {
