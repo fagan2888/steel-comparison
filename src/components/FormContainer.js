@@ -38,27 +38,29 @@ class FormContainer extends Component {
 
     return (
       <div>
-        <h1 className="Header-1"><a href={config.monitor_link} target="_blank" rel="noopener noreferrer"><b>Global Steel Trade Monitor Comparison Dashboard</b></a></h1>
+        <h1 className="Header-1"><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">GSTM - Comparison Search</a></h1>
         <p className="DefaultParagraph-1">
-          Search for and compare steel trade for multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows. Click Generate Dashboard to update the graphs.
+          This tool allows users to to search for and compare steel trade for multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows. These visualizations are meant to complement those in the <a href="https://beta.trade.gov/gstm">Global Steel Trade Monitor</a>.
         </p>
         <p>
-          Compare trade data between two or more reporter countries, partner countries or product groups. Please select the way that you would like to compare the information.
+          Compare trade data between two reporter countries, partner countries or product groups. Please select the way that you would like to compare the information.  Click Generate Dashboard to update the graphs.
         </p>
-        <fieldset onChange={this.handleChangeComparisonType} id="comparisonType">
-          <legend>Select a type of comparison:</legend>
-          <input type="radio" name="comparisonType" value="Reporting Countries" id="two-reporting-countries" />
-          <label htmlFor="two-reporting-countries">Two Reporting Countries</label><br />
+        <div className="center-fieldset">
+          <fieldset onChange={this.handleChangeComparisonType} id="comparisonType">
+            <legend>Select the type of comparison:</legend>
+            <input type="radio" name="comparisonType" value="Reporting Countries" id="two-reporting-countries" />
+            <label htmlFor="two-reporting-countries">Two Reporting Countries</label><br />
 
-          <input type="radio" name="comparisonType" value="Partner Countries" id="two-partner-countries" />
-          <label htmlFor="two-partner-countries">Two Partner Countries</label><br />
+            <input type="radio" name="comparisonType" value="Partner Countries" id="two-partner-countries" />
+            <label htmlFor="two-partner-countries">Two Partner Countries</label><br />
 
-          <input type="radio" name="comparisonType" value="Product Groups" id="two-product-groups" />
-          <label htmlFor="two-product-groups">Two Product Groups</label><br />
+            <input type="radio" name="comparisonType" value="Product Groups" id="two-product-groups" />
+            <label htmlFor="two-product-groups">Two Product Groups</label><br />
 
-          <input type="radio" name="comparisonType" value="Trade Flows" id="two-trade-flows" />
-          <label htmlFor="two-trade-flows">Two Trade Flows</label><br />
-        </fieldset>
+            <input type="radio" name="comparisonType" value="Trade Flows" id="two-trade-flows" />
+            <label htmlFor="two-trade-flows">Two Trade Flows</label><br />
+          </fieldset>
+        </div>
 
         {this.state.comparisonType ?
           <Form

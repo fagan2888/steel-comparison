@@ -16,43 +16,43 @@ beforeAll(async () => {
 });
 
 test('main title is present', async () => {
-  const mainTitleElement = `#GSTM-app > div > h1 > a > b`;
+  const mainTitleElement = `#GSTM-app > div > h1 > a`;
   const mainTitleText = await page.$eval(mainTitleElement, e => e.innerText);
   await page.waitForSelector(mainTitleElement, 5000);
-  expect(mainTitleText).toBe('Global Steel Trade Monitor Comparison Dashboard');
+  expect(mainTitleText).toBe('GSTM - Comparison Search');
 });
 
 test('Form for comparing Reporter Countries contains correct default values', async () => {
-  await page.click(`#two-reporting-countries`);
-  const subtitleElement = `#GSTM-app > div > div > h2`;
+  await page.click(`#comparisonType > label[for="two-reporting-countries"]`);
+  const subtitleElement = `#GSTM-app div.form-and-instructions > h2`;
   const subtitleText = await page.$eval(subtitleElement, e => e.innerText);
   await page.waitForSelector(subtitleElement, 5000);
   expect(subtitleText).toBe('Comparing Reporting Countries');
 
-  const TradeFlowSelect = `#GSTM-app form .TradeFlow`;
+  const TradeFlowSelect = `#GSTM-app form > div > div.TradeFlow`;
   await page.waitFor(1000); // wait for lifecycle methods
   await page.waitForSelector(TradeFlowSelect, 5000);
   const defaultTradeFlow = await page.$eval(TradeFlowSelect, e => e.innerText);
   expect(defaultTradeFlow).toBe('Imports');
 
-  const ReporterCountrySelect1 = `#GSTM-app > div > div > form .ReportingCountries`; // Automatically select the first of its type
+  const ReporterCountrySelect1 = `#GSTM-app form > div > div.ReportingCountries`; // Automatically select the first of its type
   await page.waitForSelector(ReporterCountrySelect1, 5000);
   const defaultReporterCo1 = await page.$eval(ReporterCountrySelect1, e => e.innerText);
   expect(defaultReporterCo1).toBe('United States');
 
-  const PartnerCountriesSelect = `#GSTM-app > div > div > form .PartnerCountries`;
+  const PartnerCountriesSelect = `#GSTM-app form > div > div.PartnerCountries`;
   await page.waitForSelector(PartnerCountriesSelect, 5000);
   const defaultPartnerCo = await page.$eval(PartnerCountriesSelect, e => e.innerText);
   expect(defaultPartnerCo).toBe('All Countries');
 
-  const FlowTypeSelect = `#GSTM-app > div > div > form .FlowType`;
+  const FlowTypeSelect = `#GSTM-app form > div > div.FlowType`;
   await page.waitForSelector(FlowTypeSelect, 5000);
   const defaultFlowType = await page.$eval(FlowTypeSelect, e => e.innerText);
   expect(defaultFlowType).toBe('Quantity (Metric Tons)');
 });
 
 test('User can search with Two Reporter Countries', async () => {
-  const ReporterSelect = `#GSTM-app > div > div > form .ReportingCountries`;
+  const ReporterSelect = `#GSTM-app form > div > div.ReportingCountries`;
   await page.waitFor(1000); // wait for Reporter Country options to populate
   await page.click(ReporterSelect);
   await page.focus(ReporterSelect);
@@ -66,7 +66,7 @@ test('User can search with Two Reporter Countries', async () => {
 
   await page.waitFor(1000); // wait for the Partner Country state to refresh
 
-  const GenerateGraphsButton = `#GSTM-app > div > div > form button[type="submit"]`;
+  const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;
   await page.click(GenerateGraphsButton);
 
   // Wait a bit and expect some graphs
@@ -77,13 +77,13 @@ test('User can search with Two Reporter Countries', async () => {
 })
 
 test('User can search with Two Partner Countries', async () => {
-  await page.click(`#two-partner-countries`);
+  await page.click(`#comparisonType > label[for="two-partner-countries"]`);
   await page.waitFor(1000); // wait for lifecycle methods
-  const subtitleElement = `#GSTM-app > div > div > h2`;
+  const subtitleElement = `#GSTM-app div.form-and-instructions > h2`;
   const subtitleText = await page.$eval(subtitleElement, e => e.innerText);
   await page.waitForSelector(subtitleElement, 5000);
   expect(subtitleText).toBe('Comparing Partner Countries');
-  const PartnerSelect = `#GSTM-app > div > div > form .PartnerCountries`;
+  const PartnerSelect = `#GSTM-app form > div > div.PartnerCountries`;
   await page.click(PartnerSelect);
   await page.keyboard.press('Tab');
   await page.keyboard.press('Tab'); // Press again to focus on the second such menu..
@@ -91,7 +91,7 @@ test('User can search with Two Partner Countries', async () => {
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Tab');
 
-  const GenerateGraphsButton = `#GSTM-app > div > div > form button[type="submit"]`;
+  const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;
   await page.click(GenerateGraphsButton);
 
   // Wait a bit and expect some graphs
@@ -116,18 +116,18 @@ test('User can search with Two Partner Countries', async () => {
 })
 
 test('User can search with Two Trade Flows', async () => {
-  await page.waitForSelector(`#two-trade-flows`, 5000);
-  await page.click(`#two-trade-flows`);
+  await page.waitForSelector(`#comparisonType > label[for="two-trade-flows"]`, 5000);
+  await page.click(`#comparisonType > label[for="two-trade-flows"]`);
   await page.waitFor(1000); // wait for lifecycle methods
   
-  const GenerateGraphsButton = `#GSTM-app > div > div > form button[type="submit"]`;
+  const GenerateGraphsButton = `#GSTM-app form button[type="submit"]`;
   await page.click(GenerateGraphsButton);
 
   // Wait a bit and expect some graphs
   const firstChartTitle = `#GSTM-app > div > div > div > div:nth-child(1) > h4`;
   await page.waitForSelector(firstChartTitle, 5000);
   const firstChartTitleText = await page.$eval(firstChartTitle, e => e.innerText);
-  expect(firstChartTitleText).toBe('United States Imports to and Exports from World of All Steel Mill Products in Thousands of Metric Tons - View Data Table');
+  expect(firstChartTitleText).toBe('United States Imports from and Exports to World of All Steel Mill Products in Thousands of Metric Tons - View Data Table');
 })
 
 afterAll(() => browser.close());
