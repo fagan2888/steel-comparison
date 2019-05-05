@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "./staging.html"
   },
   {
-    "revision": "f44817dd849f1d696e4f6adb856b085d",
+    "revision": "c5c6fb588aa8b4e29b97e970eed98b47",
     "url": "./index.html"
   }
 ];
