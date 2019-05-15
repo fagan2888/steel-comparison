@@ -40,7 +40,10 @@ class FormContainer extends Component {
       <div>
         <h1 className="Header-1"><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">GSTM - Comparison Search</a></h1>
         <p className="DefaultParagraph-1">
-          This tool allows users to to search for and compare steel trade for two Reporting Countries, two Partner Countries, two Product Groups, or Trade Flows. These visualizations are intended to complement those in the <a href="https://beta.trade.gov/gstm">Global Steel Trade Monitor</a>.  
+          The Global Steel Trade Monitor Comparison Dashboard features a series of interactive data tables and graphs that offer insight into the comparative analysis of  global steel trade trends and provide stakeholders with additional comparative information on steel trade globally. This tool was designed to enable users to search for and compare steel trade for multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows.
+        </p>
+        <p>
+          These visualizations are intended to complement those in the <a href="https://beta.trade.gov/gstm">Global Steel Trade Monitor</a>.  
         </p>
         <p>
           Please select the way that you would like to compare the information.  Click the "Generate Graphs" button below to update the graphs.
