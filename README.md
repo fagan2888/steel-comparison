@@ -1,9 +1,11 @@
-# Steel Search
+[![Build Status](https://travis-ci.org/InternationalTradeAdministration/steel-comparison.svg?branch=master)](https://travis-ci.org/InternationalTradeAdministration/steel-comparison)
+# Steel Comparison
 
-A search client for Global Steel Trade Data.
+A search client for comparing data series from the Global Steel Trade Monitor.
 
 ## Setup
-First, install dependencies with `npm install`.
+Install Node.js (this app was developed with LTS v8.16.0).
+Then, install dependencies with `npm install`.
 
 Then, `npm run start` runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
