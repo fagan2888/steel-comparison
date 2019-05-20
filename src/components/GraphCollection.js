@@ -16,18 +16,14 @@ class GraphCollection extends Component {
   }
 
   async componentDidUpdate(prevProps) {
-    if ((this.props.submitted !== prevProps.submitted) || (this.props.comparisonType !== prevProps.comparisonType)) {
-      this.setState({
+    if (this.props.location.search !== prevProps.location.search) {
+      this.setState({ 
+        loadingResults: true, 
         results: null,
         product_groups: null,
-        total: 0,
-        loadingResults: false,
+        total: 0, 
         message: null,
       });
-    }
-
-    if (this.props.location.search !== prevProps.location.search) {
-      this.setState({ loadingResults: true, total: 0, message: null });
       const tradeResponse = await this.props.tradeRepository._getData(this.props.location.search);
       if (tradeResponse.total === 0) {
         this.setState({ message: 'No results were found for this query.', loadingResults: false })
@@ -37,6 +33,7 @@ class GraphCollection extends Component {
           total: tradeResponse.total,
           product_groups: tradeResponse.aggregations.product_groups,
           loadingResults: false,
+          message: null,
         });
       }
     }
@@ -47,17 +44,16 @@ class GraphCollection extends Component {
 
     if (this.props.comparisonType === "Product Groups") {
       paired_results.push(results_array);
-      return paired_results; // return an array containing one nested array
+      return paired_results; // return an array containing one nested array which contains 2 objects, representing the two datasets being compared
     } else {
       this.state.product_groups.forEach(function (item) {
         paired_results.push(results_array.filter(entry => entry.product_group === item["key"]));
       })
-      return paired_results; // return an array containing 6 nested arrays
+      return paired_results; // return an array containing 6 nested arrays, where each array is a pair of objects, representing the two datasets being compared
     }
   }
 
   render() {
-
     let dataset_label_key;
     switch (this.props.comparisonType) {
       case 'Product Groups':

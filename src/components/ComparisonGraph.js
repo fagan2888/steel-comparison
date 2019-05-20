@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import Modal from './ComparisonModal';
-import { omit } from 'lodash';
+import { omit, uniq, differenceBy } from 'lodash';
 import moment from 'moment';
 import config from '../config';
 import queryString from 'query-string';
@@ -30,18 +30,10 @@ class ComparisonGraph extends Component {
   }
 
   render() {
-
     const query = queryString.parse(this.props.location.search, {arrayFormat: 'comma'});
 
-    const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'ytd_end_month', 'trade_flow', 'updated_date'];
-    const y_axis_label = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
-    const data_valuesA = [];
-    const data_valuesB = [];
-    const original_labels = Object.keys(omit(this.props.data_array[0], excluded_fields)).sort(); /* taking the keys from the first object (chosen arbitrarily) */
-    const x_axis_values = [];
-
     let queryLabelKey;
-    /* Deriving queryLabelKey based on the currently available query object is preferable to receiving comparisonType based on props since I was unable to get `shouldComponentUpdate` to work (and from reading the docs, probably shouldn't...) */
+    /* Deriving queryLabelKey based on the currently available query object is preferable to receiving comparisonType based on props since I was unable to get `shouldComponentUpdate` to work (and from reading the docs, probably shouldn't rely on that anyway...) */
     if (query['trade_flow'].length === 0) {
       queryLabelKey = 'trade_flow';
     } else if (query['product_groups'].length === 2) {
@@ -52,23 +44,43 @@ class ComparisonGraph extends Component {
       queryLabelKey = 'partner_countries';
     }
     
+    /* How to refer to the two data sets: */
     const LabelForSeriesA = (queryLabelKey === 'trade_flow') ? "IMP" : query[queryLabelKey][0];
     const LabelForSeriesB = (queryLabelKey === 'trade_flow') ? "EXP" : query[queryLabelKey][1];
 
-    /* assign the two objects accordingly */
+    /* assign the two objects in the data array accordingly */
     const dataObjB = this.props.data_array.filter(obj => obj[this.props.dataset_label_key] === LabelForSeriesB);
     const dataObjA = this.props.data_array.filter(obj => obj[this.props.dataset_label_key] === LabelForSeriesA);
     
-    for (let i in original_labels){
-      let label = original_labels[i];
+    const y_axis_label = query.flow_type === 'QTY' ? 'Thousands of Metric Tons' : 'Thousands of U.S. Dollars';
+
+    const data_valuesA = [];
+    const data_valuesB = [];
+    const excluded_fields = ['id', 'reporter_country', 'partner_country', 'product_group', 'flow_type', 'ytd_end_month', 'trade_flow', 'updated_date'];
+    
+    const original_labelsA = Object.keys(omit(this.props.data_array[0], excluded_fields));
+    const original_labelsB = Object.keys(omit(this.props.data_array[1], excluded_fields));
+    /* push the two sets of labels together, dedupe and `.sort()` */
+    let original_labels_combined = uniq(original_labelsA.concat(original_labelsB)).sort();
+
+    /* If we're comparing two reporter countries, and they have different ytd_end_month, then we've been instructed to remove the YTD fields from the data */
+    let ytd_disclaimer = false;
+    if ((queryLabelKey === 'reporter_countries') && !!(this.props.data_array[1])) {
+      if (this.props.data_array[0].ytd_end_month !== this.props.data_array[1].ytd_end_month) {
+        let ytd_fields = original_labels_combined.filter(label => label.startsWith('ytd_'));
+        original_labels_combined = differenceBy(original_labels_combined, ytd_fields);
+        ytd_disclaimer = true;
+      };
+    };
+
+    const x_axis_values = [];
+
+    for (let i in original_labels_combined){
+      let label = original_labels_combined[i];
       /* Take the value of the key from the object (which is the first and only object in its array) */
-      if (dataObjA.length > 0) {
-        data_valuesA.push(dataObjA[0][label]/1000)
-      }
+      if (dataObjA.length > 0) { data_valuesA.push(dataObjA[0][label]/1000) }
       /* Same thing here for LabelSeriesB */
-      if (dataObjB.length > 0) {
-        data_valuesB.push(dataObjB[0][label]/1000)
-      }
+      if (dataObjB.length > 0) { data_valuesB.push(dataObjB[0][label]/1000) }
       /* prepare the x-axis labels by removing 'sum_' and capitalizing 'ytd' */
       label = label.replace('sum_', '');
       let ytd_label = 'YTD ' + this.props.data_array[0].ytd_end_month + ' ';
@@ -83,7 +95,7 @@ class ComparisonGraph extends Component {
         data_valuesB.splice(index, 1);
       }
     });
-
+    
     // console.log(this.props.data_array);
     // console.log(data_valuesA);
     // console.log(data_valuesB);
@@ -104,16 +116,28 @@ class ComparisonGraph extends Component {
 
     const chartTitle = constructChartTitle(this.props.dataset_label_key, query, this.props.data_array[0]);
 
-    function constructFootnote(last_updated) {
-      const last_updated_date = moment(last_updated, 'DDMMMYYYY').utc().format('MM-DD-YYYY');
+    const constructFootnote = () => {
+      let updatedA;
+      let updatedB;
+      let updated_note;
+      if (queryLabelKey === 'reporter_countries') {
+        if (dataObjA.length > 0) { updatedA =  moment(dataObjA[0].updated_date, 'DDMMMYYYY').utc().format('MM-DD-YYYY') };
+        if (dataObjB.length > 0) { updatedB =  moment(dataObjB[0].updated_date, 'DDMMMYYYY').utc().format('MM-DD-YYYY') };
+
+        if (!!updatedA && !!updatedB) {
+          updated_note = `${LabelForSeriesA} updated on ${updatedA}, ${LabelForSeriesB} updated on ${updatedB}`;
+        } else if (!updatedA) {
+          updated_note = `${LabelForSeriesB} updated on ${updatedB}`
+        } else { updated_note = `${LabelForSeriesA} updated on ${updatedA}.`}
+      } else {
+        updated_note = `Updated on ${moment(this.props.data_array[0].updated_date, 'DDMMMYYYY').utc().format('MM-DD-YYYY')}.`
+      }
       return (
         <p className="caption"> 
-          {`${config.footnote}  Updated on ${last_updated_date}.`}
+          {`${config.footnote} ${updated_note}`}
         </p> 
       );
     }
-
-    const footnote = constructFootnote(this.props.data_array[0].updated_date, query, data_valuesA, data_valuesB);
 
     const chartData = {
       labels: x_axis_values,
@@ -210,8 +234,9 @@ class ComparisonGraph extends Component {
           data_valuesA={data_valuesA}
           data_valuesB={data_valuesB}
           title={chartTitle}
+          ytd_disclaimer={ytd_disclaimer}
         />
-        {footnote}
+        {constructFootnote()}
       </div>
     )
   }

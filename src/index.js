@@ -6,7 +6,11 @@ import { HashRouter } from 'react-router-dom';
 import App from './components/FormContainer';
 import * as serviceWorker from './serviceWorker';
 import { TradeRepository } from './repositories/TradeRepository';
-import './steel-search.css';
+import './css/steel-search.css';
+import './css/dropdown-menus.css';
+import './css/custom.css';
+import './css/styleguide.css';
+import './css/uswds.css';
 
 function renderSteelSearch(divID, BASE_URL, API_KEY) {
 
