@@ -6,7 +6,7 @@ const ContactTOS = () => {
       <b>For Questions and Feedback:</b>
       <p>Steel Import Monitoring and Analysis Team</p>
       <p>Email: <a href="mailto:ecglobalsteelstats@trade.gov">ecglobalsteelstats@trade.gov</a>  Call: <a href="tel:1-202-482-2105" rel="nofollow">(202) 482-2105</a></p>
-      <p>Data source: Global Trade Atlas; Copyright ©IHS Markit Global Inc. 2018. All rights reserved.</p>
+      <p>Data source: Global Trade Atlas; Copyright ©IHS Markit Global Inc. All rights reserved.</p>
 
       <br/>
 

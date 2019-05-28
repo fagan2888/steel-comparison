@@ -50,7 +50,7 @@
   margin: 0 auto;
   display: inline-block;
   min-width: 50%;
-  box-shadow: 1px 1px 1px var(--color-primary-darker);
+  box-shadow: 1.5px 1.5px 1.5px darkgray;
 }
 
 #GSTM-app fieldset legend {
@@ -60,7 +60,7 @@
   margin-left: 5px;
   margin-bottom: 0;
   background-color: var(--color-primary-darkest);
-  box-shadow: 1px 1px 1px var(--color-primary-darkest);
+  box-shadow: 1.5px 1.5px 1.5px var(--color-primary-darkest);
 }
 
 #GSTM-app fieldset div.comparison-option {

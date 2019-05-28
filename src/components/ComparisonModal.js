@@ -6,15 +6,15 @@ Modal.setAppElement('#GSTM-app');
 const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title, ytd_disclaimer}) => {
 	let asteriskCount = 0;
 	const formattedData = (dataValue) => {
-		if ((dataValue >= 0) && (dataValue < 1)) {
-			return parseFloat(dataValue).toLocaleString();
-		} else if (dataValue >= 0) {
-			return parseFloat(dataValue.toFixed(2)).toLocaleString();
-		} else {
+		if (!dataValue) {
 			asteriskCount++;
 			return '*'
-		};
-	}
+		} else if ((dataValue >= 0) && (dataValue <= 1)) {
+			return parseFloat(dataValue).toLocaleString();
+		} else {
+			return parseFloat(dataValue.toFixed(2)).toLocaleString();
+		}
+	};
 
 	const table_rows = labels.map((label, i) => {
 		return (
@@ -24,7 +24,7 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 				<td style={cellStyle}>{formattedData(data_valuesB[i])}</td>
 			</tr>
 		)
-	})
+	});
 
 	return (
 		<Modal
@@ -44,11 +44,11 @@ const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, dat
 					{table_rows}
 	  		</tbody>
 	  	</table>
-			{ (asteriskCount > 0) ? (
-				<small>* Asterisk indicates no data available.</small>
-			) : null }
 			{ ytd_disclaimer ? (
-				<small>These reporting countries have different Year-To-Date end months. To see more complete data, refer to the <a href="https://beta.trade.gov/gstm">GSTM Search Tool</a>.</small>
+				<div><small>These reporting countries have different Year-To-Date end months. To see more complete data, refer to the <a href="https://beta.trade.gov/gstm">GSTM Search Tool</a>.</small></div>
+			) : null }
+			{ (asteriskCount > 0) ? (
+				<div><small>* Asterisk indicates no data available.</small></div>
 			) : null }
 	  	<div className="modal-button-div">
 	  		<button className="modalClose" style={modalButtonStyle} onClick={closeModal}>Close</button>
