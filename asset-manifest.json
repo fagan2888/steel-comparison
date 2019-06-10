@@ -3,7 +3,7 @@
   "main.js": "./static/js/steel-search.js",
   "main.js.map": "./static/js/steel-search.js.map",
   "index.html": "./index.html",
-  "precache-manifest.32c884f3126fb2332170c8c96787d472.js": "./precache-manifest.32c884f3126fb2332170c8c96787d472.js",
+  "precache-manifest.bc4bad45f801968204e4359844d2c4ec.js": "./precache-manifest.bc4bad45f801968204e4359844d2c4ec.js",
   "service-worker.js": "./service-worker.js",
   "staging.html": "./staging.html",
   "static/css/steel-search.css.map": "./static/css/steel-search.css.map",
