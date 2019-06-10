@@ -40,13 +40,13 @@ class FormContainer extends Component {
       <div>
         <h1 className="Header-1"><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">GSTM - Comparison Search</a></h1>
         <p className="DefaultParagraph-1">
-          The Global Steel Trade Monitor Comparison Dashboard features a series of interactive data tables and graphs that offer insight into the comparative analysis of  global steel trade trends and provide stakeholders with additional comparative information on steel trade globally. This tool was designed to enable users to search for and compare steel trade for multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows.
+        The Global Steel Trade Monitor Comparison Dashboard (GSTM Comparison Dashboard) is a tool that features a series of interactive data tables and graphs that allow comparisons of  global steel trade data. This also provides stakeholders with further trend analysis on the global steel trade. The GTSM Comparison Dashboard enables users to search for and compare steel trade trends by multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows.
         </p>
         <p>
-          These visualizations are intended to complement those in the <a href="https://beta.trade.gov/gstm">Global Steel Trade Monitor</a>.  
+          Please select the way that you would like to compare the information, and then {config.instructions[this.state.comparisonType]}
         </p>
         <p>
-          Please select the way that you would like to compare the information.  Click the "Generate Graphs" button below to update the graphs.
+          Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
         </p>
         <div className="center-fieldset">
           <fieldset onChange={this.handleChangeComparisonType} id="comparisonType">

@@ -184,12 +184,6 @@ class Form extends Component {
       <div>
         <div className="form-and-instructions">
           <h2>Comparing {this.props.comparisonType}</h2>
-          <p>
-            {config.instructions[this.props.comparisonType]}
-          </p>
-          <p>
-            Please cite the data and graphs as: U.S. Department of Commerce, Enforcement and Compliance using data from IHS Markit - Global Trade Atlas sourced from the reporting country's official statistics.
-          </p>
           <p><b>All fields are required.</b>  <a href={config.faqs_link} target="_blank" rel="noopener noreferrer">FAQs</a></p>
 
           <form onSubmit={this.handleSubmit}>
@@ -289,7 +283,7 @@ class Form extends Component {
                 </>
               ) : null}
               <br />
-              <b>Quantity or Value: </b><br /><p>Unit of measure - either metric tons or U.S. dollars.</p>
+              <b>Quantity or Value: </b><br /><p>Unit of measure - either metric tons or U.S. dollars</p>
               <Select
                 name="FlowType"
                 className="FlowType"
@@ -300,7 +294,7 @@ class Form extends Component {
                 aria-label="Select Flow Type"
               />
               <button type="submit" onSubmit={this.handleSubmit}>Generate Graphs</button>
-              <button><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">Return to the Global Steel Trade Monitor</a></button>
+              <button><a href={config.GSTM_link} target="_blank" rel="noopener noreferrer">Return to the Global Steel Trade Monitor</a></button>
             </LoadingOverlay>
           </form>
         </div>
