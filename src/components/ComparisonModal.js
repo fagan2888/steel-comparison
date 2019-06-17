@@ -6,7 +6,7 @@ Modal.setAppElement('#GSTM-app');
 const ComparisonBarModal = ({modalOpen, closeModal, labels, LabelForSeriesA, data_valuesA, LabelForSeriesB, data_valuesB, title, ytd_disclaimer}) => {
 	let asteriskCount = 0;
 	const formattedData = (dataValue) => {
-		if (!dataValue) {
+		if (!dataValue && dataValue !== 0) {
 			asteriskCount++;
 			return '*'
 		} else if ((dataValue >= 0) && (dataValue <= 1)) {
