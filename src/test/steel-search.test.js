@@ -19,7 +19,7 @@ test('main title is present', async () => {
   const mainTitleElement = `#GSTM-app > div > h1 > a`;
   const mainTitleText = await page.$eval(mainTitleElement, e => e.innerText);
   await page.waitForSelector(mainTitleElement, 5000);
-  expect(mainTitleText).toBe('GSTM - Comparison Search');
+  expect(mainTitleText).toBe('Comparison Dashboard');
 });
 
 test('Form for comparing Reporter Countries contains correct default values', async () => {

@@ -2,7 +2,7 @@
   --color-primary: #0071bc;
   --color-primary-darker: #205493;
   --color-primary-darkest: #112e51;
-  --color-secondary-alt: #02bfe7;
+  --color-secondary-alt: #73b3e7;
   --color-secondary: #e31c3d;
   --color-secondary-dark: #cd2026;
 }
@@ -13,9 +13,19 @@
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,"Roboto",Arial,sans-serif;
 }
 
+#GSTM-app #GSTM_banner {
+  background-color: lemonchiffon;
+  display: inline-block;
+  width: 100%;
+  margin-left: 0;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 #GSTM-app h1 {
   font-family: "Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif;
   font-size: 32px;
+  margin-top: 1em;
 }
 
 #GSTM-app h1 > a {
@@ -84,7 +94,7 @@
 }
 
 #GSTM-app .form-and-instructions {
-  display: inline;
+  display: inline-block;
 }
 #GSTM-app .form-and-instructions > h2 {
   margin-top: 0.5em;
@@ -100,6 +110,7 @@
 #GSTM-app form button {
   display: block;
   margin-top: 1em;
+  margin-bottom: 0.5em;
   width: 20em;
   font-size: 1em;
   line-height: 1;
@@ -111,24 +122,6 @@
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-}
-
-#GSTM-app form a.buttonStyle {
-  display: block;
-  margin-top: 1em;
-  width: 20em;
-  font-size: 1em;
-  font-weight: 700;
-  line-height: 1;
-  padding: 1.04rem;
-  color: #fff;
-  background-color: var(--color-primary);
-  -webkit-appearance: none;
-  border: 0;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
 }
 
 #GSTM-app form p {

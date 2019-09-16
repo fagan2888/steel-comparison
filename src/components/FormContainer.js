@@ -38,7 +38,8 @@ class FormContainer extends Component {
 
     return (
       <div>
-        <h1 className="Header-1"><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">GSTM - Comparison Search</a></h1>
+        <a id="GSTM_banner" href={config.GSTM_link} target="_blank" rel="noopener noreferrer">Go to the GSTM</a>
+        <h1><a href={config.monitor_link} target="_blank" rel="noopener noreferrer">Comparison Dashboard</a></h1>
         <p className="DefaultParagraph-1">
         The Global Steel Trade Monitor Comparison Dashboard (GSTM Comparison Dashboard) is a tool that features a series of interactive data tables and graphs that allow comparisons of  global steel trade data. This also provides stakeholders with further trend analysis on the global steel trade. The GTSM Comparison Dashboard enables users to search for and compare steel trade trends by multiple Reporting Countries, Partner Countries, Product Groups, or Trade Flows.
         </p>
