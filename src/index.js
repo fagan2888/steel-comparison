@@ -8,9 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import { TradeRepository } from './repositories/TradeRepository';
 import './css/steel-search.css';
 import './css/dropdown-menus.css';
-import './css/custom.css';
-import './css/styleguide.css';
-import './css/uswds.css';
 
 function renderSteelSearch(divID, BASE_URL, API_KEY) {
 
