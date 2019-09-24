@@ -4,7 +4,7 @@
 A search client for comparing data series from the Global Steel Trade Monitor.
 
 ## Setup
-Install Node.js (this app was developed with LTS v8.16.0).
+Install Node.js (this app was developed with LTS v8.16.0, and also works with v12.2.0).
 Then, install dependencies with `npm install`.
 
 Then, `npm run start` runs the app in the development mode.<br>
