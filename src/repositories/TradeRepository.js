@@ -1,13 +1,17 @@
+import config from '../config';
+
 export class TradeRepository {
 
-    constructor(url, apiKey) {
+    constructor(url) {
         this.url = url;
-        this.apiKey = apiKey;
     }
 
     async _getAggregations(trade_flow, reporters="", partners="") {
-        return fetch(`${this.url}?&reporter_countries=${reporters}&partner_countries=${partners}&trade_flow=${trade_flow}&api_key=${this.apiKey}`)
-        // .then(console.log(`${this.url}?&reporter_countries=${reporters}&partner_countries=${partners}&trade_flow=${trade_flow}&api_key=${this.apiKey}`))
+        return fetch(`${this.url}?&reporter_countries=${reporters}&partner_countries=${partners}&trade_flow=${trade_flow}`, {
+            headers: {
+                'Authorization': 'Bearer ' + config.accessToken
+            }        
+        })
         .then(response => response.json())
         .catch(error => console.log(error))
     }
